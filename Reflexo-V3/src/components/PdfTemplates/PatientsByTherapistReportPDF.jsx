@@ -129,10 +129,72 @@ const styles = StyleSheet.create({
     borderTop: `1px solid #e0e0e0`,
     paddingTop: 8,
   },
+  // Nuevo estilo para estados vacíos
+  emptyState: {
+    textAlign: 'center',
+    padding: 40,
+    color: '#666',
+    fontSize: 12,
+  },
 });
 
-const PatientsByTherapistReportPDF = ({ data, date, logoUrl, companyInfo }) => {
-  const therapists = data || [];
+// Helper para validar y formatear datos del paciente
+const formatPatientData = (patient) => {
+  if (!patient) return { patient_id: 'N/A', patient: 'N/A', appointments: 0 };
+  
+  return {
+    patient_id: patient.patient_id || 'N/A',
+    patient: patient.patient || 'N/A',
+    appointments: patient.appointments || 0,
+  };
+};
+
+// Helper para validar datos del terapeuta
+const validateTherapistData = (therapist) => {
+  if (!therapist || !therapist.therapist) {
+    return false;
+  }
+  
+  if (!Array.isArray(therapist.patients) || therapist.patients.length === 0) {
+    return false;
+  }
+  
+  return true;
+};
+
+const PatientsByTherapistReportPDF = ({ 
+  data = [], 
+  date, 
+  logoUrl, 
+  companyInfo = {} 
+}) => {
+  // Validación de datos críticos
+  if (!Array.isArray(data) || data.length === 0) {
+    return (
+      <Document>
+        <Page size="A4" style={styles.page}>
+          <Text style={styles.emptyState}>
+            No hay datos disponibles para generar el reporte
+          </Text>
+        </Page>
+      </Document>
+    );
+  }
+
+  // Validación de fecha
+  if (!date || !date.format) {
+    return (
+      <Document>
+        <Page size="A4" style={styles.page}>
+          <Text style={styles.emptyState}>
+            Error: Fecha de reporte no válida
+          </Text>
+        </Page>
+      </Document>
+    );
+  }
+
+  const therapists = data;
   const now = new Date();
   const fechaHora = `${date.format('DD/MM/YYYY')} - ${now.toLocaleTimeString()}`;
   const clinicName = companyInfo?.company_name || defaultClinicName;
@@ -159,40 +221,60 @@ const PatientsByTherapistReportPDF = ({ data, date, logoUrl, companyInfo }) => {
 
         <View style={styles.divider} />
 
-        {therapists.map((therapist, idx) => (
-          <View key={idx} style={styles.therapistBlock}>
-            <Text style={styles.therapistName}>{therapist.therapist}</Text>
-            <View style={styles.table}>
-              <View style={styles.tableHeader}>
-                <Text style={[styles.headerCell, styles.cellPatientId]}>
-                  ID Paciente
+        {therapists.map((therapist, idx) => {
+          // Validar datos del terapeuta
+          if (!validateTherapistData(therapist)) {
+            return (
+              <View key={`invalid-${idx}`} style={styles.therapistBlock}>
+                <Text style={styles.therapistName}>
+                  Terapeuta: Datos incompletos
                 </Text>
-                <Text style={[styles.headerCell, styles.cellPatientName]}>
-                  Nombre del Paciente
-                </Text>
-                <Text style={[styles.headerCell, styles.cellAppointments]}>
-                  N° Citas
+                <Text style={styles.emptyState}>
+                  Información del terapeuta no disponible
                 </Text>
               </View>
-              {therapist.patients.map((p, i) => (
-                <View
-                  style={[styles.tableRow, i % 2 !== 0 ? styles.rowOdd : {}]}
-                  key={p.patient_id}
-                >
-                  <Text style={[styles.tableCell, styles.cellPatientId]}>
-                    {p.patient_id}
+            );
+          }
+
+          return (
+            <View key={`therapist-${idx}`} style={styles.therapistBlock}>
+              <Text style={styles.therapistName}>{therapist.therapist}</Text>
+              <View style={styles.table}>
+                <View style={styles.tableHeader}>
+                  <Text style={[styles.headerCell, styles.cellPatientId]}>
+                    ID Paciente
                   </Text>
-                  <Text style={[styles.tableCell, styles.cellPatientName]}>
-                    {p.patient}
+                  <Text style={[styles.headerCell, styles.cellPatientName]}>
+                    Nombre del Paciente
                   </Text>
-                  <Text style={[styles.tableCell, styles.cellAppointments]}>
-                    {p.appointments}
+                  <Text style={[styles.headerCell, styles.cellAppointments]}>
+                    N° Citas
                   </Text>
                 </View>
-              ))}
+                {therapist.patients.map((patient, i) => {
+                  const formattedPatient = formatPatientData(patient);
+                  
+                  return (
+                    <View
+                      style={[styles.tableRow, i % 2 !== 0 ? styles.rowOdd : {}]}
+                      key={`patient-${formattedPatient.patient_id}-${i}`}
+                    >
+                      <Text style={[styles.tableCell, styles.cellPatientId]}>
+                        {formattedPatient.patient_id}
+                      </Text>
+                      <Text style={[styles.tableCell, styles.cellPatientName]}>
+                        {formattedPatient.patient}
+                      </Text>
+                      <Text style={[styles.tableCell, styles.cellAppointments]}>
+                        {formattedPatient.appointments}
+                      </Text>
+                    </View>
+                  );
+                })}
+              </View>
             </View>
-          </View>
-        ))}
+          );
+        })}
 
         <Text style={styles.footer}>
           {clinicName} - Documento generado automáticamente.

@@ -2,26 +2,30 @@ import React from 'react';
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 import dayjs from 'dayjs';
 
-// Función para calcular el elemento base chino
+// Función optimizada para calcular el elemento base chino
 const calculateChineseElement = (birthDate) => {
   if (!birthDate) return 'No especificado';
+  
   let year = dayjs(birthDate).year();
   const month = dayjs(birthDate).month() + 1;
   const day = dayjs(birthDate).date();
+  
   if ((month === 1 && day >= 1) || (month === 2 && day <= 15)) {
     year -= 1;
   }
+  
   const lastTwoDigits = year % 100;
-  let suma = lastTwoDigits
-    .toString()
-    .split('')
-    .reduce((acc, curr) => acc + parseInt(curr), 0);
+  
+  // Helper function para sumar dígitos
+  const sumDigits = (num) => {
+    return num.toString().split('').reduce((acc, curr) => acc + parseInt(curr), 0);
+  };
+  
+  let suma = sumDigits(lastTwoDigits);
   while (suma >= 10) {
-    suma = suma
-      .toString()
-      .split('')
-      .reduce((acc, curr) => acc + parseInt(curr), 0);
+    suma = sumDigits(suma); // ✅ Función auxiliar reutilizable
   }
+  
   const result = 10 - suma;
   return result;
 };
@@ -39,6 +43,16 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-start',
   },
+  // Estilos reutilizables para eliminar repetición
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  marginLeft4: { marginLeft: 4 },
+  marginLeft6: { marginLeft: 6 },
+  marginLeft12: { marginLeft: 12 },
+  // Estilos existentes
   sectionTitle: {
     fontWeight: 'bold',
     fontSize: 10,
@@ -178,32 +192,55 @@ const styles = StyleSheet.create({
   },
 });
 
-const FichaPDF = ({ cita, paciente, visitas, historia = {} }) => {
-  // Formato de fecha
-  const formatDate = (date) => (date ? dayjs(date).format('DD/MM/YYYY') : '');
-
-  // Helper para subrayado si vacío
-  const renderField = (value, underlineStyle = styles.underline) =>
-    value ? (
-      <Text style={styles.field}>{value}</Text>
-    ) : (
-      <View style={underlineStyle} />
+const FichaPDF = ({ cita = {}, paciente = {}, visitas = 0, historia = {} }) => {
+  // Validación de props críticos
+  if (!cita || !paciente) {
+    return (
+      <Document>
+        <Page size={{ width: 260, height: 800 }} style={styles.page}>
+          <Text style={styles.field}>Error: Datos insuficientes para generar la ficha</Text>
+        </Page>
+      </Document>
     );
+  }
+
+  // Formato de fecha optimizado con manejo de errores
+  const formatDate = (date) => {
+    if (!date) return '';
+    try {
+      return dayjs(date).format('DD/MM/YYYY');
+    } catch (error) {
+      return '';
+    }
+  };
+
+  // Helper mejorado para renderizar campos
+  const renderField = (value, underlineStyle = styles.underline) => {
+    if (!value || value.toString().trim() === '') {
+      return <View style={underlineStyle} />;
+    }
+    return <Text style={styles.field}>{value}</Text>;
+  };
+
+  // Helper para renderizar secciones
+  const renderSection = (title, content) => (
+    <>
+      <Text style={styles.sectionTitle}>{title}</Text>
+      <View style={styles.line} />
+      <View style={styles.blockBig}>
+        {renderField(content, styles.blockText)}
+      </View>
+    </>
+  );
 
   return (
     <Document>
       <Page size={{ width: 260, height: 800 }} style={styles.page}>
         {/* Cabecera */}
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            marginBottom: 8,
-          }}
-        >
+        <View style={styles.row}>
           <Text style={styles.nameLabel}>NOMBRE:</Text>
           <View style={styles.nameUnderline} />
-          <Text style={[styles.codeLabel, { marginLeft: 4 }]}>COD:</Text>
+          <Text style={[styles.codeLabel, styles.marginLeft4]}>COD:</Text>
           <View style={styles.codeUnderline} />
         </View>
         <View style={{ flexDirection: 'row', marginBottom: 4 }}>
@@ -213,7 +250,7 @@ const FichaPDF = ({ cita, paciente, visitas, historia = {} }) => {
               {formatDate(cita.appointment_date)}
             </Text>
           </Text>
-          <Text style={[styles.field, { marginLeft: 6 }]}>
+          <Text style={[styles.field, styles.marginLeft6]}>
             ({cita.ticket_number ? cita.ticket_number : 'S/N'})
           </Text>
         </View>
@@ -231,58 +268,28 @@ const FichaPDF = ({ cita, paciente, visitas, historia = {} }) => {
         )}
         <View style={styles.line} />
         {/* DNI y Hora en la misma línea */}
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            marginBottom: 8,
-          }}
-        >
+        <View style={styles.row}>
           <Text style={styles.label}>DNI:</Text>
           {renderField(paciente.document_number, styles.fieldUnderline)}
-          <Text style={[styles.label, { marginLeft: 12 }]}>H:</Text>
+          <Text style={[styles.label, styles.marginLeft12]}>H:</Text>
           {renderField(cita.appointment_hour, styles.fieldUnderline)}
         </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            marginBottom: 8,
-          }}
-        >
+        <View style={styles.row}>
           <Text style={styles.label}>Ocupación:</Text>
           {renderField(paciente.ocupation, styles.fieldUnderline)}
         </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            marginBottom: 8,
-          }}
-        >
+        <View style={styles.row}>
           <Text style={styles.label}>VISITA PRIMERA:</Text>
           {renderField(formatDate(cita.initial_date), styles.fieldUnderline)}
         </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            marginBottom: 8,
-          }}
-        >
+        <View style={styles.row}>
           <Text style={styles.label}>ULTIMA:</Text>
           {renderField('', styles.fieldUnderline)}
         </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            marginBottom: 8,
-          }}
-        >
+        <View style={styles.row}>
           <Text style={styles.label}>NAC:</Text>
           {renderField(formatDate(paciente.birth_date), styles.fieldUnderline)}
-          <Text style={[styles.label, { marginLeft: 4 }]}>/ Base:</Text>
+          <Text style={[styles.label, styles.marginLeft4]}>/ Base:</Text>
           {paciente.birth_date ? (
             <Text style={styles.field}>
               {calculateChineseElement(paciente.birth_date)}
@@ -292,74 +299,37 @@ const FichaPDF = ({ cita, paciente, visitas, historia = {} }) => {
           )}
         </View>
         <View style={styles.line} />
-        {/* Diagnóstico */}
-        <Text style={styles.sectionTitle}>DIAGNOSTICO MEDICO</Text>
-        <View style={styles.line} />
-        <View style={styles.blockBig}>
-          {renderField(cita.diagnosis, styles.blockText)}
-        </View>
-        {/* Medicamentos */}
-        <Text style={styles.sectionTitle}>MEDICAMENTOS</Text>
-        <View style={styles.line} />
-        <View style={styles.blockBig}>
-          {renderField(cita.medications, styles.blockText)}
-        </View>
-        {/* Operaciones */}
-        <Text style={styles.sectionTitle}>OPERACIONES</Text>
-        <View style={styles.line} />
-        <View style={styles.blockBig}>
-          {renderField(cita.surgeries, styles.blockText)}
-        </View>
-        {/* Dolencias */}
-        <Text style={styles.sectionTitle}>DOLENCIAS</Text>
-        <View style={styles.line} />
-        <View style={styles.blockBig}>
-          {renderField(cita.ailments, styles.blockText)}
-        </View>
+        
+        {/* Secciones usando el helper renderSection */}
+        {renderSection('DIAGNOSTICO MEDICO', cita.diagnosis)}
+        {renderSection('MEDICAMENTOS', cita.medications)}
+        {renderSection('OPERACIONES', cita.surgeries)}
+        {renderSection('DOLENCIAS', cita.ailments)}
+        
         {/* PI, PA, T, Diagnóstico Reflexológico */}
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            marginBottom: 8,
-          }}
-        >
+        <View style={styles.row}>
           <Text style={styles.label}>P.I:</Text>
           {renderField(historia.weight, styles.fieldUnderline)}
           <Text style={styles.label}> KG /</Text>
         </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            marginBottom: 8,
-          }}
-        >
+        <View style={styles.row}>
           <Text style={styles.label}>P.A:</Text>
           <View style={styles.shortUnderline} />
           <View style={styles.shortUnderline} />
           <Text style={styles.label}> KG /</Text>
-          <Text style={[styles.label, { marginLeft: 4 }]}>
+          <Text style={[styles.label, styles.marginLeft4]}>
             {dayjs().format('DD/MM/YYYY')}
           </Text>
         </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            marginBottom: 8,
-          }}
-        >
+        <View style={styles.row}>
           <Text style={styles.label}>T:</Text>
           <View style={styles.tinyUnderline} />
           <View style={styles.tinyUnderline} />
           <Text style={styles.label}> 0.0</Text>
         </View>
-        <Text style={styles.sectionTitle}>DIAGNOSTICOS REFLEXOLOGICO</Text>
-        <View style={styles.line} />
-        <View style={styles.blockBig}>
-          {renderField(cita.reflexology_diagnostics, styles.blockText)}
-        </View>
+        
+        {renderSection('DIAGNOSTICOS REFLEXOLOGICO', cita.reflexology_diagnostics)}
+        
         {/* Firma del terapeuta */}
         <View style={styles.firma}>
           <Text style={{ fontSize: 9 }}>Firma del terapeuta:</Text>

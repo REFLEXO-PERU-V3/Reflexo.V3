@@ -8,6 +8,27 @@ import {
   Image,
 } from '@react-pdf/renderer';
 
+// Configuración centralizada
+const defaultCompany = {
+  name: 'REFLEXOPERU',
+  address: 'Calle Las Golondrinas N° 153 - Urb. Los Nogales',
+  phone: '01-503-8416',
+  email: 'reflexoperu@reflexoperu.com',
+  city: 'LIMA - PERU',
+  exonerated: 'EXONERADO DE TRIBUTOS',
+  di: 'D.I. 626-D.I.23211',
+};
+
+const defaultTicket = {
+  number: 1,
+  date: '2025-06-23',
+  patient: 'PACIENTE',
+  service: 'Consulta',
+  unit: 1,
+  amount: 'S/ 0.00',
+  paymentType: 'EFECTIVO',
+};
+
 const styles = StyleSheet.create({
   page: {
     padding: 18,
@@ -137,80 +158,91 @@ const styles = StyleSheet.create({
   },
 });
 
-const getFontSize = (text, base = 13, min = 9, maxLen = 28) => {
-  if (!text) return base;
-  if (text.length > maxLen) return min;
-  return base;
+// Helper para formatear fecha
+const formatDate = (dateString) => {
+  if (!dateString) return 'Fecha no disponible';
+  try {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('es-ES');
+  } catch (error) {
+    return dateString;
+  }
+};
+
+// Helper para validar y formatear importe
+const formatAmount = (amount) => {
+  if (!amount) return 'S/ 0.00';
+  if (typeof amount === 'number') {
+    return `S/ ${amount.toFixed(2)}`;
+  }
+  return amount.toString();
 };
 
 const TicketPDF = ({
-  company = {
-    name: 'REFLEXOPERU',
-    address: 'Calle Las Golondrinas N° 153 - Urb. Los Nogales',
-    phone: '01-503-8416',
-    email: 'reflexoperu@reflexoperu.com',
-    city: 'LIMA - PERU',
-    exonerated: 'EXONERADO DE TRIBUTOS',
-    di: 'D.I. 626-D.I.23211',
-  },
-  ticket = {
-    number: 1,
-    date: '2025-06-23',
-    patient: 'PACIENTE',
-    service: 'Consulta',
-    unit: 1,
-    amount: 'S/ 0.00',
-    paymentType: 'EFECTIVO',
-  },
-}) => (
-  <Document>
-    <Page size="A6" style={styles.page} wrap={false}>
-      <View style={styles.center} wrap={false}>
-        <Text style={styles.bold}>{company.name}</Text>
-        <Text style={styles.headerLine}>{company.address}</Text>
-        <Text style={styles.headerLine}>Tel: {company.phone}</Text>
-        <Text style={styles.headerLine}>{company.email}</Text>
-        <View style={styles.spaceBlock} />
-        <Text style={styles.headerLine}>{company.city}</Text>
-        <Text style={styles.headerLine}>{company.exonerated}</Text>
-        <Text style={styles.headerLine}>{company.di}</Text>
-        <View style={styles.spaceBlock} />
-        <Text style={styles.headerLineBold}>TICKET N° {ticket.number}</Text>
-        <Text style={styles.headerLineBold}>
-          Fecha: <Text style={styles.field}>{ticket.date}</Text>
-        </Text>
-        <Text style={styles.headerLineBold}>
-          Paciente: <Text style={styles.field}>{ticket.patient}</Text>
-        </Text>
-        <Text style={styles.headerLineBold}>
-          Tipo de Pago: <Text style={styles.field}>{ticket.paymentType}</Text>
-        </Text>
-      </View>
-      <View style={styles.lineDouble} wrap={false} />
-      <View style={styles.table} wrap={false}>
-        <View style={styles.tableRow} wrap={false}>
-          <Text style={styles.tableCellHeader}>SERVICIO</Text>
-          <Text style={styles.tableCellHeader}>UNIDAD</Text>
-          <Text style={[styles.tableCellHeader, styles.lastCell]}>
-            S/ IMPORTE
+  company = defaultCompany,
+  ticket = defaultTicket,
+}) => {
+  // Validación de datos críticos
+  if (!ticket || !company) {
+    return (
+      <Document>
+        <Page size="A6" style={styles.page}>
+          <Text style={styles.headerLineBold}>Error: Datos del ticket no disponibles</Text>
+        </Page>
+      </Document>
+    );
+  }
+
+  return (
+    <Document>
+      <Page size="A6" style={styles.page} wrap={false}>
+        <View style={styles.center} wrap={false}>
+          <Text style={styles.bold}>{company.name || defaultCompany.name}</Text>
+          <Text style={styles.headerLine}>{company.address || defaultCompany.address}</Text>
+          <Text style={styles.headerLine}>Tel: {company.phone || defaultCompany.phone}</Text>
+          <Text style={styles.headerLine}>{company.email || defaultCompany.email}</Text>
+          <View style={styles.spaceBlock} />
+          <Text style={styles.headerLine}>{company.city || defaultCompany.city}</Text>
+          <Text style={styles.headerLine}>{company.exonerated || defaultCompany.exonerated}</Text>
+          <Text style={styles.headerLine}>{company.di || defaultCompany.di}</Text>
+          <View style={styles.spaceBlock} />
+          <Text style={styles.headerLineBold}>TICKET N° {ticket.number || 'N/A'}</Text>
+          <Text style={styles.headerLineBold}>
+            Fecha: <Text style={styles.field}>{formatDate(ticket.date)}</Text>
+          </Text>
+          <Text style={styles.headerLineBold}>
+            Paciente: <Text style={styles.field}>{ticket.patient || 'N/A'}</Text>
+          </Text>
+          <Text style={styles.headerLineBold}>
+            Tipo de Pago: <Text style={styles.field}>{ticket.paymentType || 'N/A'}</Text>
           </Text>
         </View>
-        <View style={styles.tableRow} wrap={false}>
-          <Text style={styles.tableCell}>{ticket.service}</Text>
-          <Text style={styles.tableCell}>{ticket.unit}</Text>
-          <Text style={[styles.tableCell, styles.lastCell]}>
-            {ticket.amount}
-          </Text>
+        <View style={styles.lineDouble} wrap={false} />
+        <View style={styles.table} wrap={false}>
+          <View style={styles.tableRow} wrap={false}>
+            <Text style={styles.tableCellHeader}>SERVICIO</Text>
+            <Text style={styles.tableCellHeader}>UNIDAD</Text>
+            <Text style={[styles.tableCellHeader, styles.lastCell]}>
+              S/ IMPORTE
+            </Text>
+          </View>
+          <View style={styles.tableRow} wrap={false}>
+            <Text style={styles.tableCell}>{ticket.service || 'N/A'}</Text>
+            <Text style={styles.tableCell}>{ticket.unit || 0}</Text>
+            <Text style={[styles.tableCell, styles.lastCell]}>
+              {formatAmount(ticket.amount)}
+            </Text>
+          </View>
         </View>
-      </View>
-      <View style={styles.lineDouble} wrap={false} />
-      <View style={styles.totalBlock} wrap={false}>
-        <Text style={styles.total}>TOTAL: {ticket.amount}</Text>
-      </View>
-      <Text style={styles.small}>Gracias por su preferencia</Text>
-      <Text style={styles.small}>Presentarse 30 minutos antes de la cita</Text>
-    </Page>
-  </Document>
-);
+        <View style={styles.lineDouble} wrap={false} />
+        <View style={styles.totalBlock} wrap={false}>
+          <Text style={styles.total}>TOTAL: {formatAmount(ticket.amount)}</Text>
+        </View>
+        <Text style={styles.small}>Gracias por su preferencia</Text>
+        <Text style={styles.small}>Presentarse 30 minutos antes de la cita</Text>
+      </Page>
+    </Document>
+  );
+};
 
 export default TicketPDF;
