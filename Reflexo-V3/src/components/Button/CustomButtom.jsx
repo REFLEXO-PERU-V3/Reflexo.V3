@@ -6,7 +6,7 @@ const CustomButton = ({text, onClick}) => {
             theme={{
                 components: {
                     Button: {
-                        colorPrimary: '#00AA55',
+                        colorPrimary: '#868D89FF',
                         algorithm: true,
                         },
                 },
