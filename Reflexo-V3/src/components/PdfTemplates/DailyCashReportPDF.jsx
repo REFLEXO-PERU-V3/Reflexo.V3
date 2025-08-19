@@ -7,71 +7,48 @@ import {
   StyleSheet,
   Image,
 } from '@react-pdf/renderer';
+import { colors, fonts, spacing, sizes, commonStyles } from '../../css/pdfTheme';
 
 const defaultLogo = '/src/assets/Img/Dashboard/MiniLogoReflexo.png';
 const defaultClinicName = 'Reflexo Perú';
 
-// Paleta de colores pastel original
-const pastelGreen = '#95e472';
-const darkGreen = '#2d5a3d';
-const lightBackground = '#f8f9fa';
-
 const styles = StyleSheet.create({
   page: {
-    backgroundColor: '#fff',
-    padding: 30,
-    fontFamily: 'Helvetica',
-    fontSize: 9,
+    ...commonStyles.page,
   },
   // Cabecera
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 25,
+    ...commonStyles.header,
   },
   logo: {
-    width: 70,
-    height: 70,
-    borderRadius: 50,
-    borderWidth: 5,
-    borderColor: '#4CAF50',
-    borderStyle: 'solid',
+    ...commonStyles.logo,
   },
-
   headerTitles: {
-    marginLeft: 15,
+    ...commonStyles.headerTitles,
   },
   clinicName: {
-    color: darkGreen,
-    fontSize: 22,
-    fontFamily: 'Helvetica-Bold',
+    ...commonStyles.clinicName,
   },
   reportTitle: {
-    color: '#444',
-    fontSize: 14,
+    ...commonStyles.reportTitle,
   },
   headerInfo: {
-    marginLeft: 'auto',
-    textAlign: 'right',
+    ...commonStyles.headerInfo,
   },
   infoText: {
-    fontSize: 9,
-    color: '#555',
-    marginBottom: 2,
+    ...commonStyles.infoText,
   },
   divider: {
-    borderBottomWidth: 2,
-    borderBottomColor: pastelGreen,
-    marginVertical: 15,
+    ...commonStyles.divider,
   },
   // Sección de Resumen
   summaryContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: lightBackground,
-    padding: 15,
-    borderRadius: 8,
-    border: `1px solid #e0e0e0`,
+    backgroundColor: colors.lightBackground,
+    padding: spacing.summaryPadding,
+    borderRadius: sizes.borderRadius,
+    border: `1px solid ${colors.border}`,
     marginBottom: 20,
   },
   summaryItem: {
@@ -79,45 +56,37 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   summaryLabel: {
-    fontSize: 10,
-    color: '#555',
+    fontSize: sizes.fontSize.medium,
+    color: colors.textLight,
     marginBottom: 4,
   },
   summaryValue: {
-    fontSize: 16,
-    color: darkGreen,
-    fontFamily: 'Helvetica-Bold',
+    fontSize: sizes.fontSize.title,
+    color: colors.darkGreen,
+    fontFamily: fonts.bold,
   },
   // Estilos de la tabla
   table: {
-    border: `1px solid #e0e0e0`,
-    borderRadius: 8,
-    overflow: 'hidden',
+    ...commonStyles.table,
   },
   tableHeader: {
-    flexDirection: 'row',
-    backgroundColor: pastelGreen,
-    padding: 10,
+    ...commonStyles.tableHeader,
   },
   headerCell: {
-    color: '#fff',
-    fontFamily: 'Helvetica-Bold',
-    fontSize: 11,
+    ...commonStyles.headerCell,
   },
   tableRow: {
-    flexDirection: 'row',
-    padding: 10,
-    borderBottom: `1px solid #e0e0e0`,
+    ...commonStyles.tableRow,
   },
   rowOdd: {
-    backgroundColor: lightBackground,
+    ...commonStyles.rowOdd,
   },
   tableCell: {
-    fontSize: 10,
+    ...commonStyles.tableCell,
   },
   cellMethod: {
     flex: 2,
-    fontFamily: 'Helvetica-Bold',
+    fontFamily: fonts.bold,
   },
   cellCount: {
     flex: 1,
@@ -129,36 +98,19 @@ const styles = StyleSheet.create({
   },
   // Pie de tabla
   tableFooter: {
-    flexDirection: 'row',
-    padding: 10,
-    backgroundColor: '#eaffdf',
-    borderTop: `2px solid ${pastelGreen}`,
+    ...commonStyles.tableFooter,
   },
   footerLabel: {
     flex: 3,
-    textAlign: 'right',
-    fontFamily: 'Helvetica-Bold',
-    color: darkGreen,
-    fontSize: 12,
+    ...commonStyles.footerLabel,
   },
   footerValue: {
     flex: 1,
-    textAlign: 'right',
-    fontFamily: 'Helvetica-Bold',
-    color: darkGreen,
-    fontSize: 12,
+    ...commonStyles.footerValue,
   },
   // Pie de página del documento
   footer: {
-    position: 'absolute',
-    bottom: 20,
-    left: 30,
-    right: 30,
-    textAlign: 'center',
-    fontSize: 8,
-    color: '#999',
-    borderTop: `1px solid #e0e0e0`,
-    paddingTop: 8,
+    ...commonStyles.footer,
   },
 });
 
