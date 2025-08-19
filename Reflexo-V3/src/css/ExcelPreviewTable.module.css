@@ -1,0 +1,52 @@
+.container {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px #e0e0e0;
+  padding: 24px;
+  margin-top: 16px;
+}
+
+/* Tipografía/tamaño para la tabla AntD dentro del contenedor */
+.container :global(.ant-table) {
+  font-family: Helvetica;
+  font-size: 15px;
+}
+
+/* Filas pares/impares */
+.rowEven td {
+  background: #f8f8f8 !important;
+}
+
+.rowOdd td {
+  background: #fff !important;
+}
+
+/* Overrides de Ant Design */
+.container :global(.ant-table-thead > tr > th) {
+  background: #95e472 !important;
+  color: #222 !important;
+  font-weight: bold !important;
+  border: none !important;
+}
+
+.container :global(.ant-table-tbody > tr > td) {
+  border: 1px solid #d9d9d9 !important;
+}
+
+.container :global(.ant-pagination-item-active) {
+  border-color: #95e472 !important;
+}
+
+.container :global(.ant-pagination-item-active a) {
+  color: #2d5a3d !important;
+}
+
+.container :global(.ant-pagination-item:hover) {
+  border-color: #95e472 !important;
+}
+
+.container :global(.ant-pagination-item:hover a) {
+  color: #2d5a3d !important;
+}
+
+
