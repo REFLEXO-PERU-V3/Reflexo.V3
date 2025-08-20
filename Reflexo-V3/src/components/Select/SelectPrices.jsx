@@ -1,0 +1,121 @@
+import { ConfigProvider, Input, Select } from 'antd';
+import { useEffect, useState, useCallback } from 'react';
+import styles from '../Input/Input.module.css';
+import { getPredeterminedPrices } from './SelectsApi';
+
+const { Option } = Select;
+
+const SelectPrices = ({
+  onChange,
+  onPriceChange,
+  value,
+  initialPrice = '',
+  ...rest
+}) => {
+  const [prices, setPrices] = useState([]);
+  const [inputPrice, setInputPrice] = useState(initialPrice);
+  const [internalValue, setInternalValue] = useState(value);
+
+  useEffect(() => {
+    const fetchPrices = async () => {
+      try {
+        const priceOptions = await getPredeterminedPrices();
+        setPrices(priceOptions);
+      } catch (error) {
+        console.error('Error al obtener precios:', error);
+      }
+    };
+    fetchPrices();
+  }, []);
+
+  useEffect(() => {
+    setInputPrice(initialPrice);
+  }, [initialPrice]);
+
+  useEffect(() => {
+    setInternalValue(value);
+  }, [value]);
+
+  const handleSelectChange = useCallback((selectedValue) => {
+    const selected = prices.find((item) => item.value === selectedValue);
+    const newPrice = selected?.price || '';
+    setInputPrice(newPrice);
+    setInternalValue(selectedValue);
+    if (onChange) onChange(selectedValue);
+    if (onPriceChange) onPriceChange(newPrice);
+  }, [prices, onChange, onPriceChange]);
+
+  const handleInputChange = useCallback((e) => {
+    const newValue = e.target.value;
+    setInputPrice(newValue);
+    if (onPriceChange) onPriceChange(newValue);
+  }, [onPriceChange]);
+
+  return (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '8px',
+        width: '100%',
+      }}
+    >
+      <ConfigProvider
+        theme={{
+          components: {
+            Select: {
+              colorPrimary: '#1677ff',
+              optionSelectedBg: '#333333',
+              colorText: '#fff',
+              colorBgElevated: '#444444',
+              colorTextPlaceholder: '#aaa',
+              controlItemBgHover: '#444444',
+              selectorBg: '#444444',
+            },
+          },
+          token: {
+            colorTextBase: '#fff',
+          },
+        }}
+      >
+        <Select
+          className={styles.inputStyle}
+          dropdownStyle={{ backgroundColor: '#444444', color: '#fff' }}
+          style={{ color: '#fff', backgroundColor: '#1a1a1a' }}
+          onChange={handleSelectChange}
+          value={internalValue}
+          allowClear
+          {...rest}
+        >
+          {prices.map((item) => (
+            <Option
+              key={item.value}
+              value={item.value}
+              style={{ color: '#fff' }}
+            >
+              {item.label}
+            </Option>
+          ))}
+        </Select>
+      </ConfigProvider>
+
+      <Input
+        className={styles.inputStyle}
+        value={inputPrice}
+        prefix="S/"
+        onChange={handleInputChange}
+        style={{
+          height: '35px',
+          lineHeight: '40px',
+          paddingTop: '0px',
+          paddingBottom: '0px',
+          marginBottom: '-50px',
+          display: rest.hidePriceInput ? 'none' : 'flex',
+          alignItems: 'center',
+        }}
+      />
+    </div>
+  );
+};
+
+export default SelectPrices;
