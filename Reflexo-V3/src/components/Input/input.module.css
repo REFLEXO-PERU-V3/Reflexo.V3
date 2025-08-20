@@ -1,0 +1,260 @@
+/* components/Input/InputField.module.css */
+
+/* ========================================
+   CONTENEDOR PRINCIPAL DEL INPUT
+   ======================================== */
+.inputWrapper {
+  display: flex;           /* Layout flexible para alinear elementos */
+  align-items: center;     /* Centra verticalmente los elementos */
+  position: relative;      /* Posicionamiento relativo para elementos hijos */
+  width: 100%;            /* Ocupa todo el ancho disponible */
+}
+
+/* ========================================
+   ESTILOS BASE DEL INPUT
+   ======================================== */
+.inputStyle {
+  border-color: #444;      /* Color del borde por defecto */
+  border-radius: 8px;      /* Bordes redondeados */
+  color: #ffffff;          /* Color del texto (blanco) */
+  background-color: #444444; /* Fondo gris oscuro */
+  width: 100%;            /* Ancho completo del contenedor */
+  padding: 12px 16px;     /* Espaciado interno: arriba/abajo 12px, izquierda/derecha 16px */
+  border: 2px solid #444; /* Borde sólido de 2px */
+  font-size: 14px;        /* Tamaño de fuente */
+  font-weight: 500;       /* Peso de la fuente (semi-bold) */
+  line-height: 1.5;       /* Altura de línea para mejor legibilidad */
+  transition: all 0.3s ease; /* Transición suave de 0.3s para todos los cambios */
+  outline: none;          /* Elimina el outline por defecto del navegador */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil para dar profundidad */
+}
+
+/* ========================================
+   ESTADO HOVER DEL INPUT
+   ======================================== */
+.inputStyle:hover {
+  border-color: #00AA55;   /* Cambia el borde a verde al pasar el mouse */
+  box-shadow: 0 4px 12px rgba(0, 170, 85, 0.2); /* Sombra verde más pronunciada */
+  transform: translateY(-1px); /* Eleva ligeramente el input hacia arriba */
+}
+
+/* ========================================
+   ESTADO FOCUS DEL INPUT
+   ======================================== */
+.inputStyle:focus {
+  border-color: #00AA55;   /* Borde verde cuando el input tiene el foco */
+  box-shadow: 0 0 0 3px rgba(0, 170, 85, 0.15); /* Anillo de focus verde */
+  transform: translateY(-1px); /* Mantiene la elevación del hover */
+}
+
+/* ========================================
+   ESTADO DESHABILITADO DEL INPUT
+   ======================================== */
+.inputStyle:disabled {
+  background-color: #2a2a2a; /* Fondo más oscuro para indicar estado deshabilitado */
+  color: #888;              /* Color de texto gris para indicar inactividad */
+  cursor: not-allowed;      /* Cursor que indica que no se puede interactuar */
+  border-color: #333;       /* Borde más oscuro */
+  box-shadow: none;         /* Sin sombras en estado deshabilitado */
+  transform: none;          /* Sin transformaciones */
+}
+
+/* ========================================
+   ESTILOS DEL ICONO
+   ======================================== */
+.icon {
+  cursor: pointer;          /* Cursor de mano para indicar que es clickeable */
+  margin-left: 8px;         /* Margen izquierdo para separarlo del input */
+  font-size: 20px;          /* Tamaño del icono */
+  color: #ffffff;           /* Color del icono (blanco) */
+  transition: all 0.3s ease; /* Transición suave para todos los cambios */
+  padding: 8px;             /* Espaciado interno del icono */
+  border-radius: 6px;       /* Bordes redondeados del área del icono */
+}
+
+/* ========================================
+   ESTADO HOVER DEL ICONO
+   ======================================== */
+.icon:hover {
+  color: #00AA55;           /* Cambia a color verde al pasar el mouse */
+  background-color: rgba(0, 170, 85, 0.1); /* Fondo verde semitransparente */
+  transform: scale(1.1);    /* Agranda ligeramente el icono */
+}
+
+/* ========================================
+   ESTADOS DEL ICONO
+   ======================================== */
+.iconRequired {
+  color: #FFF;
+}
+
+.iconOptional {
+  color: #aaa;
+}
+
+/* ========================================
+   ESTILOS PARA EL CAMPO DE PACIENTES
+   ======================================== */
+.patientRow {
+  width: 100%;              /* Ancho completo */
+  margin-top: 15px;         /* Margen superior para separación */
+  margin-bottom: 16px;      /* Margen inferior para separación */
+}
+
+.patientContainer {
+  display: flex;             /* Layout flexible para alinear elementos horizontalmente */
+  gap: 10px;                 /* Espacio entre elementos del contenedor */
+  align-items: flex-end;     /* Alinea elementos al final (abajo) */
+  width: 100%;               /* Ancho completo */
+}
+
+.patientInputContainer {
+  flex: 1;                   /* Toma todo el espacio disponible */
+}
+
+.patientButtonContainer {
+  margin-bottom: -26px;      /* Margen negativo para alinear con el input */
+}
+
+/* ========================================
+   BOTÓN DEL CAMPO DE PACIENTES
+   ======================================== */
+.patientButton {
+  height: 32px;              /* Altura fija del botón */
+  border-color: #00b96b;     /* Color del borde (verde claro) */
+  white-space: nowrap;       /* Evita que el texto se rompa en múltiples líneas */
+  background-color: #00b96b; /* Color de fondo (verde claro) */
+  border-radius: 6px;        /* Bordes redondeados */
+  font-weight: 600;          /* Peso de la fuente (semi-bold) */
+  transition: all 0.3s ease; /* Transición suave para todos los cambios */
+  box-shadow: 0 2px 6px rgba(0, 185, 107, 0.3); /* Sombra verde sutil */
+}
+
+/* ========================================
+   ESTADO HOVER DEL BOTÓN DE PACIENTES
+   ======================================== */
+.patientButton:hover {
+  background-color: #00AA55; /* Cambia a verde primario al pasar el mouse */
+  border-color: #00AA55;     /* Borde verde primario */
+  box-shadow: 0 4px 12px rgba(0, 170, 85, 0.4); /* Sombra verde más pronunciada */
+  transform: translateY(-1px); /* Eleva ligeramente el botón */
+}
+
+/* ========================================
+   COLUMNA DE CHECKBOXES
+   ======================================== */
+.checkboxColumn {
+  display: flex;             /* Layout flexible para apilar elementos verticalmente */
+  flex-direction: column;    /* Dirección vertical (columna) */
+  margin-bottom: -26px;      /* Margen negativo para alinear con otros elementos */
+  margin-left: 2px;          /* Margen izquierdo pequeño para separación */
+  gap: 8px;                  /* Espacio entre checkboxes */
+}
+
+/* ========================================
+   ELEMENTOS INDIVIDUALES DE CHECKBOX
+   ======================================== */
+.checkboxItem {
+  margin-bottom: 0px;        /* Sin margen inferior */
+  margin-left: 2px;          /* Margen izquierdo pequeño */
+  transition: all 0.2s ease; /* Transición rápida para cambios */
+}
+
+/* ========================================
+   ESTADO HOVER DE LOS CHECKBOXES
+   ======================================== */
+.checkboxItem:hover {
+  transform: scale(1.05);    /* Agranda ligeramente al pasar el mouse */
+}
+
+/* ========================================
+   ESTILOS PARA COMPONENTES DE SELECCIÓN
+   ======================================== */
+.selectComponent {
+  color: #fff;
+  background-color: #1a1a1a;
+}
+
+.selectDropdown {
+  background-color: #444444;
+  color: #fff;
+}
+
+.selectOption {
+  color: #fff;
+}
+
+/* ========================================
+   ESTILOS PARA COMPONENTES DE FECHA
+   ======================================== */
+.datePickerComponent {
+  width: 100%;
+  color: #ffffff;
+  background-color: #424242FF;
+  border-color: #444444;
+}
+
+.datePickerDropdown {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.datePickerCita {
+  width: 100%;
+  color: #ffffff;
+  background-color: #333333FF;
+  border-color: #444444;
+}
+
+.datePickerCitaDropdown {
+  background-color: #2C2C2CFF;
+  color: #ffffff;
+}
+
+/* ========================================
+   ESTILOS PARA COMPONENTES DE HORA
+   ======================================== */
+.timePickerComponent {
+  width: 100%;
+}
+
+/* ========================================
+   ESTILOS PARA FORM ITEMS
+   ======================================== */
+.formItem {
+  margin-bottom: -30px;
+  margin-top: -10px;
+}
+
+/* ========================================
+   ESTILOS PARA ESPACIADORES
+   ======================================== */
+.spacer {
+  height: 32px;
+}
+
+/* ========================================
+   DISEÑO RESPONSIVO PARA MÓVILES
+   ======================================== */
+@media (max-width: 768px) {
+  /* Ajustes para pantallas pequeñas */
+  .inputStyle {
+    padding: 10px 14px;     /* Padding reducido para móviles */
+    font-size: 16px;        /* Fuente más grande para prevenir zoom en iOS */
+  }
+  
+  /* Cambia el layout a columna en móviles */
+  .patientContainer {
+    flex-direction: column;  /* Apila elementos verticalmente */
+    gap: 12px;               /* Espacio entre elementos apilados */
+  }
+  
+  /* Botones ocupan todo el ancho en móviles */
+  .patientButtonContainer {
+    width: 100%;             /* Ancho completo */
+  }
+  
+  .patientButton {
+    width: 100%;             /* Botón de ancho completo */
+  }
+}
