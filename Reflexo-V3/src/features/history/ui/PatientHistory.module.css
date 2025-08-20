@@ -1,0 +1,385 @@
+/* ========================================
+   VARIABLES CSS Y ESTILOS BASE
+   ======================================== */
+:root {
+  --primary-color: #4caf50;
+  --primary-hover: #388e3c;
+  --primary-dark: #2e7d32;
+  --danger-color: #f44336;
+  --danger-hover: #d32f2f;
+  --bg-dark: #161616;
+  --bg-card: #222;
+  --bg-input: #222;
+  --text-light: #fff;
+  --text-medium: #eee;
+  --text-dark: #111;
+  --border-color: #333;
+  --border-hover: #444;
+  --shadow-light: rgba(0, 0, 0, 0.5);
+  --shadow-primary: rgba(76, 175, 80, 0.2);
+  --shadow-green: rgba(60, 109, 67, 0.3);
+  --radius-small: 5px;
+  --radius-medium: 10px;
+  --spacing-xs: 8px;
+  --spacing-sm: 10px;
+  --spacing-md: 15px;
+  --spacing-lg: 20px;
+  --spacing-xl: 25px;
+}
+
+/* ========================================
+   LAYOUT PRINCIPAL
+   ======================================== */
+.container {
+  max-width: 1400px;
+  margin: var(--spacing-lg) auto;
+  padding: 0;
+}
+
+.card {
+  border-radius: var(--radius-medium);
+  background: var(--bg-dark);
+  box-shadow: 0 4px 20px var(--shadow-light);
+}
+
+/* ========================================
+   TÍTULOS Y ENCABEZADOS
+   ======================================== */
+.title {
+  margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--border-color);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-light);
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.sectionTitle {
+  margin: var(--spacing-xl) 0 var(--spacing-md);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ========================================
+   FORMULARIO Y CAMPOS
+   ======================================== */
+.form {
+  padding: var(--spacing-lg);
+}
+
+.formItem {
+  margin-bottom: 16px;
+}
+
+.formItem label {
+  font-weight: 600;
+  color: var(--text-light) !important;
+}
+
+/* Estilos base para inputs, textareas y selects */
+.input, .textarea, .select {
+  width: 100%;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-medium) !important;
+  background-color: var(--bg-input) !important;
+}
+
+/* Estados de focus para campos de entrada */
+.input:focus, .textarea:focus, .select:focus {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 2px var(--shadow-primary) !important;
+}
+
+/* Campos deshabilitados */
+.ant-input-disabled, .ant-input[disabled] {
+  color: var(--text-medium) !important;
+  opacity: 1;
+  background-color: var(--bg-input) !important;
+}
+
+/* Campos de diagnóstico específicos */
+.diagnosticTextArea {
+  resize: vertical;
+  min-height: 80px !important;
+  max-height: 120px !important; 
+}
+
+/* ========================================
+   SECCIÓN DE TERAPEUTAS
+   ======================================== */
+.therapistContainer {
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: center;
+  width: 100%;
+}
+
+.therapistRow {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: var(--spacing-sm);
+  align-items: center;
+}
+
+.therapistButtons {
+  display: flex;
+  gap: var(--spacing-xs);
+}
+
+/* Botón de selección */
+.selectButton {
+  border-color: var(--primary-color) !important;
+  color: var(--text-dark) !important;
+  background-color: var(--primary-color) !important;
+}
+
+.selectButton:hover {
+  border-color: var(--primary-hover) !important;
+  background-color: var(--primary-hover) !important;
+}
+
+/* Botón de eliminación */
+.removeButton {
+  border-color: var(--danger-color) !important;
+  color: var(--text-medium) !important;
+  background-color: var(--danger-color) !important;
+}
+
+.removeButton:hover {
+  border-color: var(--danger-hover) !important;
+  background-color: var(--danger-hover) !important;
+}
+
+/* Dropdown de terapeutas */
+.therapistDropdown {
+  position: absolute;
+  z-index: 10;
+  width: 250px;
+  max-height: 200px;
+  margin-top: 5px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-small);
+  background-color: var(--bg-card);
+  box-shadow: 0 4px 8px var(--shadow-green);
+}
+
+.dropdownItem {
+  cursor: pointer;
+  padding: var(--spacing-xs) 12px;
+  font-size: 13px;
+  color: var(--text-medium);
+  transition: background-color 0.2s;
+}
+
+.dropdownItem:hover {
+  color: var(--text-dark);
+  background-color: var(--primary-dark);
+}
+
+/* ========================================
+   LAYOUTS Y DISPOSICIÓN
+   ======================================== */
+.flexRow {
+  display: flex;
+  gap: var(--spacing-lg);
+  margin-bottom: 16px;
+}
+
+.flexItem {
+  flex: 1;
+  min-width: 220px;
+  margin-bottom: 0 !important;
+}
+
+.flexItem textarea {
+  resize: vertical;
+  min-height: 80px !important;
+  max-height: 120px !important;
+}
+
+.threeColumnLayout {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.column {
+  flex: 1;
+}
+
+.physicalInfoRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  min-width: 900px;
+  margin-bottom: var(--spacing-md);
+}
+
+.physicalInfoItem {
+  flex: 1;
+  min-width: 150px;
+  max-width: 200px;
+}
+
+.bottomSection {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-top: var(--spacing-lg);
+}
+
+.startDateSection {
+  flex: 1;
+  max-width: 250px;
+}
+
+/* ========================================
+   COMPONENTES ESPECÍFICOS
+   ======================================== */
+.datePicker {
+  width: 100%;
+}
+
+.ant-picker {
+  color: var(--text-dark) !important;
+  background-color: var(--text-light) !important;
+}
+
+.ant-picker-input input {
+  color: var(--text-dark) !important;
+}
+
+/* ========================================
+   BOTONES DE ACCIÓN
+   ======================================== */
+.actionButtons {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+/* Estilos base para botones */
+.printButton, .saveButton, .cancelButton {
+  transition: all 0.2s ease;
+}
+
+/* Botón de impresión */
+.printButton {
+  border-color: var(--border-color) !important;
+  color: var(--text-medium) !important;
+  background-color: var(--border-color) !important;
+}
+
+.printButton:hover {
+  border-color: var(--border-hover) !important;
+  background-color: var(--border-hover) !important;
+}
+
+/* Botón de guardar */
+.saveButton {
+  border-color: var(--primary-color) !important;
+  color: var(--text-dark) !important;
+  background-color: var(--primary-color) !important;
+}
+
+.saveButton:hover {
+  border-color: var(--primary-hover) !important;
+  background-color: var(--primary-hover) !important;
+}
+
+/* Botón de cancelar */
+.cancelButton {
+  border-color: var(--border-color) !important;
+  color: var(--text-medium) !important;
+  background-color: transparent !important;
+}
+
+.cancelButton:hover {
+  background-color: var(--border-color) !important;
+}
+
+/* ========================================
+   MODALES Y ESTADOS
+   ======================================== */
+.ticketModalLoading {
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  background: var(--bg-card);
+}
+
+/* ========================================
+   DISEÑO RESPONSIVO
+   ======================================== */
+@media (max-width: 1200px) {
+  .container {
+    padding: var(--spacing-md);
+  }
+  
+  .physicalInfoRow {
+    min-width: 0;
+  }
+  
+  .physicalInfoItem {
+    flex: 1 1 200px;
+  }
+
+  .bottomSection {
+    flex-direction: column;
+    gap: var(--spacing-md);
+    align-items: flex-start;
+  }
+
+  .startDateSection {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .actionButtons {
+    justify-content: flex-start;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin: var(--spacing-sm);
+    padding: 0;
+  }
+
+  .threeColumnLayout {
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .physicalInfoItem {
+    flex: 1 1 100%;
+  }
+
+  .therapistContainer {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    align-items: flex-start;
+  }
+
+  .therapistButtons {
+    width: 100%;
+  }
+
+  .selectButton, .removeButton {
+    width: 100%;
+  }
+
+  .actionButtons {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .actionButtons button {
+    width: 100%;
+  }
+}
