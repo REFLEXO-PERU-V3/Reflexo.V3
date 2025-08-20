@@ -7,48 +7,70 @@ import {
   StyleSheet,
   Image,
 } from '@react-pdf/renderer';
-import { colors, fonts, spacing, sizes, commonStyles } from '../../css/pdfTheme';
 
 const defaultLogo = '/src/assets/Img/Dashboard/MiniLogoReflexo.png';
 const defaultClinicName = 'Reflexo Perú';
 
+// Paleta de colores pastel
+const pastelGreen = '#95e472';
+const darkGreen = '#2d5a3d';
+const lightBackground = '#f8f9fa';
+
 const styles = StyleSheet.create({
   page: {
-    ...commonStyles.page,
+    backgroundColor: '#fff',
+    padding: 30,
+    fontFamily: 'Helvetica',
+    fontSize: 9,
   },
   // Cabecera
   header: {
-    ...commonStyles.header,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 25,
   },
   logo: {
-    ...commonStyles.logo,
+    width: 70,
+    height: 70,
+    borderRadius: 50,
+    borderWidth: 5,
+    borderColor: '#4CAF50',
+    borderStyle: 'solid',
   },
   headerTitles: {
-    ...commonStyles.headerTitles,
+    marginLeft: 15,
   },
   clinicName: {
-    ...commonStyles.clinicName,
+    color: darkGreen,
+    fontSize: 22,
+    fontFamily: 'Helvetica-Bold',
   },
   reportTitle: {
-    ...commonStyles.reportTitle,
+    color: '#444',
+    fontSize: 14,
   },
   headerInfo: {
-    ...commonStyles.headerInfo,
+    marginLeft: 'auto',
+    textAlign: 'right',
   },
   infoText: {
-    ...commonStyles.infoText,
+    fontSize: 9,
+    color: '#555',
+    marginBottom: 2,
   },
   divider: {
-    ...commonStyles.divider,
+    borderBottomWidth: 2,
+    borderBottomColor: pastelGreen,
+    marginVertical: 15,
   },
   // Sección de Resumen
   summaryContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: colors.lightBackground,
-    padding: spacing.summaryPadding,
-    borderRadius: sizes.borderRadius,
-    border: `1px solid ${colors.border}`,
+    backgroundColor: lightBackground,
+    padding: 15,
+    borderRadius: 8,
+    border: '1px solid #e0e0e0',
     marginBottom: 20,
   },
   summaryItem: {
@@ -56,37 +78,45 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   summaryLabel: {
-    fontSize: sizes.fontSize.medium,
-    color: colors.textLight,
+    fontSize: 10,
+    color: '#555',
     marginBottom: 4,
   },
   summaryValue: {
-    fontSize: sizes.fontSize.title,
-    color: colors.darkGreen,
-    fontFamily: fonts.bold,
+    fontSize: 16,
+    color: darkGreen,
+    fontFamily: 'Helvetica-Bold',
   },
   // Estilos de la tabla
   table: {
-    ...commonStyles.table,
+    border: '1px solid #e0e0e0',
+    borderRadius: 8,
+    overflow: 'hidden',
   },
   tableHeader: {
-    ...commonStyles.tableHeader,
+    flexDirection: 'row',
+    backgroundColor: pastelGreen,
+    padding: 10,
   },
   headerCell: {
-    ...commonStyles.headerCell,
+    color: '#fff',
+    fontFamily: 'Helvetica-Bold',
+    fontSize: 11,
   },
   tableRow: {
-    ...commonStyles.tableRow,
+    flexDirection: 'row',
+    padding: 10,
+    borderBottom: '1px solid #e0e0e0',
   },
   rowOdd: {
-    ...commonStyles.rowOdd,
+    backgroundColor: lightBackground,
   },
   tableCell: {
-    ...commonStyles.tableCell,
+    fontSize: 10,
   },
   cellMethod: {
     flex: 2,
-    fontFamily: fonts.bold,
+    fontFamily: 'Helvetica-Bold',
   },
   cellCount: {
     flex: 1,
@@ -98,19 +128,36 @@ const styles = StyleSheet.create({
   },
   // Pie de tabla
   tableFooter: {
-    ...commonStyles.tableFooter,
+    flexDirection: 'row',
+    padding: 10,
+    backgroundColor: '#eaffdf',
+    borderTop: `2px solid ${pastelGreen}`,
   },
   footerLabel: {
     flex: 3,
-    ...commonStyles.footerLabel,
+    textAlign: 'right',
+    fontFamily: 'Helvetica-Bold',
+    color: darkGreen,
+    fontSize: 12,
   },
   footerValue: {
     flex: 1,
-    ...commonStyles.footerValue,
+    textAlign: 'right',
+    fontFamily: 'Helvetica-Bold',
+    color: darkGreen,
+    fontSize: 12,
   },
   // Pie de página del documento
   footer: {
-    ...commonStyles.footer,
+    position: 'absolute',
+    bottom: 20,
+    left: 30,
+    right: 30,
+    textAlign: 'center',
+    fontSize: 8,
+    color: '#999',
+    borderTop: '1px solid #e0e0e0',
+    paddingTop: 8,
   },
 });
 
