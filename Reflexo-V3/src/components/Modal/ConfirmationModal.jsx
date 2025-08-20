@@ -1,5 +1,5 @@
+import CustomButton from '../Button/CustomButtom';
 import CustomModal from './CustomModal';
-import CustomButton from '../components/Button/CustomButtom';
 
 /**
  * Modal de confirmación reutilizable
