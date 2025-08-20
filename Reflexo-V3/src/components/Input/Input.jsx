@@ -282,16 +282,15 @@ const InputField = ({
           }}
         >
           <Select
-            className={styles.inputStyle}
+            className={`${styles.inputStyle} ${styles.selectComponent}`}
             dropdownStyle={{ backgroundColor: '#444444', color: '#fff' }}
-            style={{ color: '#fff', backgroundColor: '#1a1a1a' }}
             {...rest}
           >
             {options.map((opt) => (
               <Option
                 key={opt.value}
                 value={opt.value}
-                style={{ color: '#fff' }}
+                className={styles.selectOption}
               >
                 {opt.label}
               </Option>
@@ -324,12 +323,7 @@ const InputField = ({
         >
           <DatePicker
             {...inputProps}
-            style={{
-              width: '100%',
-              color: '#ffffff',
-              backgroundColor: '#424242FF',
-              borderColor: '#444444',
-            }}
+            className={styles.datePickerComponent}
             dropdownStyle={{
               backgroundColor: '#000000',
               color: '#ffffff',
@@ -394,8 +388,7 @@ const InputField = ({
               ? 'Teléfono obligatorio (clic para hacerlo opcional)'
               : 'Teléfono opcional (clic para hacerlo obligatorio)'
           }
-          className={styles.icon}
-          style={{ color: isPhoneRequired ? '#FFF' : '#aaa' }}
+          className={`${styles.icon} ${isPhoneRequired ? styles.iconRequired : styles.iconOptional}`}
         />
       </div>
     );
@@ -442,7 +435,7 @@ const CitaComponents = ({ componentType, form, ...props }) => {
       );
     case 'spacer':
       // Espacio visual en blanco para mejorar el layout
-      return <div style={{ height: props.height || 32 }} />;
+      return <div className={styles.spacer} style={{ height: props.height || 32 }} />;
     default:
       return null;
   }
@@ -486,7 +479,6 @@ const PatientField = ({
             label="Paciente"
             rules={[{ required: true, message: 'Este campo es requerido' }]}
             className={styles.formItem}
-            style={{ marginBottom: '-30px', marginTop: '-10px' }}
           >
             <InputField
               readonly={true}
@@ -580,12 +572,7 @@ const DateField = ({ form }) => {
         }}
       >
         <DatePicker
-          style={{
-            width: '100%',
-            color: '#ffffff',
-            backgroundColor: '#333333FF',
-            borderColor: '#444444',
-          }}
+          className={styles.datePickerCita}
           onChange={handleDateChange}
           dropdownStyle={{
             backgroundColor: '#2C2C2CFF',
@@ -643,7 +630,7 @@ const TimeField = ({ form }) => {
       >
         <TimePicker
           format="HH:mm"
-          style={{ width: '100%' }}
+          className={styles.timePickerComponent}
           onChange={handleTimeChange}
         />
       </ConfigProvider>

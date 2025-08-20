@@ -82,6 +82,17 @@
 }
 
 /* ========================================
+   ESTADOS DEL ICONO
+   ======================================== */
+.iconRequired {
+  color: #FFF;
+}
+
+.iconOptional {
+  color: #aaa;
+}
+
+/* ========================================
    ESTILOS PARA EL CAMPO DE PACIENTES
    ======================================== */
 .patientRow {
@@ -154,6 +165,72 @@
    ======================================== */
 .checkboxItem:hover {
   transform: scale(1.05);    /* Agranda ligeramente al pasar el mouse */
+}
+
+/* ========================================
+   ESTILOS PARA COMPONENTES DE SELECCIÓN
+   ======================================== */
+.selectComponent {
+  color: #fff;
+  background-color: #1a1a1a;
+}
+
+.selectDropdown {
+  background-color: #444444;
+  color: #fff;
+}
+
+.selectOption {
+  color: #fff;
+}
+
+/* ========================================
+   ESTILOS PARA COMPONENTES DE FECHA
+   ======================================== */
+.datePickerComponent {
+  width: 100%;
+  color: #ffffff;
+  background-color: #424242FF;
+  border-color: #444444;
+}
+
+.datePickerDropdown {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.datePickerCita {
+  width: 100%;
+  color: #ffffff;
+  background-color: #333333FF;
+  border-color: #444444;
+}
+
+.datePickerCitaDropdown {
+  background-color: #2C2C2CFF;
+  color: #ffffff;
+}
+
+/* ========================================
+   ESTILOS PARA COMPONENTES DE HORA
+   ======================================== */
+.timePickerComponent {
+  width: 100%;
+}
+
+/* ========================================
+   ESTILOS PARA FORM ITEMS
+   ======================================== */
+.formItem {
+  margin-bottom: -30px;
+  margin-top: -10px;
+}
+
+/* ========================================
+   ESTILOS PARA ESPACIADORES
+   ======================================== */
+.spacer {
+  height: 32px;
 }
 
 /* ========================================
