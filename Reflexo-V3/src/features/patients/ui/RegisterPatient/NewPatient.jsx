@@ -23,7 +23,7 @@ const Fields = [
     /* Tercera Fila */
     { name: 'birthDate', label: 'Fecha de Nacimiento', type: 'date', required: true, span: 8 },
     {
-        name: 'sex', labe: 'Sexo', type: 'select',
+        name: 'sex', label: 'Sexo', type: 'select',
         options: [
             { value: 'M', label: 'Masculino' },
             { value: 'F', label: 'Femenino' }
@@ -38,7 +38,7 @@ const Fields = [
 
     /* Cuarta fila*/
     { name: 'primary_phone', label: 'Telefono', type: 'phoneNumber', required: true, span: 8 },
-    { name: 'email', label: 'Correeo Electronico', type: 'text', span: 16 },
+    { name: 'email', label: 'Correo Electronico', type: 'text', span: 16 },
 
     /*Quinta fila*/
     { name: 'ubicacion', label: 'Ubicacion', type: 'ubigeo', span: 8 },
@@ -47,7 +47,7 @@ const Fields = [
 ];
 
 const NewPatient = () => {
-    return <FormGenerator fields={fields} />;
+    return <FormGenerator fields={Fields} />;
 };
 
 export default NewPatient;
