@@ -1,0 +1,147 @@
+.container{
+  min-height: 100vh;
+  background-color: transparent; /* hereda del tema global */
+  /* Reserva espacio para futuro header y sidebar */
+  padding-top: 50px;
+  padding-right: 40px;
+  padding-left: 280px;
+  padding-bottom: 40px;
+  max-width: 100%;
+  margin-left: auto;
+  overflow-x: hidden;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: flex-end;
+  margin-left: auto;
+  width: 100%;
+  max-width: 1500px;
+}
+
+.searchGrow { flex: 1; min-width: 300px; }
+.tableWrap { width: 100%; max-width: 1500px; margin-left: auto; margin-top: 16px; }
+
+/* Quitar la "línea" del header creada por la celda de scroll de AntD */
+:global(.appointmentsMainContainer .ant-table-cell-scrollbar) {
+  box-shadow: none !important;
+  background: transparent !important;
+  border: 0 !important;
+}
+
+:global(html[data-theme="dark"]) { background-color: #121212 !important; color-scheme: dark; }
+:global(html[data-theme="light"]) { background-color: #ffffff !important; color-scheme: light; }
+:global(html),
+:global(body),
+:global(#root) { width: 100% !important; background-color: inherit !important; }
+:global(body) { margin: 0 !important; display: block !important; place-items: initial !important; min-width: 0 !important; overflow-x: hidden !important; transition: background-color 200ms ease, color 200ms ease; }
+:global(*) { box-sizing: border-box; }
+
+/* Botón primario con acento verde dentro del contenedor global */
+:global(.appointmentsMainContainer .ant-btn-primary) {
+  background-color: #00AA55 !important;
+  border-color: #00AA55 !important;
+}
+:global(.appointmentsMainContainer .ant-btn-primary:hover),
+:global(.appointmentsMainContainer .ant-btn-primary:focus) {
+  background-color: #04964b !important;
+  border-color: #04964b !important;
+}
+
+/* Inputs (Search, DatePicker) en tema oscuro */
+:global(html[data-theme="dark"] .appointmentsMainContainer .ant-input-affix-wrapper),
+:global(html[data-theme="dark"] .appointmentsMainContainer .ant-picker) {
+  background-color: #1f1f1f !important;
+  border-color: #333 !important;
+  color: #e6e6e6 !important;
+}
+:global(html[data-theme="dark"] .appointmentsMainContainer .ant-input),
+:global(html[data-theme="dark"] .appointmentsMainContainer .ant-picker input) { color: #e6e6e6 !important; }
+:global(html[data-theme="dark"] .appointmentsMainContainer .ant-input::placeholder),
+:global(html[data-theme="dark"] .appointmentsMainContainer .ant-picker input::placeholder) { color: #9aa0a6 !important; }
+:global(html[data-theme="dark"] .appointmentsMainContainer .ant-input-affix-wrapper:hover),
+:global(html[data-theme="dark"] .appointmentsMainContainer .ant-picker:hover),
+:global(html[data-theme="dark"] .appointmentsMainContainer .ant-picker-focused) { border-color: #444 !important; }
+
+/* Dropdown del calendario (global por portal de AntD) */
+:global(html[data-theme="dark"] .ant-picker-dropdown .ant-picker-panel) { background: #1f1f1f !important; color: #e6e6e6 !important; }
+:global(html[data-theme="dark"] .ant-picker-dropdown .ant-picker-header),
+:global(html[data-theme="dark"] .ant-picker-dropdown .ant-picker-content th) { color: #c7c7c7 !important; }
+:global(html[data-theme="dark"] .ant-picker-dropdown .ant-picker-cell-in-view) { color: #d6d6d6 !important; }
+:global(html[data-theme="dark"] .ant-picker-dropdown .ant-picker-cell-selected .ant-picker-cell-inner),
+:global(html[data-theme="dark"] .ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-start .ant-picker-cell-inner),
+:global(html[data-theme="dark"] .ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-end .ant-picker-cell-inner) { background: #00AA55 !important; color: #fff !important; }
+:global(html[data-theme="dark"] .ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before) { border-color: #00AA55 !important; }
+
+/* Tabla oscura */
+:global(html[data-theme="dark"] .appointmentsMainContainer .ant-table) { color: #e6e6e6; }
+:global(html[data-theme="dark"] .appointmentsMainContainer .ant-table-container) { border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.35); }
+:global(html[data-theme="dark"] .appointmentsMainContainer .ant-table-thead > tr > th) { background: #232323 !important; color: #cfcfcf !important; border-bottom: 1px solid #2e2e2e !important; }
+:global(html[data-theme="dark"] .appointmentsMainContainer .ant-table-tbody > tr > td) { background: #1E1E1E !important; border-bottom: 1px solid #2a2a2a !important; }
+:global(html[data-theme="dark"] .appointmentsMainContainer .ant-table-tbody > tr:hover > td) { background: #232323 !important; }
+:global(html[data-theme="dark"] .appointmentsMainContainer .ant-pagination) { color: #d0d0d0; }
+:global(html[data-theme="dark"] .appointmentsMainContainer .ant-pagination-item-active) { border-color: #00AA55 !important; }
+:global(html[data-theme="dark"] .appointmentsMainContainer .ant-pagination-item-active a) { color: #00AA55 !important; }
+
+/* Paginación tema oscuro */
+:global(html[data-theme="dark"] .appointmentsMainContainer .ant-pagination) {
+  background: #1f1f1f;
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  padding: 2px 8px;
+}
+:global(html[data-theme="dark"] .appointmentsMainContainer .ant-pagination-item) {
+  background: transparent;
+  border-color: #2a2a2a;
+}
+:global(html[data-theme="dark"] .appointmentsMainContainer .ant-pagination-item a) { color: #d0d0d0; }
+:global(html[data-theme="dark"] .appointmentsMainContainer .ant-pagination-item-active) {
+  background: rgba(0,170,85,0.15);
+}
+:global(html[data-theme="dark"] .appointmentsMainContainer .ant-pagination-prev .ant-pagination-item-link,
+        html[data-theme="dark"] .appointmentsMainContainer .ant-pagination-next .ant-pagination-item-link) {
+  color: #d0d0d0;
+  border-color: #2a2a2a;
+}
+
+/* Tabla clara: mantener estructura estética con separación de celdas */
+:global(html[data-theme="light"] .appointmentsMainContainer .ant-table) { color: #1a1a1a; }
+:global(html[data-theme="light"] .appointmentsMainContainer .ant-table-container) { border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.06); border: 1px solid #E8E8E8; }
+:global(html[data-theme="light"] .appointmentsMainContainer .ant-table-thead > tr > th) { background: #F7F7F9 !important; color: #333 !important; border-bottom: 1px solid #E6E6E6 !important; }
+:global(html[data-theme="light"] .appointmentsMainContainer .ant-table-thead > tr > th:not(:last-child)) { border-right: 1px solid #EDEDED !important; }
+:global(html[data-theme="light"] .appointmentsMainContainer .ant-table-tbody > tr > td) { background: #FFFFFF !important; border-bottom: 1px solid #EEEEEE !important; }
+:global(html[data-theme="light"] .appointmentsMainContainer .ant-table-tbody > tr > td:not(:last-child)) { border-right: 1px solid #F0F0F0 !important; }
+:global(html[data-theme="light"] .appointmentsMainContainer .ant-table-tbody > tr:hover > td) { background: #FAFAFA !important; }
+:global(html[data-theme="light"] .appointmentsMainContainer .ant-pagination-item-active) { border-color: #00AA55 !important; }
+:global(html[data-theme="light"] .appointmentsMainContainer .ant-pagination-item-active a) { color: #00AA55 !important; }
+
+/* Paginación tema claro */
+:global(html[data-theme="light"] .appointmentsMainContainer .ant-pagination) {
+  background: #F5F5F7;
+  border: 1px solid #E8E8E8;
+  border-radius: 12px;
+  padding: 2px 8px;
+  color: #334155;
+}
+:global(html[data-theme="light"] .appointmentsMainContainer .ant-pagination-item) {
+  background: #FFFFFF;
+  border-color: #E6E6E6;
+}
+:global(html[data-theme="light"] .appointmentsMainContainer .ant-pagination-item a) { color: #334155; }
+:global(html[data-theme="light"] .appointmentsMainContainer .ant-pagination-item-active) {
+  background: #00AA55;
+  border-color: #00AA55 !important;
+}
+:global(html[data-theme="light"] .appointmentsMainContainer .ant-pagination-item-active a) { color: #ffffff !important; }
+:global(html[data-theme="light"] .appointmentsMainContainer .ant-pagination-prev .ant-pagination-item-link,
+        html[data-theme="light"] .appointmentsMainContainer .ant-pagination-next .ant-pagination-item-link) {
+  color: #334155;
+  border-color: #E6E6E6;
+  background: #FFFFFF;
+}
+:global([data-theme="light"] .appointmentsMainContainer) {
+  background-color: #fff !important;
+} 
