@@ -3,11 +3,13 @@ import { Button, ConfigProvider, Form, Input } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../../assets/Img/Dashboard/MiniLogoReflexo.webp';
-import { useTheme } from '../../../context/ThemeContext';
+
 import { initializeParticles } from '../../../hooks/loginpacticles';
 import { useToast } from '../../../services/toastify/ToastContext';
-import { removeLocalStorage } from '../../../utils/localStorageUtility';
+
 import { useAuth as useAuthContext } from '../../../routes/AuthContext';
+import { useTheme } from '../../../context/ThemeContext';
+import { removeLocalStorage } from '../../../utils/localStorageUtility';
 
 import styles from './Login.module.css';
 import { useAuth } from '../hook/authHook';
