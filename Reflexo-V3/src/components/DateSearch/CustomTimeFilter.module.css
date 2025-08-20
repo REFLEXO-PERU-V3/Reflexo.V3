@@ -1,0 +1,20 @@
+/* Estilo base del DatePicker */
+.datePicker {
+  width: 200px;
+  font-size: 16px;
+  border-radius: 4px;
+  transition: border-color 0.2s ease;
+  outline: none;
+}
+
+/* Estado de foco (accesibilidad) */
+.datePicker:focus {
+  border: 1.5px solid green;
+}
+
+/* Estado hover */
+.datePicker:hover {
+   box-shadow: 0 0 0 3px rgba(0, 170, 85, 0.3);
+
+}
+
