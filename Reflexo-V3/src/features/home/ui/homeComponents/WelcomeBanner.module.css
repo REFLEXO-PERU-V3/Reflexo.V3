@@ -1,0 +1,31 @@
+.banner {
+    padding: clamp(16px, 5vw, 30px);
+    border-radius: 20px;
+
+    text-align: left;
+
+    background-color: #1a1a1a; /* Fondo fijo, oscuro */
+    color: white; /* Texto fijo en blanco */
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Título adaptable */
+.title {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* espacio entre el texto y el icono */
+    flex-wrap: wrap;
+
+    margin-bottom: 10px;
+
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: bold;
+    color: white;
+}
+
+/* Versículo adaptable */
+.subtitle {
+    flex-wrap: wrap;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: white;
+}
