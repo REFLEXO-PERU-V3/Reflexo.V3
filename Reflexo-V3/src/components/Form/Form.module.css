@@ -1,0 +1,303 @@
+/* ===================================
+   ESTILOS DEL COMPONENTE FORMULARIO - TEMA CLARO
+   ===================================
+   
+   Este archivo contiene todos los estilos para el componente FormComponent.
+   Utiliza CSS Modules para evitar conflictos de nombres de clases.
+   El diseño está optimizado para tema claro con colores blanco y verde.
+*/
+
+/* ===================================
+   CONTENEDOR PRINCIPAL DEL FORMULARIO
+   =================================== */
+.formContainer {
+  max-width: 850px;        /* Ancho máximo para mantener legibilidad */
+  margin: 0 auto;          /* Centrado horizontal */
+  margin-top: 10px;        /* Espaciado superior mínimo */
+  padding: 24px;           /* Espaciado interno generoso */
+  border-radius: 12px;     /* Bordes redondeados modernos */
+  color: #333333;          /* Texto gris oscuro para buena legibilidad */
+  background-color: #ffffff; /* Fondo blanco limpio */
+  border: 2px solid #e8f5e8; /* Borde verde muy claro */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+/* ===================================
+   ESTILOS DE TÍTULOS
+   =================================== */
+/* Títulos de secciones dentro del formulario */
+.title {
+  margin-top: 10px;        /* Espaciado superior reducido */
+  font-size: 26px;         /* Tamaño grande pero no excesivo */
+  font-weight: bold;       /* Peso de fuente destacado */
+  color: #2d5a2d;          /* Verde oscuro para títulos */
+  border-bottom: 2px solid #4CAF50; /* Línea verde debajo del título */
+  padding-bottom: 8px;     /* Espaciado para la línea */
+}
+
+/* ===================================
+   ESTILOS DE ETIQUETAS (LABELS)
+   =================================== */
+/* Etiquetas de los campos del formulario */
+.label {
+  font-size: 0.95rem;      /* Tamaño ligeramente menor que el texto normal */
+  color: #2d5a2d;          /* Verde oscuro para buena legibilidad */
+  font-weight: 600;        /* Peso medio para destacar */
+}
+
+/* ===================================
+   ESPACIADO DE ELEMENTOS DEL FORMULARIO
+   =================================== */
+/* Espaciado compacto entre campos para mejor densidad visual */
+.formItem {
+  margin: 12px 0;          /* Margen vertical moderado */
+}
+
+/* Estilos para los Form.Item de Ant Design */
+.formItem :global(.ant-form-item-label) {
+  padding-bottom: 4px;     /* Reducir espaciado entre label e input */
+}
+
+.formItem :global(.ant-form-item-explain-error) {
+  color: #d32f2f;          /* Color rojo para errores */
+  font-size: 0.85rem;      /* Tamaño menor para mensajes de error */
+}
+
+/* ===================================
+   ESTILOS DE BOTONES
+   =================================== */
+/* Contenedor del grupo de botones */
+.buttonGroup {
+  margin-top: 24px;        /* Mayor separación del resto del formulario */
+  margin-bottom: 10px;     /* Espaciado inferior */
+  border-top: 1px solid #e8f5e8; /* Línea separadora verde claro */
+  padding-top: 16px;       /* Espaciado superior */
+}
+
+/* Wrapper para alinear botones a la derecha */
+.buttonWrapper {
+  display: flex;           /* Flexbox para alineación */
+  justify-content: flex-end; /* Alineación a la derecha */
+  gap: 12px;               /* Espaciado entre botones */
+}
+
+/* Estilo específico del botón Cancelar */
+.buttonCancel {
+  display: flex;           /* Flexbox para centrar contenido */
+  align-items: center;     /* Centrado vertical */
+  justify-content: center; /* Centrado horizontal */
+  height: 40px;            /* Altura mayor para mejor usabilidad */
+  padding: 0 20px;         /* Espaciado interno horizontal */
+  border: 2px solid #e0e0e0; /* Borde gris claro */
+  border-radius: 6px;      /* Bordes redondeados */
+  font-size: 0.95rem;      /* Tamaño de fuente */
+  font-weight: 500;        /* Peso medio */
+  color: #666666;          /* Texto gris */
+  background-color: #ffffff; /* Fondo blanco */
+  cursor: pointer;         /* Cursor pointer */
+  transition: all 0.3s ease; /* Transición suave */
+}
+
+.buttonCancel:hover {
+  border-color: #bdbdbd;   /* Borde más oscuro al hover */
+  color: #333333;          /* Texto más oscuro al hover */
+  transform: translateY(-1px); /* Efecto de elevación */
+}
+
+/* Estilo específico del botón Enviar/Registrar */
+.buttonSubmit {
+  display: flex;           /* Flexbox para centrar contenido */
+  align-items: center;     /* Centrado vertical */
+  justify-content: center; /* Centrado horizontal */
+  height: 40px;            /* Altura igual al botón cancelar */
+  padding: 0 20px;         /* Espaciado interno horizontal */
+  border: none;            /* Sin borde */
+  border-radius: 6px;      /* Bordes redondeados */
+  font-size: 0.95rem;      /* Tamaño de fuente consistente */
+  font-weight: 600;        /* Peso mayor para destacar */
+  color: #ffffff;          /* Texto blanco */
+  background-color: #4CAF50; /* Fondo verde principal */
+  cursor: pointer;         /* Cursor pointer */
+  transition: all 0.3s ease; /* Transición suave */
+}
+
+.buttonSubmit:hover {
+  background-color: #45a049; /* Verde más oscuro al hover */
+  transform: translateY(-1px); /* Efecto de elevación */
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3); /* Sombra verde */
+}
+
+.buttonSubmit:active {
+  transform: translateY(0); /* Resetear elevación al click */
+}
+
+/* ===================================
+   ESTILOS DE CAMPOS DE ENTRADA
+   =================================== */
+/* Estilos globales para todos los inputs y controles de Ant Design */
+input,
+select,
+textarea,
+:global(.ant-input),
+:global(.ant-select-selector),
+:global(.ant-picker) {
+  height: 40px !important; /* Altura estándar para todos los controles */
+  padding: 8px 12px !important; /* Espaciado interno cómodo */
+  font-size: 0.95rem !important; /* Tamaño de fuente consistente */
+  line-height: 1.4 !important; /* Altura de línea para buena legibilidad */
+  border: 2px solid #e8f5e8 !important; /* Borde verde muy claro */
+  border-radius: 6px !important; /* Bordes redondeados */
+  background-color: #ffffff !important; /* Fondo blanco */
+  color: #333333 !important; /* Texto gris oscuro */
+  transition: all 0.3s ease !important; /* Transición suave */
+}
+
+/* Estados de focus para inputs */
+input:focus,
+select:focus,
+textarea:focus,
+:global(.ant-input:focus),
+:global(.ant-select-focused .ant-select-selector),
+:global(.ant-picker:focus) {
+  border-color: #4CAF50 !important; /* Borde verde al focus */
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1) !important; /* Sombra verde suave */
+  outline: none !important; /* Sin outline por defecto */
+}
+
+/* Placeholder styling */
+input::placeholder,
+textarea::placeholder,
+:global(.ant-input::placeholder),
+:global(.ant-select-selection-placeholder) {
+  color: #999999 !important; /* Color gris para placeholders */
+  opacity: 1 !important; /* Opacidad completa */
+}
+
+/* Estilos para textareas */
+textarea,
+:global(.ant-input) {
+  min-height: 80px !important; /* Altura mínima para textareas */
+  resize: vertical !important; /* Solo redimensionar verticalmente */
+}
+
+/* ===================================
+   ESTILOS PARA SELECTS
+   =================================== */
+:global(.ant-select-dropdown) {
+  border: 2px solid #e8f5e8 !important; /* Borde verde claro */
+  border-radius: 6px !important; /* Bordes redondeados */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important; /* Sombra suave */
+}
+
+:global(.ant-select-item-option-selected) {
+  background-color: #e8f5e8 !important; /* Fondo verde claro para opción seleccionada */
+  color: #2d5a2d !important; /* Texto verde oscuro */
+}
+
+:global(.ant-select-item-option:hover) {
+  background-color: #f1f8e9 !important; /* Fondo verde muy claro al hover */
+}
+
+/* ===================================
+   DISEÑO RESPONSIVE PARA MÓVILES
+   =================================== */
+/* Adaptaciones para pantallas pequeñas (móviles) */
+@media (max-width: 480px) {
+  /* Contenedor principal más compacto en móviles */
+  .formContainer {
+    padding: 16px;         /* Reducir espaciado interno */
+    margin: 10px;          /* Margen lateral en móviles */
+  }
+
+  /* Títulos más pequeños en móviles */
+  .title {
+    margin-bottom: 0.5rem; /* Menor espaciado inferior */
+    font-size: 1.4rem;     /* Tamaño de fuente reducido */
+  }
+
+  /* Campos más compactos en móviles */
+  .formItem {
+    margin: 8px 0;         /* Reducir margen vertical */
+  }
+
+  /* Controles más pequeños en móviles */
+  input,
+  select,
+  textarea,
+  :global(.ant-input),
+  :global(.ant-select-selector),
+  :global(.ant-picker) {
+    height: 36px !important; /* Altura reducida para móviles */
+    font-size: 0.9rem !important; /* Fuente más pequeña */
+    padding: 6px 10px !important; /* Menos espaciado interno */
+  }
+
+  /* Botones más compactos en móviles */
+  .buttonCancel,
+  .buttonSubmit {
+    height: 36px;          /* Altura reducida */
+    padding: 0 16px;       /* Menos espaciado interno */
+    font-size: 0.9rem;     /* Fuente más pequeña */
+  }
+
+  /* Botones en columna en móviles muy pequeños */
+  .buttonWrapper {
+    flex-direction: column; /* Botones en columna */
+    gap: 8px;              /* Espaciado menor */
+  }
+
+  .buttonCancel,
+  .buttonSubmit {
+    width: 100%;           /* Ancho completo en móviles */
+  }
+}
+
+/* ===================================
+   ESTILOS ADICIONALES PARA TEMA CLARO
+   =================================== */
+
+/* Contenedor general con fondo claro */
+.container {
+  background-color: #f8fdf8; /* Fondo verde muy claro para toda la página */
+  min-height: 100vh;       /* Altura mínima completa */
+  padding: 20px 0;         /* Espaciado vertical */
+}
+
+/* Estilos para checkboxes */
+:global(.ant-checkbox-wrapper) {
+  color: #333333 !important; /* Texto gris oscuro */
+}
+
+:global(.ant-checkbox-checked .ant-checkbox-inner) {
+  background-color: #4CAF50 !important; /* Fondo verde para checkbox marcado */
+  border-color: #4CAF50 !important; /* Borde verde */
+}
+
+/* Estilos para radio buttons */
+:global(.ant-radio-checked .ant-radio-inner) {
+  border-color: #4CAF50 !important; /* Borde verde */
+}
+
+:global(.ant-radio-checked .ant-radio-inner::after) {
+  background-color: #4CAF50 !important; /* Punto verde */
+}
+
+/* ===================================
+   NOTAS DE IMPLEMENTACIÓN - TEMA CLARO
+   ===================================
+   
+   1. Este formulario usa CSS Modules para encapsulación de estilos
+   2. El tema claro es consistente en todo el componente
+   3. Los estilos son responsive y se adaptan a móviles
+   4. Se mantiene consistencia visual con Ant Design
+   5. Los colores siguen una paleta coherente:
+      - Fondo principal: #ffffff (blanco)
+      - Fondo secundario: #f8fdf8 (verde muy claro)
+      - Controles: #e8f5e8 (verde claro)
+      - Texto: #333333 (gris oscuro)
+      - Títulos: #2d5a2d (verde oscuro)
+      - Botón principal: #4CAF50 (verde)
+      - Botón secundario: #ffffff con borde gris
+   6. Se agregaron efectos hover y transiciones para mejor UX
+   7. Sombras sutiles para dar profundidad al diseño
+*/
