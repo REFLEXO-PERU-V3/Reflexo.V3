@@ -30,7 +30,7 @@ import {
 } from 'antd';
 
 // Estilos CSS modulares
-import styles from '../Input/Input.module.css';
+import styles from './input.module.css';
 
 // Componentes de selección personalizados
 import { SelectTypeOfDocument } from '../Select/SelctTypeOfDocument';
