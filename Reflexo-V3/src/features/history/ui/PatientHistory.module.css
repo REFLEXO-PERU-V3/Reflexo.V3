@@ -1,23 +1,57 @@
 /* ========================================
-   VARIABLES CSS Y ESTILOS BASE
+   SISTEMA DE TEMAS - CLARO Y OSCURO
    ======================================== */
+
+/* Tema claro (por defecto) */
 :root {
   --primary-color: #4caf50;
   --primary-hover: #388e3c;
   --primary-dark: #2e7d32;
   --danger-color: #f44336;
   --danger-hover: #d32f2f;
-  --bg-dark: #161616;
+  
+  /* Colores del tema claro */
+  --bg-light: #ffffff;
+  --bg-card: #f8f9fa;
+  --bg-input: #ffffff;
+  --text-dark: #333333;
+  --text-medium: #666666;
+  --text-light: #999999;
+  --border-color: #e0e0e0;
+  --border-hover: #cccccc;
+  --shadow-light: rgba(0, 0, 0, 0.1);
+  --shadow-primary: rgba(76, 175, 80, 0.2);
+  --shadow-green: rgba(60, 109, 67, 0.1);
+  --radius-small: 5px;
+  --radius-medium: 10px;
+  --spacing-xs: 8px;
+  --spacing-sm: 10px;
+  --spacing-md: 15px;
+  --spacing-lg: 20px;
+  --spacing-xl: 25px;
+}
+
+/* Tema oscuro */
+[data-theme="dark"] {
+  --primary-color: #4caf50;
+  --primary-hover: #388e3c;
+  --primary-dark: #2e7d32;
+  --danger-color: #f44336;
+  --danger-hover: #d32f2f;
+  
+  /* Colores del tema oscuro */
+  --bg-light: #161616;
   --bg-card: #222;
   --bg-input: #222;
-  --text-light: #fff;
-  --text-medium: #eee;
-  --text-dark: #111;
+  --text-dark: #eee;
+  --text-medium: #ccc;
+  --text-light: #999;
   --border-color: #333;
   --border-hover: #444;
   --shadow-light: rgba(0, 0, 0, 0.5);
   --shadow-primary: rgba(76, 175, 80, 0.2);
   --shadow-green: rgba(60, 109, 67, 0.3);
+  
   --radius-small: 5px;
   --radius-medium: 10px;
   --spacing-xs: 8px;
@@ -38,8 +72,10 @@
 
 .card {
   border-radius: var(--radius-medium);
-  background: var(--bg-dark);
+  background: var(--bg-light);
   box-shadow: 0 4px 20px var(--shadow-light);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
 }
 
 /* ========================================
@@ -51,18 +87,20 @@
   border-bottom: 1px solid var(--border-color);
   font-size: 28px;
   font-weight: 700;
-  color: var(--text-light);
+  color: var(--text-dark);
   text-align: center;
   letter-spacing: 1px;
+  transition: color 0.3s ease;
 }
 
 .sectionTitle {
   margin: var(--spacing-xl) 0 var(--spacing-md);
   font-size: 20px;
   font-weight: 700;
-  color: var(--text-light);
+  color: var(--text-dark);
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  transition: color 0.3s ease;
 }
 
 /* ========================================
@@ -78,15 +116,17 @@
 
 .formItem label {
   font-weight: 600;
-  color: var(--text-light) !important;
+  color: var(--text-dark) !important;
+  transition: color 0.3s ease;
 }
 
 /* Estilos base para inputs, textareas y selects */
 .input, .textarea, .select {
   width: 100%;
   border: 1px solid var(--border-color) !important;
-  color: var(--text-medium) !important;
+  color: var(--text-dark) !important;
   background-color: var(--bg-input) !important;
+  transition: all 0.3s ease;
 }
 
 /* Estados de focus para campos de entrada */
@@ -99,7 +139,7 @@
 .ant-input-disabled, .ant-input[disabled] {
   color: var(--text-medium) !important;
   opacity: 1;
-  background-color: var(--bg-input) !important;
+  background-color: var(--bg-card) !important;
 }
 
 /* Campos de diagnóstico específicos */
@@ -134,8 +174,9 @@
 /* Botón de selección */
 .selectButton {
   border-color: var(--primary-color) !important;
-  color: var(--text-dark) !important;
+  color: var(--bg-light) !important;
   background-color: var(--primary-color) !important;
+  transition: all 0.3s ease;
 }
 
 .selectButton:hover {
@@ -146,8 +187,9 @@
 /* Botón de eliminación */
 .removeButton {
   border-color: var(--danger-color) !important;
-  color: var(--text-medium) !important;
+  color: var(--bg-light) !important;
   background-color: var(--danger-color) !important;
+  transition: all 0.3s ease;
 }
 
 .removeButton:hover {
@@ -164,21 +206,22 @@
   margin-top: 5px;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-small);
-  background-color: var(--bg-card);
-  box-shadow: 0 4px 8px var(--shadow-green);
+  background-color: var(--bg-light);
+  box-shadow: 0 4px 8px var(--shadow-light);
+  transition: all 0.3s ease;
 }
 
 .dropdownItem {
   cursor: pointer;
   padding: var(--spacing-xs) 12px;
   font-size: 13px;
-  color: var(--text-medium);
-  transition: background-color 0.2s;
+  color: var(--text-dark);
+  transition: all 0.3s ease;
 }
 
 .dropdownItem:hover {
-  color: var(--text-dark);
-  background-color: var(--primary-dark);
+  color: var(--bg-light);
+  background-color: var(--primary-color);
 }
 
 /* ========================================
@@ -247,7 +290,8 @@
 
 .ant-picker {
   color: var(--text-dark) !important;
-  background-color: var(--text-light) !important;
+  background-color: var(--bg-light) !important;
+  transition: all 0.3s ease;
 }
 
 .ant-picker-input input {
@@ -264,25 +308,25 @@
 
 /* Estilos base para botones */
 .printButton, .saveButton, .cancelButton {
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 /* Botón de impresión */
 .printButton {
   border-color: var(--border-color) !important;
-  color: var(--text-medium) !important;
-  background-color: var(--border-color) !important;
+  color: var(--text-dark) !important;
+  background-color: var(--bg-light) !important;
 }
 
 .printButton:hover {
   border-color: var(--border-hover) !important;
-  background-color: var(--border-hover) !important;
+  background-color: var(--bg-card) !important;
 }
 
 /* Botón de guardar */
 .saveButton {
   border-color: var(--primary-color) !important;
-  color: var(--text-dark) !important;
+  color: var(--bg-light) !important;
   background-color: var(--primary-color) !important;
 }
 
@@ -294,12 +338,12 @@
 /* Botón de cancelar */
 .cancelButton {
   border-color: var(--border-color) !important;
-  color: var(--text-medium) !important;
-  background-color: transparent !important;
+  color: var(--text-dark) !important;
+  background-color: var(--bg-light) !important;
 }
 
 .cancelButton:hover {
-  background-color: var(--border-color) !important;
+  background-color: var(--bg-card) !important;
 }
 
 /* ========================================
@@ -309,7 +353,72 @@
   align-items: center;
   justify-content: center;
   height: 400px;
+  background: var(--bg-light);
+  transition: background-color 0.3s ease;
+}
+
+/* ========================================
+   TABLA DE TERAPEUTAS
+   ======================================== */
+.therapistTable {
+  background: var(--bg-light);
+  transition: background-color 0.3s ease;
+}
+
+.therapistTable .ant-table-thead > tr > th {
+  background: var(--bg-card) !important;
+  color: var(--text-dark) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  transition: all 0.3s ease;
+}
+
+.therapistTable .ant-table-tbody > tr > td {
+  background: var(--bg-light) !important;
+  color: var(--text-dark) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  transition: all 0.3s ease;
+}
+
+.therapistTable .ant-table-tbody > tr:hover > td {
+  background: var(--bg-card) !important;
+}
+
+.tableRow {
+  background: var(--bg-light) !important;
+  transition: background-color 0.3s ease;
+}
+
+.tableRow:hover {
+  background: var(--bg-card) !important;
+}
+
+/* ========================================
+   BOTÓN DE CAMBIO DE TEMA
+   ======================================== */
+.themeToggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  padding: 10px 15px;
+  border-radius: var(--radius-small);
+  border: 1px solid var(--border-color);
+  background: var(--bg-light);
+  color: var(--text-dark);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.themeToggle:hover {
   background: var(--bg-card);
+  border-color: var(--primary-color);
+}
+
+.themeToggle:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--shadow-primary);
 }
 
 /* ========================================
@@ -381,5 +490,12 @@
 
   .actionButtons button {
     width: 100%;
+  }
+
+  .themeToggle {
+    top: 10px;
+    right: 10px;
+    padding: 8px 12px;
+    font-size: 12px;
   }
 }

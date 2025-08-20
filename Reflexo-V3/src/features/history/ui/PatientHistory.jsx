@@ -35,88 +35,97 @@ const { Title } = Typography;
 const { Option } = Select;
 const { TextArea } = Input;
 
-// Tema consolidado para toda la aplicación
-const theme = {
-  token: {
-    colorPrimary: '#4caf50',
-    colorBgContainer: '#222',
-    colorText: '#eee',
-    colorBorder: '#333',
-    colorBgElevated: '#222',
-    colorTextHeading: '#4caf50',
-    colorTextLabel: '#4caf50',
-    borderRadius: 6,
-    fontSize: 14,
-    fontFamily: 'Arial, sans-serif',
-    colorTextLightSolid: '#111',
-  },
-  components: {
-    Table: {
-      headerBg: '#272727',
-      headerColor: 'rgba(199,26,26,0.88)',
-      colorBgContainer: '#272727',
-      borderColor: '#555555',
-      rowHoverBg: '#555555',
-      cellPaddingBlock: 12,
-      cellPaddingInline: 16,
-    },
-    Radio: {
+// Función para obtener el tema actual
+const getCurrentTheme = () => {
+  return document.documentElement.getAttribute('data-theme') || 'light';
+};
+
+// Función para obtener el tema de Ant Design basado en el tema actual
+const getAntTheme = (themeMode) => {
+  const isDark = themeMode === 'dark';
+  
+  return {
+    token: {
       colorPrimary: '#4caf50',
-      colorBgContainer: '#fff',
+      colorBgContainer: isDark ? '#222' : '#ffffff',
+      colorText: isDark ? '#eee' : '#333333',
+      colorBorder: isDark ? '#333' : '#e0e0e0',
+      colorBgElevated: isDark ? '#222' : '#ffffff',
+      colorTextHeading: '#4caf50',
+      colorTextLabel: '#4caf50',
+      borderRadius: 6,
+      fontSize: 14,
+      fontFamily: 'Arial, sans-serif',
+      colorTextLightSolid: '#ffffff',
     },
-    Button: {
-      colorPrimary: '#4caf50',
-      colorPrimaryHover: '#388e3c',
-      colorPrimaryActive: '#2e7d32',
-      defaultBorderColor: '#333',
-      defaultColor: '#eee',
-      defaultBg: '#333',
-      dangerBorderColor: '#f44336',
-      dangerColor: '#eee',
-      dangerBg: '#f44336',
+    components: {
+      Table: {
+        headerBg: isDark ? '#272727' : '#f8f9fa',
+        headerColor: isDark ? '#eee' : '#333333',
+        colorBgContainer: isDark ? '#222' : '#ffffff',
+        borderColor: isDark ? '#333' : '#e0e0e0',
+        rowHoverBg: isDark ? '#333' : '#f5f5f5',
+        cellPaddingBlock: 12,
+        cellPaddingInline: 16,
+      },
+      Radio: {
+        colorPrimary: '#4caf50',
+        colorBgContainer: isDark ? '#222' : '#ffffff',
+      },
+      Button: {
+        colorPrimary: '#4caf50',
+        colorPrimaryHover: '#388e3c',
+        colorPrimaryActive: '#2e7d32',
+        defaultBorderColor: isDark ? '#333' : '#e0e0e0',
+        defaultColor: isDark ? '#eee' : '#333333',
+        defaultBg: isDark ? '#222' : '#ffffff',
+        dangerBorderColor: '#f44336',
+        dangerColor: '#ffffff',
+        dangerBg: '#f44336',
+      },
+      Input: {
+        colorBgContainer: isDark ? '#222' : '#ffffff',
+        colorBorder: isDark ? '#333' : '#e0e0e0',
+        colorText: isDark ? '#eee' : '#333333',
+        colorTextDisabled: isDark ? '#999' : '#999999',
+        activeBorderColor: '#4caf50',
+        hoverBorderColor: '#4caf50',
+      },
+      Select: {
+        colorBgContainer: isDark ? '#222' : '#ffffff',
+        colorBorder: isDark ? '#333' : '#e0e0e0',
+        colorText: isDark ? '#eee' : '#333333',
+        optionSelectedBg: '#4caf50',
+        optionSelectedColor: '#ffffff',
+        optionActiveBg: isDark ? '#333' : '#f5f5f5',
+      },
+      DatePicker: {
+        colorBgContainer: isDark ? '#222' : '#ffffff',
+        colorBorder: isDark ? '#333' : '#e0e0e0',
+        colorText: isDark ? '#eee' : '#333333',
+        cellActiveWithRangeBg: '#4caf50',
+        cellHoverBg: isDark ? '#333' : '#f5f5f5',
+        panelBg: isDark ? '#222' : '#ffffff',
+        panelInputBg: isDark ? '#222' : '#ffffff',
+        colorTextHeading: isDark ? '#eee' : '#333333',
+        colorTextDescription: isDark ? '#ccc' : '#666666',
+        colorIcon: isDark ? '#ccc' : '#666666',
+        colorIconHover: '#4caf50',
+        cellBg: isDark ? '#222' : '#ffffff',
+        cellColor: isDark ? '#eee' : '#333333',
+        cellActiveBg: '#4caf50',
+        timeColumnBg: isDark ? '#222' : '#ffffff',
+      },
+      Card: {
+        colorBgContainer: isDark ? '#161616' : '#ffffff',
+        colorBorderSecondary: '#4caf50',
+      },
+      Form: {
+        labelColor: '#4caf50',
+        itemMarginBottom: 16,
+      },
     },
-    Input: {
-      colorBgContainer: '#222',
-      colorBorder: '#333',
-      colorText: '#eee',
-      colorTextDisabled: '#eee',
-      activeBorderColor: '#4caf50',
-      hoverBorderColor: '#4caf50',
-    },
-    Select: {
-      colorBgContainer: '#222',
-      colorBorder: '#333',
-      colorText: '#eee',
-      optionSelectedBg: '#2e7d32',
-      optionSelectedColor: '#111',
-      optionActiveBg: '#333',
-    },
-    DatePicker: {
-      colorBgContainer: '#222',
-      colorBorder: '#333',
-      colorText: '#eee',
-      cellActiveWithRangeBg: '#2e7d32',
-      cellHoverBg: '#333',
-      panelBg: '#222',
-      panelInputBg: '#222',
-      colorTextHeading: '#eee',
-      colorTextDescription: '#eee',
-      colorIcon: '#eee',
-      colorIconHover: '#4caf50',
-      cellBg: '#222',
-      cellColor: '#eee',
-      cellActiveBg: '#2e7d32',
-      timeColumnBg: '#222',
-    },
-    Card: {
-      colorBgContainer: '#111',
-      colorBorderSecondary: '#2e7d32',
-    },
-    Form: {
-      labelColor: '#4caf50',
-      itemMarginBottom: 16,
-    },
-  },
+  };
 };
 
 // Constantes para valores reutilizables
@@ -135,6 +144,23 @@ const PatientHistory = () => {
   const [showTicketModal, setShowTicketModal] = useState(false);
   const [loadingTicket, setLoadingTicket] = useState(false);
   const [showFichaModal, setShowFichaModal] = useState(false);
+  const [currentTheme, setCurrentTheme] = useState(getCurrentTheme());
+
+  // Función para cambiar el tema
+  const toggleTheme = () => {
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', newTheme);
+    setCurrentTheme(newTheme);
+    // Guardar en localStorage para persistencia
+    localStorage.setItem('theme', newTheme);
+  };
+
+  // Efecto para cargar el tema guardado
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    setCurrentTheme(savedTheme);
+  }, []);
 
   const { id } = useParams();
   const location = useLocation();
@@ -418,8 +444,17 @@ const PatientHistory = () => {
   );
 
   return (
-    <ConfigProvider theme={theme}>
+    <ConfigProvider theme={getAntTheme(currentTheme)}>
       <div className={styles.container}>
+        {/* Botón de cambio de tema */}
+        <button 
+          className={styles.themeToggle}
+          onClick={toggleTheme}
+          title={`Cambiar a tema ${currentTheme === 'light' ? 'oscuro' : 'claro'}`}
+        >
+          {currentTheme === 'light' ? '🌙' : '☀️'} 
+          {currentTheme === 'light' ? ' Modo Oscuro' : ' Modo Claro'}
+        </button>
         <Card className={styles.card}>
           <Title level={2} className={styles.title}>
             Detalles del Historial
@@ -611,6 +646,7 @@ const PatientHistory = () => {
             scroll={{ y: 200 }}
             pagination={false}
             rowClassName={() => styles.tableRow}
+            className={styles.therapistTable}
           />
         </Modal>
 
