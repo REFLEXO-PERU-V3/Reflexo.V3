@@ -1,0 +1,365 @@
+.page.themeDark {
+  background: linear-gradient(180deg, #0f1113 0%, #0b0c0e 100%);
+}
+
+.page.themeLight {
+  background: linear-gradient(180deg, #f5f7fa 0%, #edf1f7 100%);
+}
+.wrapper :global(.ant-select-dropdown),
+.modalRoot :global(.ant-select-dropdown) {
+  background: #333333;
+}
+
+.wrapper :global(.ant-select-item),
+.wrapper :global(.ant-select-item-option-content),
+.wrapper :global(.ant-select-item-option),
+.modalRoot :global(.ant-select-item),
+.modalRoot :global(.ant-select-item-option-content),
+.modalRoot :global(.ant-select-item-option) {
+  color: #ffffff !important;
+}
+
+.wrapper :global(.ant-select-item-option-active),
+.modalRoot :global(.ant-select-item-option-active) {
+  background: #444444 !important;
+}
+.wrapper :global(.ant-btn-default) {
+  background-color: #666666;
+  color: #ffffff;
+  border-color: #666666;
+  border-radius: 8px;
+}
+
+.wrapper :global(.ant-input[disabled]),
+.wrapper :global(.ant-input-affix-wrapper-disabled),
+.wrapper :global(.ant-select-disabled .ant-select-selector),
+.wrapper :global(.ant-picker-disabled),
+.wrapper :global(.ant-picker-input > input[disabled]) {
+  background-color: #3a3a3a !important;
+  color: #bbbbbb !important;
+}
+
+.wrapper :global(.ant-form-item-has-error .ant-input),
+.wrapper :global(.ant-form-item-has-error .ant-input-affix-wrapper),
+.wrapper :global(.ant-form-item-has-error .ant-select-selector),
+.wrapper :global(.ant-form-item-has-error .ant-picker) {
+  border-color: #ff5f5f !important;
+  box-shadow: none !important;
+}
+.wrapper {
+  padding: 28px;
+  width: 820px;
+  max-width: 90vw;
+  margin: 0 auto;
+  background-color: #1a1a1a; /* fondo principal */
+  min-height: auto;
+  color: #ffffff; /* texto principal */
+  border-radius: 16px;
+  border: 1px solid #2a2a2a;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.page {
+  position: fixed;
+  inset: 0; /* top:0 right:0 bottom:0 left:0 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  overflow: auto; /* allow scroll if content exceeds viewport */
+}
+
+.title {
+  color: #ffffff;
+  margin-bottom: 16px;
+}
+
+.accentDivider {
+  border-color: #1cb54a !important;
+  opacity: 0.9;
+  margin: 8px 0 24px 0 !important;
+}
+
+/* ==== Theme modifiers ==== */
+
+.themeLight .wrapper {
+  background-color: #ffffff;
+  color: #1a1a1a;
+  border-color: #e5e5e5;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.themeLight .title {
+  color: #000000 !important;
+}
+
+/* Typography titles by theme */
+.themeDark .wrapper :global(.ant-typography) {
+  color: #ffffff !important;
+}
+.themeLight .wrapper :global(.ant-typography) {
+  color: #000000 !important;
+}
+
+/* Ensure native headings also follow theme */
+.themeDark .wrapper :global(h1),
+.themeDark .wrapper :global(h2),
+.themeDark .wrapper :global(h3),
+.themeDark .wrapper :global(h4),
+.themeDark .wrapper :global(h5),
+.themeDark .wrapper :global(h6) {
+  color: #ffffff !important;
+}
+.themeLight .wrapper :global(h1),
+.themeLight .wrapper :global(h2),
+.themeLight .wrapper :global(h3),
+.themeLight .wrapper :global(h4),
+.themeLight .wrapper :global(h5),
+.themeLight .wrapper :global(h6) {
+  color: #000000 !important;
+}
+
+.themeToggleRow { margin-bottom: 8px; }
+.themeLabel { opacity: 0.85; }
+
+/* Inputs, selects, pickers - Light theme */
+.themeLight .wrapper :global(.ant-input),
+.themeLight .wrapper :global(.ant-input-affix-wrapper),
+.themeLight .wrapper :global(.ant-input-number),
+.themeLight .wrapper :global(.ant-picker),
+.themeLight .wrapper :global(.ant-select-selector),
+.themeLight .wrapper :global(.ant-select-selection-placeholder),
+.themeLight .wrapper :global(.ant-select-selection-item) {
+  background-color: #f5f5f5 !important;
+  border-color: #d9d9d9 !important;
+  color: #1a1a1a !important;
+}
+
+.themeLight .wrapper :global(.ant-input::placeholder),
+.themeLight .wrapper :global(.ant-select-selection-placeholder),
+.themeLight .wrapper :global(.ant-picker-input > input::placeholder) {
+  color: #8c8c8c !important;
+}
+
+.themeLight .wrapper :global(.ant-form-item-label > label),
+.themeLight .wrapper :global(label) {
+  color: #000000 !important;
+}
+
+.themeLight .wrapper :global(.ant-divider-horizontal) {
+  border-top-color: #eaeaea !important;
+}
+
+/* Checkbox/Radio labels - Light theme */
+.themeLight .wrapper :global(.ant-checkbox-wrapper),
+.themeLight .wrapper :global(.ant-radio-wrapper),
+.themeLight .wrapper :global(.ant-checkbox-wrapper span),
+.themeLight .wrapper :global(.ant-radio-wrapper span) {
+  color: #000000 !important;
+}
+
+.themeLight .wrapper :global(.ant-btn-default) {
+  background-color: #f0f0f0;
+  color: #1a1a1a;
+  border-color: #d9d9d9;
+}
+
+.themeLight .wrapper :global(.ant-btn-default:hover) {
+  background-color: #e6e6e6;
+}
+
+/* Table / dropdowns - Light theme */
+.themeLight .wrapper :global(.ant-table),
+.themeLight .wrapper :global(.ant-table-container),
+.themeLight .wrapper :global(.ant-table-thead > tr > th),
+.themeLight .wrapper :global(.ant-table-tbody > tr > td) {
+  background: #ffffff;
+  color: #1a1a1a;
+}
+
+.themeLight .wrapper :global(.ant-select-dropdown) {
+  background: #ffffff;
+}
+.themeLight .wrapper :global(.ant-select-item),
+.themeLight .wrapper :global(.ant-select-item-option),
+.themeLight .wrapper :global(.ant-select-item-option-content) {
+  color: #1a1a1a !important;
+}
+.themeLight .wrapper :global(.ant-select-item-option-active) {
+  background: #f5f5f5 !important;
+}
+
+/* Modal - Light theme */
+.themeLight.modalRoot :global(.ant-modal-content) {
+  background: #ffffff;
+  color: #1a1a1a;
+}
+.themeLight.modalRoot :global(.ant-modal-header),
+.themeLight.modalRoot :global(.ant-modal-title) {
+  background: #ffffff;
+  color: #1a1a1a;
+}
+.themeLight.modalRoot :global(.ant-modal-mask) {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+/* Modal - Dark theme */
+.themeDark.modalRoot :global(.ant-modal-content) {
+  background: #272727;
+  color: #ffffff;
+}
+.themeDark.modalRoot :global(.ant-modal-header),
+.themeDark.modalRoot :global(.ant-modal-title) {
+  background: #272727;
+  color: #ffffff;
+}
+.themeDark.modalRoot :global(.ant-modal-mask) {
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.themeDark .form {
+  color: #ffffff;
+}
+.themeLight .form {
+  color: #1a1a1a;
+}
+
+.patientInput {
+  background-color: #444444; /* inputs oscuros */
+  color: #000000;
+}
+
+.actions {
+  margin-top: 24px;
+}
+
+.btnSecondary {
+  background-color: #666666;
+  border-color: #666666;
+  color: #000000;
+}
+
+.checkboxTop {
+  margin-top: 32px;
+}
+
+.divider {
+  border-color: #555555 !important;
+}
+
+.fullWidth {
+  width: 100% !important;
+}
+
+.mb16 {
+  margin-bottom: 16px;
+}
+
+/* Scoped Ant Design overrides inside this component */
+.wrapper :global(.ant-typography) {
+  color: #000000;
+}
+
+.wrapper :global(.ant-form-item-label > label) {
+  color: #ffffff;
+}
+
+/* Forzar textos según tema en labels, radios, checkboxes y ayudas */
+/* Tema claro: textos oscuros */
+.themeLight .wrapper :global(.ant-form-item .ant-form-item-explain-error),
+.themeLight .wrapper :global(.ant-form-item .ant-form-item-extra),
+.themeLight .wrapper :global(.ant-radio-wrapper),
+.themeLight .wrapper :global(.ant-radio-wrapper span),
+.themeLight .wrapper :global(.ant-checkbox-wrapper),
+.themeLight .wrapper :global(.ant-checkbox-wrapper span),
+.themeLight .wrapper :global(.ant-form-item .ant-form-item-label > label),
+.themeLight .wrapper :global(label) {
+  color: #000000 !important;
+}
+
+/* Tema oscuro: textos blancos */
+.themeDark .wrapper :global(.ant-form-item .ant-form-item-explain-error),
+.themeDark .wrapper :global(.ant-form-item .ant-form-item-extra),
+.themeDark .wrapper :global(.ant-radio-wrapper),
+.themeDark .wrapper :global(.ant-radio-wrapper span),
+.themeDark .wrapper :global(.ant-checkbox-wrapper),
+.themeDark .wrapper :global(.ant-checkbox-wrapper span),
+.themeDark .wrapper :global(.ant-form-item .ant-form-item-label > label),
+.themeDark .wrapper :global(label) {
+  color: #ffffff !important;
+}
+
+.wrapper :global(.ant-input),
+.wrapper :global(.ant-input-affix-wrapper),
+.wrapper :global(.ant-input-number),
+.wrapper :global(.ant-picker),
+.wrapper :global(.ant-select-selector),
+.wrapper :global(.ant-select-selection-placeholder),
+.wrapper :global(.ant-select-selection-item) {
+  background-color: #333333 !important;
+  border-color: #555555 !important;
+  color: #ffffff !important;
+  border-radius: 8px !important;
+}
+
+.wrapper :global(.ant-input::placeholder),
+.wrapper :global(.ant-select-selection-placeholder),
+.wrapper :global(.ant-picker-input > input::placeholder) {
+  color: #ffffff !important;
+}
+
+.wrapper :global(.ant-divider-horizontal) {
+  border-block-start: 1px solid #555555;
+}
+
+.wrapper :global(.ant-btn-primary) {
+  background-color: #1cb54a;
+  border-color: #1cb54a;
+  border-radius: 8px;
+}
+
+.wrapper :global(.ant-btn-primary:hover),
+.wrapper :global(.ant-btn-primary:focus) {
+  background-color: #148235;
+  border-color: #148235;
+}
+
+.wrapper :global(.ant-table) {
+  background: #272727;
+  color: #ffffff;
+}
+
+.wrapper :global(.ant-table-thead > tr > th) {
+  background: #272727 !important;
+  color: #ffffff !important;
+  border-color: #555555 !important;
+}
+
+.wrapper :global(.ant-table-tbody > tr > td) {
+  border-color: #444444 !important;
+}
+
+/* Scoped modal styles via rootClassName */
+.modalRoot :global(.ant-modal-content) {
+  background: #272727;
+  color: #ffffff;
+}
+
+.modalRoot :global(.ant-modal-header) {
+  background: #272727;
+}
+
+.modalRoot :global(.ant-modal-title) {
+  color: #ffffff;
+}
+
+.modalRoot :global(.ant-modal-footer .ant-btn-primary) {
+  background-color: #1cb54a;
+  border-color: #1cb54a;
+}
+
+.modalRoot :global(.ant-modal-footer .ant-btn-primary:hover) {
+  background-color: #148235;
+  border-color: #148235;
+}

@@ -2,7 +2,7 @@ import axios from 'axios';
 import {
     getLocalStorage,
     removeLocalStorage,
-} from '../../../utils/localStorageUtility';
+} from '../../utils/storage';
 
 const BaseURL =
   '/backend/public/api/'; // Adjust the base URL as needed for your environment https://reflexoperu-v2.marketingmedico.vip

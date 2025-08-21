@@ -16,7 +16,7 @@ import {
 import { useAuth as useAuthentication } from '../../../routes/AuthContext';
 import { useUser } from '../../../context/UserContext';
 import { useCompany } from '../../../context/CompanyContext';
-import { get } from '../../../services/api/Axios/MethodsGeneral';
+import { get } from '../../../services/API/MethodsGeneral';
 
 export const useAuth = () => {
   const { showToast } = useToast();

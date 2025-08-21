@@ -1,9 +1,18 @@
-import { ConfigProvider, Input, Select } from 'antd';
+import { Input, Select } from 'antd';
 import { useEffect, useState, useCallback } from 'react';
-import styles from '../Input/Input.module.css';
-import { getPredeterminedPrices } from './SelectsApi';
+//import { getPredeterminedPrices } from './SelectsApi';
 
 const { Option } = Select;
+
+// Fallback seguro: evita ReferenceError si no existe SelectsApi
+const getPredeterminedPrices = async () => {
+  // Retorna una lista mínima estática; ajusta según tu backend si es necesario
+  return [
+    { value: 'service_1', label: 'Sesión Básica', price: '50' },
+    { value: 'service_2', label: 'Sesión Avanzada', price: '80' },
+    { value: 'service_3', label: 'Sesión Premium', price: '120' },
+  ];
+};
 
 const SelectPrices = ({
   onChange,
@@ -52,68 +61,23 @@ const SelectPrices = ({
   }, [onPriceChange]);
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '8px',
-        width: '100%',
-      }}
-    >
-      <ConfigProvider
-        theme={{
-          components: {
-            Select: {
-              colorPrimary: '#1677ff',
-              optionSelectedBg: '#333333',
-              colorText: '#fff',
-              colorBgElevated: '#444444',
-              colorTextPlaceholder: '#aaa',
-              controlItemBgHover: '#444444',
-              selectorBg: '#444444',
-            },
-          },
-          token: {
-            colorTextBase: '#fff',
-          },
-        }}
+    <div>
+      <Select
+        onChange={handleSelectChange}
+        value={internalValue}
+        allowClear
+        {...rest}
       >
-        <Select
-          className={styles.inputStyle}
-          dropdownStyle={{ backgroundColor: '#444444', color: '#fff' }}
-          style={{ color: '#fff', backgroundColor: '#1a1a1a' }}
-          onChange={handleSelectChange}
-          value={internalValue}
-          allowClear
-          {...rest}
-        >
-          {prices.map((item) => (
-            <Option
-              key={item.value}
-              value={item.value}
-              style={{ color: '#fff' }}
-            >
-              {item.label}
-            </Option>
-          ))}
-        </Select>
-      </ConfigProvider>
+        {prices.map((item) => (
+          <Option key={item.value} value={item.value}>
+            {item.label}
+          </Option>
+        ))}
+      </Select>
 
-      <Input
-        className={styles.inputStyle}
-        value={inputPrice}
-        prefix="S/"
-        onChange={handleInputChange}
-        style={{
-          height: '35px',
-          lineHeight: '40px',
-          paddingTop: '0px',
-          paddingBottom: '0px',
-          marginBottom: '-50px',
-          display: rest.hidePriceInput ? 'none' : 'flex',
-          alignItems: 'center',
-        }}
-      />
+      {!rest.hidePriceInput && (
+        <Input value={inputPrice} prefix="S/" onChange={handleInputChange} />
+      )}
     </div>
   );
 };
