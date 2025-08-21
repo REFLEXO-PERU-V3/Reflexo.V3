@@ -1,0 +1,365 @@
+/* Fondo global oscuro (aplicado desde el módulo) */
+:global(html) { background-color: #121212; min-height: 100%; }
+
+.light .reportCard {
+  background-color: #fdfdfd !important;
+  border-color: #ececec !important;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+}
+
+/* Light overrides */
+.light .card {
+  background-color: #fdfdfd !important;
+  border-color: #ececec !important;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.10);
+}
+
+/* Botón flotante para cambio de tema */
+.themeToggleFab {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 50;
+}
+
+.themeBtn {
+  border-radius: 999px !important;
+  padding: 10px 14px !important;
+  height: 40px !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600 !important;
+}
+
+/* Variante oscuro */
+.themeDark .themeBtn {
+  color: #ffffff !important;
+  background: #2a2a2a !important;
+  border: 1px solid #3a3a3a !important;
+}
+.themeDark .themeBtn:hover {
+  background: #333333 !important;
+}
+
+/* Variante claro */
+.themeLight .themeBtn {
+  color: #111111 !important;
+  background: #ffffff !important;
+  border: 1px solid #e5e5e5 !important;
+}
+.themeLight .themeBtn:hover {
+  background: #f5f5f5 !important;
+}
+:global(body) { background-color: #121212; min-height: 100%; }
+:global(#root) { background-color: #121212; min-height: 100%; }
+
+/* Marcadores de tema: clases utilizadas como wrapper sin reglas directas */
+
+/* Contenedor principal de la página de Reportes */
+.mainContainer {
+  /* Cubrir toda la pantalla y eliminar franjas del body */
+  position: fixed;
+  inset: 0; /* top:0 right:0 bottom:0 left:0 */
+  background-color: #121212; /* redundante pero asegura consistencia */
+  width: 100vw;
+  height: 100vh;
+
+  /* Centrar contenido en ambos ejes */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 24px; /* respiración en bordes pequeños */
+  overflow: auto; /* permitir scroll si el contenido crece */
+}
+
+@media (max-width: 992px) {
+  .mainContainer {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .mainContainer {
+    padding: 12px;
+  }
+}
+
+/* Tarjeta principal de selección */
+.card {
+  width: 100%;
+  max-width: 100%; 
+  padding: 16px;
+  border: 1px solid #333 !important;
+  border-radius: 16px !important;
+
+  text-align: center;
+
+  background-color: #242424 !important;
+
+  transition: max-width 0.3s ease;
+}
+
+.title {
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #333;
+
+  font-size: 22px; 
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+}
+
+.light .title {
+  color: #111;
+  border-bottom-color: #eaeaea;
+}
+
+/* Contenedor de las tarjetas de selección */
+.selectorContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+/* Tarjeta de selección de reporte */
+.reportCard {
+  cursor: pointer;
+
+  border: 1px solid #444 !important;
+  border-radius: 12px !important;
+
+  text-align: left;
+
+  background-color: #2f2f2f !important;
+
+  transition: all 0.3s ease;
+}
+
+.reportCard:hover {
+  transform: translateY(-4px);
+  border-color: #4caf50 !important;
+}
+
+.selectedCard {
+  border-color: #4caf50 !important;
+  background-color: #333833 !important;
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+}
+
+.light .selectedCard {
+  background-color: #f5fff7 !important;
+}
+
+.cardContent {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.cardIcon {
+  flex-shrink: 0;
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.light .cardTitle {
+  color: #111;
+}
+
+.cardDescription {
+  margin: 0;
+  font-size: 13px;
+  color: #a0a0a0;
+}
+
+.light .cardDescription {
+  color: #555;
+}
+
+.controlsWrapper {
+  display: flex;
+  flex-direction: column; 
+  gap: 16px;
+  align-items: stretch;
+
+  width: 100%;
+  margin: 24px auto 0; 
+  padding: 16px;
+  border: 1px solid #444;
+  border-radius: 12px;
+
+  background-color: #2f2f2f;
+}
+
+.light .controlsWrapper {
+  background-color: #f9fafb;
+  border-color: #ececec;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+}
+
+.datePickerContainer {
+  flex-grow: 1;
+}
+
+.generateBtn {
+  height: 48px !important;
+  border: none !important;
+
+  font-size: 16px !important;
+  font-weight: 600 !important;
+
+  background: linear-gradient(90deg, #4caf50, #00c36a) !important;
+}
+
+/* Media Query para pantallas más grandes (escritorio) */
+@media (min-width: 768px) {
+  .card {
+    max-width: 700px;
+  }
+
+  .controlsWrapper {
+    flex-direction: row;
+    align-items: center;
+    max-width: 95%;
+  }
+  
+  .generateBtn {
+    flex-shrink: 0; 
+    height: 40px !important;
+    font-size: 14px !important;
+  }
+}
+
+/* Estilos para la previsualización  */
+.previewContainer {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 85%;
+  height:90%;
+  padding: 32px;
+  border-radius: 18px;
+
+  background-color: #2a2a2a;
+  overflow-x: hidden; /* evitar scroll horizontal */
+}
+
+.light .previewContainer {
+  background-color: #ffffff;
+  border: 1px solid #eaeaea;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+}
+
+/* Estado de carga centrado sobre la previsualización */
+.spinner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  z-index: 5;
+}
+
+/* Mensaje de error dentro de la previsualización */
+.alert {
+  max-width: 720px;
+  margin: 16px auto;
+  border-radius: 10px;
+}
+
+.topActions {
+  pointer-events: none;
+
+  position: absolute;
+  z-index: 10;
+  top: 12px; /* bajar botones */
+  right: 0;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  width: 100%;
+  height: 72px; /* dar más área clicable */
+  padding: 12px 18px;
+}
+
+.actionBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+
+  font-size: 24px;
+  color: #fff;
+
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.actionBtn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.light .actionBtn {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  color: #111;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.light .actionBtn:hover {
+  background-color: rgba(0, 0, 0, 0.07);
+}
+
+/* .downloadButtons no longer used */
+
+.previewContent {
+  overflow-y: auto;
+  overflow-x: hidden; /* evitar scroll horizontal */
+  flex: 1;
+  padding-top: 50px; /* más espacio para botones superiores */
+  box-sizing: border-box; /* incluir borde/padding en el ancho */
+}
+
+.light .previewContent {
+  background: #fcfcfc;
+  /* Sin borde para evitar marco blanco alrededor del visor */
+  border: none;
+  border-radius: 0;
+  /* Quitar sombreado interno en tema claro */
+  box-shadow: none;
+}
+
+.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.errorMsg, .noDataMsg {
+  padding: 40px;
+  color: #fff;
+  text-align: center;
+}
+
+.light .errorMsg, .light .noDataMsg {
+  color: #111;
+}
