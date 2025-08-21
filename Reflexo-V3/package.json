@@ -13,7 +13,10 @@
     "@phosphor-icons/react": "^2.1.10",
     "antd": "^5.27.1",
     "axios": "^1.11.0",
+    "dayjs": "^1.11.13",
+    "moment": "^2.30.1",
     "react": "^19.1.1",
+    "react-big-calendar": "^1.19.4",
     "react-dom": "^19.1.1",
     "react-icon": "^1.0.0",
     "react-router-dom": "^7.8.1"
