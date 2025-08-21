@@ -7,8 +7,14 @@
   color: white;
   font-weight: bold;
   transition: background-color 0.3s ease, color 0.3s ease;
+
+  /* 👇 mueve el botón sí o sí */
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
 }
 
 .button:hover {
   background-color: #4b52cc;
 }
+

@@ -35,7 +35,7 @@ const QuickAccess = () => {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Accesos Rápidos</h2>
+      <h2 className="cuadro">Accesos Rápidos</h2>
       <div className={styles.grid}>
         {quickLinks.map((link, index) => (
           <button

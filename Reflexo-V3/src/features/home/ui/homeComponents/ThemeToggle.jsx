@@ -4,7 +4,13 @@ const ThemeToggle = () => {
   const [isDark, setIsDark] = useState(true);
 
   useEffect(() => {
-    document.body.style.backgroundColor = isDark ? "#333333" : "#ffffff";
+    if (isDark) {
+      document.body.classList.add("dark");
+      document.body.classList.remove("light");
+    } else {
+      document.body.classList.add("light");
+      document.body.classList.remove("dark");
+    }
   }, [isDark]);
 
   const toggleBackground = () => {
@@ -14,14 +20,16 @@ const ThemeToggle = () => {
   return (
     <button
       style={{
+        position: "fixed",
+        top: "1rem",
+        right: "1rem",
         padding: "0.5rem 1rem",
-        borderRadius: "6px",
         border: "none",
+        borderRadius: "6px",
         cursor: "pointer",
         backgroundColor: "#646cff",
         color: "white",
         fontWeight: "bold",
-        marginTop: "2rem",
       }}
       onClick={toggleBackground}
     >
@@ -31,3 +39,4 @@ const ThemeToggle = () => {
 };
 
 export default ThemeToggle;
+

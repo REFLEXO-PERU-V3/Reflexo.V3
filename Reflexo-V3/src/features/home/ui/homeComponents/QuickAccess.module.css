@@ -1,81 +1,61 @@
 .container {
-    flex: 1;
-
-    box-sizing: border-box;
-    width: 100%;
-    padding: 25px;
-    border-radius: 20px;
-
-    background-color: #1E1E1E;
+  flex: 1;
+  padding: 30px; /* más grande que antes */
+  border-radius: 20px;
+  box-sizing: border-box;
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+   box-shadow:
+    0 10px 6px #1b7b46,   /* menos alto y menos difuso */
+    0 7px 4px #1b7b46;     /* menos alto y menos difuso */
+  transition: all 0.3s ease;
+  min-height: 400px; /* más alto que antes */
+  display: flex;
+  flex-direction: column;
 }
 
 .title {
-    margin-bottom: 30px;
-    font-size: clamp(1.5rem, 2.5vw, 2rem);
-    font-weight: bold;
-    color: white;
+  margin-bottom: 25px;
+  font-weight: bold;
+  font-size: clamp(1.4rem, 3vw, 2rem); /* más grande */
 }
 
 .grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(160px, 1fr));
-    gap: clamp(10px, 2vw, 20px);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(160px, 1fr));
+  gap: 20px;
+  flex: 1;
 }
 
 .card {
-    all: unset; /* Elimina estilos por defecto del botón */
-
-    cursor: pointer;
-
-    display: flex;
-    align-items: center;
-
-    box-sizing: border-box;
-    min-height: 50px; /* Altura mínima consistente */
-    padding: clamp(0.4rem, 2.5vw, 0.7rem);
-    border-radius: 12px;
-
-    font-size: clamp(0.9rem, 2.2vw, 1.25rem);
-    font-weight: 500;
-    color: white;
-
-    background-color: #333333;
-
-    transition: all 0.3s ease;
+  all: unset;
+  display: flex;
+  align-items: center;
+  padding: 15px; /* más grande */
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  color: var(--text-primary);
+  background-color: var(--bg-quaternary);
+  box-shadow: none;
+  transition: all 0.3s ease;
 }
 
 .card:hover {
-    transform: translateY(-2px);
-    background-color: #2a2a2a;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.card:active {
-    transform: translateY(0);
-}
-
-.card:focus-visible {
-    outline: 2px solid #00c36a;
-    outline-offset: 2px;
+  transform: translateY(-2px);
+  background-color: var(--bg-hover);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
 }
 
 .icon {
-    flex-shrink: 0;
-    margin-right: 12px;
-    color: #00c36a;
+  flex-shrink: 0;
+  margin-right: 15px;
+  color: #00c36a;
 }
 
 @media screen and (max-width: 600px) {
-    .grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .card {
-        padding: 0.7rem;
-    }
-}
-
-.quickAccessCard {
-  background-color: var(--bg-quaternary);
-  color: var(--text-primary);
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }
