@@ -1,0 +1,250 @@
+/* Variables CSS para colores y valores reutilizables - Tema Claro */
+:root {
+    /* Colores primarios */
+    --primary-blue: #0066FF;
+    --primary-blue-hover: #0052CC;
+    --warning-orange: #FFAA00;
+    --warning-orange-hover: #E69500;
+    --danger-red: #FF3333;
+    --danger-red-hover: #E61A1A;
+    --success-green: #4CAF50;
+    --success-green-hover: #3d8b40;
+    
+    /* Estados */
+    --status-enabled: rgba(20, 245, 140, 0.23);
+    --status-disabled: rgba(255, 77, 79, 0.23);
+    
+    /* Colores de fondo y texto - Tema Claro */
+    --background-primary: #FFFFFF;
+    --background-secondary: #FAFAFA;
+    --background-tertiary: #F5F5F5;
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --text-placeholder: #BFBFBF;
+    --border-primary: #D9D9D9;
+    --border-secondary: #E8E8E8;
+    --border-dark: #BFBFBF;
+    
+    /* Valores de diseño */
+    --border-radius-sm: 6px;
+    --border-radius-lg: 16px;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --text-white: #fff;
+    
+    /* Valores para configuración de tema */
+    --button-control-height: 40px;
+    --popconfirm-border-radius: 8px;
+    --popconfirm-padding: 12px;
+}
+
+/* Variables CSS para colores y valores reutilizables - Tema Oscuro */
+[data-theme="dark"] {
+    /* Colores primarios (se mantienen igual) */
+    --primary-blue: #0066FF;
+    --primary-blue-hover: #0052CC;
+    --warning-orange: #FFAA00;
+    --warning-orange-hover: #E69500;
+    --danger-red: #FF3333;
+    --danger-red-hover: #E61A1A;
+    --success-green: #4CAF50;
+    --success-green-hover: #3d8b40;
+    
+    /* Estados (se mantienen igual) */
+    --status-enabled: rgba(20, 245, 140, 0.23);
+    --status-disabled: rgba(255, 77, 79, 0.23);
+    
+    /* Colores de fondo y texto - Tema Oscuro */
+    --background-primary: #2a2a2a;
+    --background-secondary: #1e1e1e;
+    --background-tertiary: #1a1a1a;
+    --text-primary: #ffffff;
+    --text-secondary: #b0b0b0;
+    --text-placeholder: #666666;
+    --border-primary: #555555;
+    --border-secondary: #666666;
+    --border-dark: #444444;
+    
+    /* Valores de diseño (se mantienen igual) */
+    --border-radius-sm: 6px;
+    --border-radius-lg: 16px;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --text-white: #fff;
+    
+    /* Valores para configuración de tema (se mantienen igual) */
+    --button-control-height: 40px;
+    --popconfirm-border-radius: 8px;
+    --popconfirm-padding: 12px;
+}
+
+/* Clases base reutilizables */
+.baseStatus {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: var(--border-radius-lg);
+    font-size: 12px;
+    font-weight: var(--font-weight-medium);
+    color: var(--text-white);
+}
+
+.baseButton {
+    border: none !important;
+    border-radius: var(--border-radius-sm) !important;
+    font-weight: var(--font-weight-medium) !important;
+    color: var(--text-white) !important;
+}
+
+.baseButton:hover {
+    color: var(--text-white) !important;
+}
+
+/* Estados de estado */
+.statusEnabled {
+    composes: baseStatus;
+    background-color: var(--status-enabled);
+}
+
+.statusDisabled {
+    composes: baseStatus;
+    background-color: var(--status-disabled);
+}
+
+/* Botones de acción */
+.editButton {
+    composes: baseButton;
+    background-color: var(--primary-blue) !important;
+}
+
+.editButton:hover {
+    composes: baseButton;
+    background-color: var(--primary-blue-hover) !important;
+}
+
+.deactivateButton {
+    composes: baseButton;
+    background-color: var(--warning-orange) !important;
+}
+
+.deactivateButton:hover {
+    composes: baseButton;
+    background-color: var(--warning-orange-hover) !important;
+}
+
+.deleteButton {
+    composes: baseButton;
+    background-color: var(--danger-red) !important;
+}
+
+.deleteButton:hover {
+    composes: baseButton;
+    background-color: var(--danger-red-hover) !important;
+}
+
+.addButton {
+    height: 36px !important;
+    padding: 4px 16px !important;
+    border-color: var(--success-green) !important;
+    border-radius: var(--border-radius-sm) !important;
+    font-weight: var(--font-weight-medium) !important;
+    color: var(--text-white) !important;
+    background-color: var(--success-green) !important;
+}
+
+.addButton:hover {
+    border-color: var(--success-green-hover) !important;
+    color: var(--text-white) !important;
+    background-color: var(--success-green-hover) !important;
+}
+
+/* Layout */
+.container {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 24px !important;
+    justify-content: center !important;
+    max-width: calc(100% - 200px) !important;
+    height: 100% !important;
+    margin: 0 auto !important;
+    padding-top: 20px !important;
+    background-color: var(--background-primary);
+    color: var(--text-primary);
+}
+
+.sectionHeader {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    margin-bottom: 16px !important;
+    background-color: var(--background-primary);
+}
+
+.sectionTitle {
+    margin: 0 !important;
+    font-size: 20px !important;
+    font-weight: var(--font-weight-semibold) !important;
+    color: var(--text-primary);
+}
+
+/* Formularios */
+.inputField {
+    border-radius: var(--border-radius-sm) !important;
+    background-color: var(--background-primary) !important;
+    border-color: var(--border-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+.inputField::placeholder {
+    color: var(--text-placeholder) !important;
+}
+
+.inputField:focus {
+    border-color: var(--success-green) !important;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2) !important;
+}
+
+.statusSwitch {
+    width: 110px !important;
+}
+
+/* Switch personalizado */
+.statusSwitch .ant-switch-inner {
+    font-size: 12px !important;
+    font-weight: var(--font-weight-medium) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Sobrescribir estilos de Ant Design */
+.ant-btn:not(.ant-btn-link):hover, 
+.ant-btn:not(.ant-btn-link):focus {
+    border-color: transparent !important;
+    color: var(--text-white) !important;
+    background: inherit !important;
+}
+
+/* Estilos adicionales para tema oscuro */
+[data-theme="dark"] .container {
+    background-color: var(--background-primary);
+}
+
+[data-theme="dark"] .sectionHeader {
+    background-color: var(--background-primary);
+}
+
+[data-theme="dark"] .sectionTitle {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .inputField {
+    background-color: var(--background-secondary) !important;
+    border-color: var(--border-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .inputField::placeholder {
+    color: var(--text-placeholder) !important;
+}
+
+[data-theme="dark"] .statusSwitch .ant-switch-inner {
+    color: var(--text-primary) !important;
+}

@@ -12,6 +12,7 @@ import {
   Popconfirm,
 } from 'antd';
 import BaseModal from '../../../components/Modal/BaseModalPayments/BaseModalPayments';
+import { useTheme } from '../../../context/ThemeContext';
 
 // Constantes para tipos de modal
 const MODAL_TYPES = {
@@ -62,6 +63,8 @@ const getNameLabel = (type) => `Nombre del ${getTypeName(type)}`;
 const getNamePlaceholder = (type) => `Ingrese el nombre del ${getTypeName(type)}`;
 
 const Payments = () => {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
   const [form] = Form.useForm();
   const {
     paymentTypes,
@@ -369,45 +372,84 @@ const Payments = () => {
     )
   );
 
+  // Función helper para renderizar botones de acción
+  const renderActionButtons = (record, type) => (
+    <Space size="small">
+      <Button
+        type="primary"
+        size="small"
+        onClick={() => handleAction(ACTIONS.EDIT, record)}
+      >
+        Editar
+      </Button>
+      {record.status === STATUS.ENABLED ? (
+        <Popconfirm
+          title="¿Estás seguro de que quieres desactivar este registro?"
+          onConfirm={() => handleDeactivate(record)}
+          okText="Sí"
+          cancelText="No"
+        >
+          <Button type="default" size="small" danger>
+            Desactivar
+          </Button>
+        </Popconfirm>
+      ) : (
+        <Button
+          type="default"
+          size="small"
+          onClick={() => handleActivate(record, type)}
+        >
+          Activar
+        </Button>
+      )}
+    </Space>
+  );
+
+  // Configuración del tema dinámico
+  const getThemeConfig = () => ({
+    token: {
+      colorPrimary: '#4CAF50',
+      colorSuccess: '#52C41A',
+      colorWarning: '#FAAD14',
+      colorError: '#FF4D4F',
+      borderRadius: 6,
+      colorBgContainer: isDark ? '#2a2a2a' : '#FFFFFF',
+      colorText: isDark ? '#ffffff' : '#333333',
+      colorTextLightSolid: '#ffffff',
+    },
+    components: {
+      Button: {
+        primaryShadow: 'none',
+        controlHeight: 40,
+        borderRadius: 6,
+        colorPrimary: '#4CAF50',
+        colorBgContainer: isDark ? '#333333' : '#ffffff',
+        colorText: isDark ? '#ffffff' : '#333333',
+        colorBorder: isDark ? '#555555' : '#d9d9d9',
+      },
+      Table: {
+        headerBg: isDark ? '#1e1e1e' : '#FAFAFA',
+        headerColor: isDark ? '#ffffff' : '#333333',
+        colorBgContainer: isDark ? '#2a2a2a' : '#ffffff',
+        colorText: isDark ? '#ffffff' : '#333333',
+        colorBorder: isDark ? '#555555' : '#d9d9d9',
+      },
+      Popconfirm: {
+        borderRadius: 8,
+        padding: 12,
+        colorBgElevated: isDark ? '#1e1e1e' : '#ffffff',
+        colorText: isDark ? '#ffffff' : '#333333',
+      },
+      Popover: {
+        colorBgElevated: isDark ? '#1e1e1e' : '#ffffff',
+        colorText: isDark ? '#ffffff' : '#333333',
+      },
+    },
+  });
+
   return (
-    <ConfigProvider
-      theme={{
-        token: {
-          colorPrimary: '#4CAF50',
-          colorSuccess: '#52C41A',
-          colorWarning: '#FAAD14',
-          colorError: '#FF4D4F',
-          borderRadius: 6,
-          colorBgContainer: '#FFFFFF',
-          colorText: '#333333',
-          colorTextLightSolid: '#ffffff',
-        },
-        components: {
-          Button: {
-            primaryShadow: 'none',
-            controlHeight: 40,
-            borderRadius: 6,
-            colorPrimary: '#4CAF50',
-            colorBgContainer: '#333333',
-            colorText: '#ffffff',
-            colorBorder: '#333333',
-          },
-          Table: {
-            headerBg: '#FAFAFA',
-            headerColor: '#333333',
-          },
-          Popconfirm: {
-            borderRadius: 8,
-            padding: 12,
-          },
-          Popover: {
-            colorBgElevated: '#000',
-            colorText: '#ffffff',
-          },
-        },
-      }}
-    >
-      <div className={styles.container}>
+    <ConfigProvider theme={getThemeConfig()}>
+      <div className={styles.container} data-theme={theme}>
         {/* Tipos de Pago */}
         {renderTableSection(
           'Tipos de pago',

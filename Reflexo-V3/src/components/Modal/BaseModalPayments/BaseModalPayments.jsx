@@ -8,9 +8,31 @@ import {
   Space,
   ConfigProvider,
 } from 'antd';
+import { useTheme } from '../../../context/ThemeContext';
 
-// Constantes para colores del tema
-const THEME_COLORS = {
+// Constantes para colores del tema claro
+const LIGHT_THEME_COLORS = {
+  primary: '#4CAF50',
+  primaryHover: '#388E3C',
+  primaryLight: '#66BB6A',
+  background: '#FFFFFF',
+  backgroundDark: '#FAFAFA',
+  backgroundDarker: '#F5F5F5',
+  border: '#D9D9D9',
+  borderLight: '#E8E8E8',
+  borderDark: '#BFBFBF',
+  borderSecondary: '#F0F0F0',
+  text: '#333333',
+  textSecondary: '#666666',
+  textPlaceholder: '#BFBFBF',
+  textDisabled: '#999999',
+  error: '#ff4d4f',
+  white: '#ffffff',
+  transparent: 'transparent',
+};
+
+// Constantes para colores del tema oscuro
+const DARK_THEME_COLORS = {
   primary: '#4CAF50',
   primaryHover: '#388E3C',
   primaryLight: '#66BB6A',
@@ -82,6 +104,9 @@ const createButtonStyles = (type = 'default') => {
   };
 };
 
+// Función helper para obtener colores del tema actual
+const getThemeColors = (isDark) => isDark ? DARK_THEME_COLORS : LIGHT_THEME_COLORS;
+
 // Función helper para crear estilos de input
 const createInputStyles = () => ({
   colorBgContainer: THEME_COLORS.background,
@@ -137,6 +162,10 @@ const BaseModal = ({
   initialValues,
   form,
 }) => {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+  const THEME_COLORS = getThemeColors(isDark);
+
   // Efecto para manejar valores iniciales del formulario
   React.useEffect(() => {
     if (visible && initialValues) {
@@ -196,7 +225,9 @@ const BaseModal = ({
     },
     components: {
       Modal: {
-        contentBg: `linear-gradient(145deg, ${THEME_COLORS.background} 0%, ${THEME_COLORS.backgroundDark} 100%)`,
+        contentBg: isDark 
+          ? `linear-gradient(145deg, ${THEME_COLORS.background} 0%, ${THEME_COLORS.backgroundDark} 100%)`
+          : THEME_COLORS.background,
         headerBg: THEME_COLORS.transparent,
         titleColor: THEME_COLORS.text,
         colorText: THEME_COLORS.textSecondary,
