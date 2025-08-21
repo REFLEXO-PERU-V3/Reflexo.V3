@@ -1,7 +1,7 @@
-import { matchPath, Outlet, useLocation } from 'react-router';
+import { matchPath, Outlet, useLocation } from 'react-router-dom';
 import CustomLayout from '../components/Header/CustomLayout';
 import Dashboard from './Dashboard/Dashboard';
-import Style from './View.module.css';
+import Style from './css/View.module.css';
 
 export default function View() {
   const location = useLocation();
@@ -43,15 +43,11 @@ export default function View() {
         <Dashboard />
       </div>
       <div className={Style.Content}>
-        <div className={Style.Header}>
-          <CustomLayout
-            title={title}
-            isBack={title !== 'Inicio' ? true : false}
-          />
-        </div>
-        <div className={Style.Outlet}>
-          <Outlet />
-        </div>
+        <CustomLayout title={title} isBack={title !== 'Inicio'}>
+          <div className={Style.Outlet}>
+            <Outlet />
+          </div>
+        </CustomLayout>
       </div>
     </div>
   );

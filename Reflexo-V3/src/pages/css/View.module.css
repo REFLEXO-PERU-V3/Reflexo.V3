@@ -2,12 +2,13 @@
   overflow: hidden; /* Evita el scroll general */
   display: flex;
   height: 100vh; /* Ocupa toda la altura */
+  width: 100vw; /* Ocupa todo el ancho */
 }
 
 .SideBar {
   /* No necesita height: 100vh porque el contenedor ya tiene altura definida */
   overflow-y: auto; /* Por si acaso el contenido del sidebar es más largo */
-  flex: 0.14;
+  flex: 0 0 280px; /* Ancho fijo del sidebar */
   background-color: #1e1e1e;
 }
 
@@ -18,8 +19,9 @@
 .Content {
   overflow-y: auto; /* Permite scroll solo en el área de contenido */
   display: flex;
-  flex: 0.86;
+  flex: 1; /* Toma el espacio restante */
   flex-direction: column;
+  min-width: 0; /* Permite que el contenido se ajuste */
 }
 
 .Header {
@@ -46,13 +48,10 @@
   align-items: center;
   justify-content: center;
 
-  background-color: #121212;
+  background-color: #f5f5f5;
   /* Puede crecer y hacer que .Content tenga scroll */
 }
 
-[data-theme="light"] .Content {
-  background-color: rgb(219, 219, 219) !important;
-}
 [data-theme="light"] .Outlet {
-  background-color: rgb(219, 219, 219) !important;
+  background-color: #ffffff !important;
 }

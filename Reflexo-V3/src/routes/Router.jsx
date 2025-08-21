@@ -1,28 +1,17 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import NewAppointment from '../features/appointments/ui/RegisterAppointment/NewAppointment';
-import Appointments from '../features/appointments/ui/appointments';
-import AppointmentsComplete from '../features/appointmentsComplete/ui/appointmentsComplete';
 import ChangesPassword from '../features/auth/ui/ChangesPassword/ChangesPassword';
 import FirstSession from '../features/auth/ui/FirstSession/FirstSession';
 import Login from '../features/auth/ui/login';
-import Calendar from '../features/calendar/ui/Calendar';
-import Payments from '../features/configuration/cPayments/Payments';
-import Profile from '../features/configuration/cProfile/Profile';
-import System from '../features/configuration/cSystem/System';
-import User from '../features/configuration/cUsers/Users';
-import Historia from '../features/history/ui/PatientHistory';
-import Home from '../features/home/ui/home';
-import NewPatient from '../features/patients/ui/RegisterPatient/NewPatient';
-import Patients from '../features/patients/ui/patients';
-import ReportGenerator from '../features/reports/ui/reports';
-import NewTherapist from '../features/staff/ui/RegisterTherapist/NewTherapist';
-import Staff from '../features/staff/ui/staff';
-import Dashboard from '../features/statistic/ui/Dashboard';
 import Error500 from '../pages/Error/Error';
 import Error404 from '../pages/Error/Error404';
 import View from '../pages/View';
-import Prueba from '../pages/prueba';
 import ProtectedRoute from './ProtectedRoute';
+
+const Placeholder = ({ title }) => (
+  <div style={{ padding: 20 }}>
+    <h2 style={{ margin: 0 }}>{title}</h2>
+  </div>
+);
 
 const router = createBrowserRouter([
   {
@@ -59,76 +48,79 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <Home />,
+            element: <Placeholder title="Inicio" />,
           },
           {
             path: 'pacientes',
-            element: <Patients />, // Listado principal
+            element: <Placeholder title="Pacientes" />,
           },
           {
             path: 'pacientes/historia/:id', // Ruta independiente
-            element: <Historia />,
+            element: <Placeholder title="Historia del Paciente" />,
           },
           {
             path: 'pacientes/registrar',
-            element: <NewPatient />,
+            element: <Placeholder title="Registrar Paciente" />,
           },
           {
             path: 'citas',
-            element: <Appointments />,
+            element: <Placeholder title="Citas" />,
           },
           {
             path: 'calendar',
-            element: <Calendar />,
+            element: <Placeholder title="Calendario" />,
           },
           {
             path: 'citas/registrar',
-            element: <NewAppointment />,
+            element: <Placeholder title="Registrar Cita" />,
           },
           {
             path: 'reportes',
-            element: <ReportGenerator />,
+            element: <Placeholder title="Reportes" />,
           },
           {
             path: 'citasCompletas',
-            element: <AppointmentsComplete />,
+            element: <Placeholder title="Citas Completadas" />,
           },
           {
             path: 'estadisticas',
-            element: <Dashboard />,
+            element: <Placeholder title="Estadísticas" />,
           },
           {
             path: 'terapeutas',
-            element: <Staff />,
-            children: [
-              {
-                path: 'editar/:id',
-                element: <Prueba />,
-              },
-            ],
+            element: <Placeholder title="Terapeutas" />,
           },
           {
             path: 'terapeutas/registrar',
-            element: <NewTherapist />,
+            element: <Placeholder title="Registrar Terapeuta" />,
           },
           {
             path: 'configPagos',
-            element: <ProtectedRoute allowedRoles={[1]} />,
-            children: [{ index: true, element: <Payments /> }],
+            element: (
+              <ProtectedRoute allowedRoles={[1]}>
+                <Placeholder title="Configuración de Pagos" />
+              </ProtectedRoute>
+            ),
           },
           {
             path: 'configPerfil',
-            element: <Profile />,
+            element: <Placeholder title="Configuración de Perfil" />,
           },
           {
             path: 'configSistema',
-            element: <ProtectedRoute allowedRoles={[1]} />,
-            children: [{ index: true, element: <System /> }],
+            element: (
+              <ProtectedRoute allowedRoles={[1]}>
+                <Placeholder title="Configuración del Sistema" />
+              </ProtectedRoute>
+            ),
           },
           {
             path: 'configUser',
-            element: <ProtectedRoute allowedRoles={[1]} />,
-            children: [{ index: true, element: <User /> }],
+            element: (
+              <ProtectedRoute allowedRoles={[1]}>
+                <Placeholder title="Configuración de Usuarios" />
+              </ProtectedRoute>
+            ),
           },
         ],
       },

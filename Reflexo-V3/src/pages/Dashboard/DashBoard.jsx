@@ -1,5 +1,5 @@
 import { Avatar, ConfigProvider, Divider, Spin } from 'antd';
-import { useLocation, useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useCompany } from '../../context/CompanyContext';
 import { useUser } from '../../context/UserContext';
 import { useAuth } from '../../routes/AuthContext';

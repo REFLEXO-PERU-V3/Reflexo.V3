@@ -1,22 +1,22 @@
-import {
-  login as LoginService,
-  logOut as LogOutService,
-  validateCode as validateCodeService,
-  changePassword as changePasswordService,
-  sendVerifyCode as sendVerifyCodeService,
-} from '../service/authService';
-import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useCompany } from '../../../context/CompanyContext';
+import { useUser } from '../../../context/UserContext';
+import { useAuth as useAuthentication } from '../../../routes/AuthContext';
+import { get } from '../../../services/API/MethodsGeneral';
 import { useToast } from '../../../services/toastify/ToastContext';
 import {
-  getLocalStorage,
-  persistLocalStorage,
-  removeLocalStorage,
+    getLocalStorage,
+    persistLocalStorage,
+    removeLocalStorage,
 } from '../../../utils/localStorageUtility';
-import { useAuth as useAuthentication } from '../../../routes/AuthContext';
-import { useUser } from '../../../context/UserContext';
-import { useCompany } from '../../../context/CompanyContext';
-import { get } from '../../../services/api/Axios/MethodsGeneral';
+import {
+    changePassword as changePasswordService,
+    login as LoginService,
+    logOut as LogOutService,
+    sendVerifyCode as sendVerifyCodeService,
+    validateCode as validateCodeService,
+} from '../service/authService';
 
 export const useAuth = () => {
   const { showToast } = useToast();

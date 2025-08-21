@@ -9,7 +9,7 @@ import {
 } from '@phosphor-icons/react';
 import { ConfigProvider, Menu } from 'antd';
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { useTheme } from '../../../context/ThemeContext';
 import { useAuth } from '../../../routes/AuthContext';
@@ -199,7 +199,6 @@ export default function MenuDashboard() {
               itemSelectedBg: '#1CB54A',
               itemActiveBg: '#1CB54A',
               subMenuItemSelectedColor: '#8ad366',
-              itemSelectedColor: '#ffffff',
             },
             menuItem: {
               color: '#ffffff',
@@ -207,7 +206,7 @@ export default function MenuDashboard() {
             },
           },
           token: {
-            colorBgBase: '#1E1E1E+',
+            colorBgBase: '#1E1E1E',
           },
         }}
       >

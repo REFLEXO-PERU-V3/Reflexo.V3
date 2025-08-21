@@ -1,6 +1,6 @@
 // src/context/AuthContext.jsx
 import { createContext, useContext, useEffect, useState } from 'react';
-import { get } from '../services/api/Axios/MethodsGeneral';
+import { get } from '../services/API/MethodsGeneral';
 import {
     getLocalStorage,
     persistLocalStorage,

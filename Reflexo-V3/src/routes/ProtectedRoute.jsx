@@ -1,5 +1,5 @@
 // src/components/ProtectedRoute.jsx
-import { Navigate, Outlet } from 'react-router';
+import { Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 import Style from './ProtectedRoute.module.css';
 
