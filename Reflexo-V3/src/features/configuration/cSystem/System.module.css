@@ -1,0 +1,354 @@
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #121212;
+  align-items: center;  
+  justify-content: center;
+}
+
+.layout {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: transparent;
+}
+
+.mainContent {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box {
+  width: 720px;          /* ancho visual como en la referencia */
+  max-width: 720px;
+  padding: 30px;
+  border-radius: 10px;
+
+  color: white;
+
+  background-color: #1e1e1e;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45); /* sutil elevación */
+}
+
+/* Responsive: en pantallas pequeñas quepa sin scroll horizontal */
+@media (max-width: 800px) {
+  .box {
+    width: calc(100% - 48px);
+    max-width: calc(100% - 48px);
+    padding: 24px;
+  }
+  .input {
+    width: 100%;
+  }
+  .logoRow {
+    gap: 24px;
+  }
+}
+
+.section {
+  margin-bottom: 28px;
+}
+
+.label {
+  display: block;
+  margin-right: 15px;
+  margin-bottom: 12px; /* separa el rótulo del contenido */
+  font-size: 16px;
+  font-weight: bold;
+  color: #BBBBBB;
+}
+
+.logoRow {
+  display: flex;
+  gap: 40px; /* más separación entre Actual y Subir nuevo */
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 10px;
+}
+
+.logoBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logoTitle {
+  margin-bottom: 10px;
+  color: white;
+}
+
+/* (eliminado bloque .logoImage no usado) */
+
+/* Placeholder cuando no hay logo */
+.noLogo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #2a2a2a;
+  color: #cccccc;
+  font-size: 12px;
+  border: 2px dashed #4CAF50;
+}
+
+.nameRow {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 12px;
+}
+
+.input {
+  width: 70%;
+  height: 32px;
+  padding: 0 10px;
+  border: none;
+  border-radius: 4px;
+
+  color: white;
+
+  background-color: #333;
+}
+
+.input:hover {
+  background-color: #444; /* Color de fondo al hacer hover */
+}
+.input:focus {
+  background-color: #333;
+  outline: none;
+}
+
+.input::placeholder {
+  color: #aaa;
+}
+
+.changeBtn {
+  cursor: pointer;
+
+  height: 32px;
+  padding: 0 15px;
+  border: none;
+  border-radius: 4px;
+
+  font-size: 14px;
+  color: white;
+
+  background-color: #4CAF50;
+
+  transition: background-color 0.3s ease;
+}
+
+.changeBtn:hover {
+  color: white;
+  background-color: #20c55f; 
+}
+
+/* Botón flotante para cambiar tema */
+.themeToggle {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 10;
+  border-radius: 999px;
+  height: 40px;
+  padding: 0 14px;
+  background-color: transparent !important; /* transparente como se solicita */
+  border-color: transparent !important;
+  color: #ffffff !important; /* visible en oscuro */
+}
+.themeToggle:hover {
+  background-color: rgba(255,255,255,0.06) !important;
+  border-color: transparent !important;
+}
+
+/* ================= Light theme (pastel) overrides ================ */
+:global([data-theme="light"]) body {
+  background-color: #f6f7fb;
+  color: #333;
+}
+
+:global([data-theme="light"]) .ant-modal .ant-modal-content {
+  background-color: #ffffff !important;
+  color: #333 !important;
+  border: 1px solid #e6e8ef !important;
+}
+
+/* Caja y textos en modo claro */
+:global([data-theme="light"]) :local(.box) {
+  background-color: #ffffff;
+  color: #333;
+  /* Aún más intenso para distinguirlo mejor en claro */
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28), 0 8px 24px rgba(0, 0, 0, 0.12);
+  border: 1px solid #e2e5ee;
+}
+
+:global([data-theme="light"]) :local(.label) {
+  color: #555555;
+}
+
+:global([data-theme="light"]) :local(.input) {
+  background-color: #f0f2f5;
+  color: #333;
+}
+
+:global([data-theme="light"]) :local(.input)::placeholder {
+  color: #777;
+}
+
+/* Botón mantiene marca pero con sombra sutil en claro */
+:global([data-theme="light"]) :local(.changeBtn) {
+  box-shadow: 0 2px 6px rgba(76, 175, 80, 0.2);
+}
+
+/* Botón transparente adaptado al modo claro */
+:global([data-theme="light"]) :local(.themeToggle) {
+  color: #1f2937 !important; /* gris profundo en claro */
+}
+:global([data-theme="light"]) :local(.themeToggle):hover {
+  background-color: rgba(0,0,0,0.04) !important;
+}
+
+/* Títulos y textos específicos en claro */
+:global([data-theme="light"]) :local(.logoTitle) {
+  color: #1f2937; /* texto principal más oscuro */
+}
+:global([data-theme="light"]) :local(.noLogo) {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+/* (eliminados bloques .modalConfirmDark no usados) */
+
+/* GLOBAL override for AntD Modal (rendered in portal) */
+:global([data-theme="dark"] .ant-modal .ant-modal-content) {
+  background-color: #1e1e1e !important;
+  color: #fff !important;
+  border: 1px solid #2a2a2a !important;
+}
+
+:global([data-theme="dark"] .ant-modal .ant-modal-header) {
+  background-color: #1e1e1e !important;
+  border-bottom: 1px solid #2a2a2a !important;
+}
+
+:global([data-theme="dark"] .ant-modal .ant-modal-title) {
+  color: #fff !important;
+}
+
+:global([data-theme="dark"] .ant-modal .ant-modal-body) {
+  color: #fff !important;
+}
+
+:global([data-theme="dark"] .ant-modal .ant-modal-footer) {
+  border-top: 1px solid #2a2a2a !important;
+}
+
+/* AntD Confirm specific selectors (oscuro) */
+:global([data-theme="dark"] .ant-modal-confirm .ant-modal-confirm-title) {
+  color: #fff !important;
+}
+
+:global([data-theme="dark"] .ant-modal-confirm .ant-modal-confirm-content) {
+  color: #fff !important;
+}
+
+/* Global buttons inside modal */
+:global([data-theme="dark"] .ant-modal .ant-btn-primary) {
+  background-color: #4CAF50 !important;
+  border-color: #4CAF50 !important;
+}
+
+:global([data-theme="dark"] .ant-modal .ant-btn-primary:hover),
+:global([data-theme="dark"] .ant-modal .ant-btn-primary:focus) {
+  background-color: #20c55f !important;
+  border-color: #20c55f !important;
+}
+
+:global([data-theme="dark"] .ant-modal .ant-btn-default) {
+  background-color: #333 !important;
+  color: #fff !important;
+  border-color: #555 !important;
+}
+
+:global([data-theme="dark"] .ant-modal .ant-btn-default:hover),
+:global([data-theme="dark"] .ant-modal .ant-btn-default:focus) {
+  background-color: #444 !important;
+  color: #fff !important;
+  border-color: #666 !important;
+}
+
+/* ================= Light theme modal overrides ================= */
+:global([data-theme="light"] .ant-modal .ant-modal-content) {
+  background-color: #ffffff !important;
+  color: #2a2a2a !important;
+  border: 1px solid #e6e8ef !important;
+  border-radius: 10px !important;
+  box-shadow: 0 14px 36px rgba(0,0,0,0.18) !important;
+}
+
+:global([data-theme="light"] .ant-modal .ant-modal-header) {
+  background-color: #ffffff !important;
+  border-bottom: 1px solid #eef0f5 !important;
+}
+
+:global([data-theme="light"] .ant-modal .ant-modal-title),
+:global([data-theme="light"] .ant-modal-confirm .ant-modal-confirm-title) {
+  color: #1f2937 !important; /* gris profundo suave */
+}
+
+:global([data-theme="light"] .ant-modal .ant-modal-body),
+:global([data-theme="light"] .ant-modal-confirm .ant-modal-confirm-content) {
+  color: #374151 !important; /* gris medio para texto */
+}
+
+:global([data-theme="light"] .ant-modal .ant-modal-footer) {
+  border-top: 1px solid #eef0f5 !important;
+}
+
+:global([data-theme="light"] .ant-modal .ant-btn-primary) {
+  background-color: #4CAF50 !important;
+  border-color: #4CAF50 !important;
+  color: #fff !important;
+  box-shadow: 0 2px 6px rgba(76, 175, 80, 0.2) !important;
+}
+:global([data-theme="light"] .ant-modal .ant-btn-primary:hover),
+:global([data-theme="light"] .ant-modal .ant-btn-primary:focus) {
+  background-color: #20c55f !important;
+  border-color: #20c55f !important;
+}
+
+:global([data-theme="light"] .ant-modal .ant-btn-default) {
+  background-color: #f3f4f6 !important; /* gris pastel */
+  color: #374151 !important;
+  border-color: #e5e7eb !important;
+}
+:global([data-theme="light"] .ant-modal .ant-btn-default:hover),
+:global([data-theme="light"] .ant-modal .ant-btn-default:focus) {
+  background-color: #e9ebef !important;
+  color: #1f2937 !important;
+  border-color: #d1d5db !important;
+}
+
+/* Icono de warning/info en confirm modal en claro */
+:global([data-theme="light"]) .ant-modal-confirm .anticon {
+  color: #eab308 !important; /* amarillo pastel para advertencia */
+}
