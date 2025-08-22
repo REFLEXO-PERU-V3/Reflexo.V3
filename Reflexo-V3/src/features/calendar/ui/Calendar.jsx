@@ -4,7 +4,7 @@ import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import './CalendarOverrides.css';
 import styles from './Calendar.module.css';
-import { Modal, Spin, Flex, Badge, Tooltip } from 'antd';
+import { Modal, Spin, Badge, Switch } from 'antd';
 import { LoadingOutlined, CalendarOutlined, ClockCircleOutlined, UserOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import { useCalendar } from '../hook/calendarHook';
@@ -26,6 +26,15 @@ const Calendario = () => {
   const [selectedEvent, setSelectedEvent] = React.useState(null);
   const [date, setDate] = React.useState(new Date());
   const [view, setView] = React.useState('month');
+  const [theme, setTheme] = React.useState('dark');
+
+  React.useEffect(() => {
+    // Aplicar atributo de tema para permitir overrides CSS globales
+    document.body.setAttribute('data-theme', theme);
+    return () => {
+      document.body.removeAttribute('data-theme');
+    };
+  }, [theme]);
 
   const handleSelectEvent = (event) => {
     setSelectedEvent(event);
@@ -168,6 +177,14 @@ const Calendario = () => {
   return (
     <div className={styles.calendarContainer}>
       <div className={styles.mainContent}>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '12px 20px' }}>
+          <Switch
+            checked={theme === 'dark'}
+            onChange={(checked) => setTheme(checked ? 'dark' : 'light')}
+            checkedChildren="Oscuro"
+            unCheckedChildren="Claro"
+          />
+        </div>
         <div className={styles.calendarWrapper}>
           {loading && (
             <div className={styles.loadingOverlay}>

@@ -3,9 +3,9 @@
 .calendarContainer {
   display: flex;
   width: 100%; /* Asegura que ocupe todo el ancho disponible */
-  height: calc(100vh - 120px); /* Ajusta este offset al alto de tu header */
+  height: calc(110vh - 125px); /* Ajusta este offset al alto de tu header */
   font-family: 'Poppins', sans-serif;
-  background: #0c0c0c;
+  background: #0b0b0c; /* fondo oscuro por defecto (tema oscuro) */
 }
 
 /* Contenedor principal del calendario */
@@ -15,18 +15,40 @@
   flex-direction: column;
   width: 100%;
   min-height: 0; /* Importante para que los hijos flex puedan encajar */
+  
 }
 
 /* Calendario en sí */
 .calendarWrapper {
   overflow-x: hidden; /* Evitar scroll horizontal */
+  overflow-y: hidden; /* Recorta líneas/ sombreados residuales internos */
   flex: 1;
+  width: min(1600px, 98vw); /* más ancho y márgenes iguales */
+  margin: 0 auto; /* centrar */
+  align-self: center; /* asegurar centrado dentro de layout flex-col */
   padding: 20px;
   border-radius: 10px;
-  background-color: #121212;
+  background-color: #121315; /* tono distinto al container en oscuro */
   position: relative;
   height: 100%;
   min-height: 0; /* Evita overflow en vistas semana/día */
+  border: 1px solid #1f1f1f; /* borde sutil en oscuro */
+
+}
+
+/* Overlay superior para tapar cualquier raya (extiende visualmente el fondo) */
+.calendarWrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 10px; /* cubre hasta 10px de cualquier seam */
+  background: #121315; /* coincide con fondo oscuro del wrapper */
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  pointer-events: none;
+  z-index: 2;
 }
 
 /* Overlay de carga */
@@ -108,4 +130,45 @@
 
 .retryButton:active {
   transform: translateY(0);
+}
+
+ /* === Tema Claro: Overrides === */
+ body[data-theme='light'] .calendarContainer {
+  background: #ffffff; /* fondo completamente blanco */
+
+}
+
+body[data-theme='light'] .mainContent {
+  background: #ffffff;
+}
+
+ body[data-theme='light'] .calendarWrapper {
+  background-color: #f9fafb; /* tono blanco muy claro para contraste suave */
+  border: 1px solid #e6e7eb; /* borde sutil en claro */
+}
+body[data-theme='light'] .calendarWrapper::before {
+  background: #f9fafb; /* mismo tono del wrapper claro */
+}
+
+body[data-theme='light'] .loadingOverlay {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+body[data-theme='light'] .loadingOverlay p {
+  color: #179a3e;
+  text-shadow: 0 0 8px rgba(23, 154, 62, 0.35);
+}
+
+body[data-theme='light'] .errorContainer {
+  background: linear-gradient(135deg, #ffffff 0%, #f7f7f9 100%);
+}
+
+body[data-theme='light'] .errorContent {
+  background: rgba(255, 0, 0, 0.03);
+  border: 1px solid #e6e7eb;
+  box-shadow: 0 8px 24px rgba(17, 18, 20, 0.08);
+}
+
+body[data-theme='light'] .errorContent p {
+  color: #33363f;
 }
