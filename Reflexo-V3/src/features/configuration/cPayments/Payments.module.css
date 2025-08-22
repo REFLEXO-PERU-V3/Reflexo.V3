@@ -1,18 +1,18 @@
 /* Variables CSS para colores y valores reutilizables - Tema Claro */
 :root {
     /* Colores primarios */
-    --primary-blue: #0066FF;
-    --primary-blue-hover: #0052CC;
-    --warning-orange: #FFAA00;
-    --warning-orange-hover: #E69500;
-    --danger-red: #FF3333;
-    --danger-red-hover: #E61A1A;
-    --success-green: #4CAF50;
-    --success-green-hover: #3d8b40;
+    --primary-blue: #1890ff;
+    --primary-blue-hover: #40a9ff;
+    --warning-orange: #faad14;
+    --warning-orange-hover: #ffc53d;
+    --danger-red: #ff4d4f;
+    --danger-red-hover: #ff7875;
+    --success-green: #52c41a;
+    --success-green-hover: #73d13d;
     
     /* Estados */
-    --status-enabled: rgba(20, 245, 140, 0.23);
-    --status-disabled: rgba(255, 77, 79, 0.23);
+    --status-enabled: #2E7D32;
+    --status-disabled: #8B4513;
     
     /* Colores de fondo y texto - Tema Claro */
     --background-primary: #FFFFFF;
@@ -31,38 +31,33 @@
     --font-weight-medium: 500;
     --font-weight-semibold: 600;
     --text-white: #fff;
-    
-    /* Valores para configuración de tema */
-    --button-control-height: 40px;
-    --popconfirm-border-radius: 8px;
-    --popconfirm-padding: 12px;
 }
 
 /* Variables CSS para colores y valores reutilizables - Tema Oscuro */
 [data-theme="dark"] {
-    /* Colores primarios (se mantienen igual) */
-    --primary-blue: #0066FF;
-    --primary-blue-hover: #0052CC;
-    --warning-orange: #FFAA00;
-    --warning-orange-hover: #E69500;
-    --danger-red: #FF3333;
-    --danger-red-hover: #E61A1A;
-    --success-green: #4CAF50;
-    --success-green-hover: #3d8b40;
+    /* Colores primarios */
+    --primary-blue: #1890ff;
+    --primary-blue-hover: #40a9ff;
+    --warning-orange: #faad14;
+    --warning-orange-hover: #ffc53d;
+    --danger-red: #ff4d4f;
+    --danger-red-hover: #ff7875;
+    --success-green: #52c41a;
+    --success-green-hover: #73d13d;
     
-    /* Estados (se mantienen igual) */
-    --status-enabled: rgba(20, 245, 140, 0.23);
-    --status-disabled: rgba(255, 77, 79, 0.23);
+    /* Estados */
+    --status-enabled: #2E7D32;
+    --status-disabled: #8B4513;
     
     /* Colores de fondo y texto - Tema Oscuro */
     --background-primary: #2a2a2a;
-    --background-secondary: #1e1e1e;
-    --background-tertiary: #1a1a1a;
+    --background-secondary: #242323;
+    --background-tertiary: #2a2a2a;
     --text-primary: #ffffff;
     --text-secondary: #b0b0b0;
-    --text-placeholder: #666666;
-    --border-primary: #555555;
-    --border-secondary: #666666;
+    --text-placeholder: #2a2a2a;
+    --border-primary: #2a2a2a;
+    --border-secondary: #2a2a2a;
     --border-dark: #444444;
     
     /* Valores de diseño (se mantienen igual) */
@@ -71,90 +66,102 @@
     --font-weight-medium: 500;
     --font-weight-semibold: 600;
     --text-white: #fff;
-    
-    /* Valores para configuración de tema (se mantienen igual) */
-    --button-control-height: 40px;
-    --popconfirm-border-radius: 8px;
-    --popconfirm-padding: 12px;
 }
 
-/* Clases base reutilizables */
-.baseStatus {
+/* Estados de estado */
+.statusEnabled {
     display: inline-block;
     padding: 4px 12px;
     border-radius: var(--border-radius-lg);
     font-size: 12px;
     font-weight: var(--font-weight-medium);
     color: var(--text-white);
-}
-
-.baseButton {
-    border: none !important;
-    border-radius: var(--border-radius-sm) !important;
-    font-weight: var(--font-weight-medium) !important;
-    color: var(--text-white) !important;
-}
-
-.baseButton:hover {
-    color: var(--text-white) !important;
-}
-
-/* Estados de estado */
-.statusEnabled {
-    composes: baseStatus;
     background-color: var(--status-enabled);
+    color: white !important;
+    min-width: 100px !important;
+    text-align: center !important;
 }
 
 .statusDisabled {
-    composes: baseStatus;
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: var(--border-radius-lg);
+    font-size: 12px;
+    font-weight: var(--font-weight-medium);
+    color: var(--text-white);
     background-color: var(--status-disabled);
-}
-
-/* Botones de acción */
-.editButton {
-    composes: baseButton;
-    background-color: var(--primary-blue) !important;
-}
-
-.editButton:hover {
-    composes: baseButton;
-    background-color: var(--primary-blue-hover) !important;
-}
-
-.deactivateButton {
-    composes: baseButton;
-    background-color: var(--warning-orange) !important;
-}
-
-.deactivateButton:hover {
-    composes: baseButton;
-    background-color: var(--warning-orange-hover) !important;
-}
-
-.deleteButton {
-    composes: baseButton;
-    background-color: var(--danger-red) !important;
-}
-
-.deleteButton:hover {
-    composes: baseButton;
-    background-color: var(--danger-red-hover) !important;
+    color: white !important;
+    min-width: 100px !important;
+    text-align: center !important;
 }
 
 .addButton {
-    height: 36px !important;
+    height: 32px !important;
     padding: 4px 16px !important;
     border-color: var(--success-green) !important;
-    border-radius: var(--border-radius-sm) !important;
+    border-radius: 6px !important;
     font-weight: var(--font-weight-medium) !important;
-    color: var(--text-white) !important;
+    color: white !important;
     background-color: var(--success-green) !important;
+    font-size: 13px !important;
+    min-width: 80px !important;
 }
 
 .addButton:hover {
     border-color: var(--success-green-hover) !important;
-    color: var(--text-white) !important;
+    color: white !important;
     background-color: var(--success-green-hover) !important;
+}
+
+.actionButton {
+    height: 28px !important;
+    padding: 2px 12px !important;
+    border-radius: 4px !important;
+    font-weight: var(--font-weight-medium) !important;
+    font-size: 12px !important;
+    min-width: 60px !important;
+    line-height: 1.2 !important;
+}
+
+.actionButton:hover {
+    opacity: 0.8 !important;
+}
+
+/* Estilos para botones de acción específicos */
+.editActionButton {
+    background-color: #1890ff !important;
+    border-color: #1890ff !important;
+    color: white !important;
+}
+
+.editActionButton:hover {
+    background-color: #40a9ff !important;
+    border-color: #40a9ff !important;
+    color: white !important;
+}
+
+.deactivateActionButton {
+    background-color: #faad14 !important;
+    border-color: #faad14 !important;
+    color: white !important;
+}
+
+.deactivateActionButton:hover {
+    background-color: #ffc53d !important;
+    border-color: #ffc53d !important;
+    color: white !important;
+}
+
+.restoreActionButton {
+    background-color: #faad14 !important;
+    border-color: #faad14 !important;
+    color: white !important;
+}
+
+.restoreActionButton:hover {
+    background-color: #ffc53d !important;
+    border-color: #ffc53d !important;
+    color: white !important;
 }
 
 /* Layout */
@@ -162,13 +169,42 @@
     display: flex !important;
     flex-direction: column !important;
     gap: 24px !important;
-    justify-content: center !important;
-    max-width: calc(100% - 200px) !important;
-    height: 100% !important;
-    margin: 0 auto !important;
-    padding-top: 20px !important;
-    background-color: var(--background-primary);
+    justify-content: flex-start !important;
+    width: 100% !important;
+    max-width: 1200px !important;
+    min-height: auto !important;
+    padding: 20px !important;
+    background-color: var(--background-primary) !important;
     color: var(--text-primary);
+    border-radius: 12px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.3s ease !important;
+    margin: 0 auto !important;
+}
+
+.pageHeader {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-bottom: 20px !important;
+    padding-bottom: 16px !important;
+    border-bottom: 1px solid var(--border-secondary) !important;
+}
+
+.pageTitle {
+    margin: 0 !important;
+    font-size: 1.8rem !important;
+    font-weight: var(--font-weight-semibold) !important;
+    color: #4CAF50 !important;
+    transition: color 0.3s ease !important;
+}
+
+.themeButton {
+    height: 36px !important;
+    padding: 0 16px !important;
+    border-radius: 6px !important;
+    font-weight: var(--font-weight-medium) !important;
+    transition: all 0.3s ease !important;
 }
 
 .sectionHeader {
@@ -176,14 +212,19 @@
     align-items: center !important;
     justify-content: space-between !important;
     margin-bottom: 16px !important;
-    background-color: var(--background-primary);
+    padding: 16px 20px !important;
+    background-color: var(--background-secondary) !important;
+    border-radius: 8px !important;
+    border: 1px solid var(--border-secondary) !important;
+    transition: all 0.3s ease !important;
 }
 
 .sectionTitle {
     margin: 0 !important;
-    font-size: 20px !important;
+    font-size: 18px !important;
     font-weight: var(--font-weight-semibold) !important;
     color: var(--text-primary);
+    transition: color 0.3s ease !important;
 }
 
 /* Formularios */
@@ -203,17 +244,6 @@
     box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2) !important;
 }
 
-.statusSwitch {
-    width: 110px !important;
-}
-
-/* Switch personalizado */
-.statusSwitch .ant-switch-inner {
-    font-size: 12px !important;
-    font-weight: var(--font-weight-medium) !important;
-    color: var(--text-primary) !important;
-}
-
 /* Sobrescribir estilos de Ant Design */
 .ant-btn:not(.ant-btn-link):hover, 
 .ant-btn:not(.ant-btn-link):focus {
@@ -225,10 +255,25 @@
 /* Estilos adicionales para tema oscuro */
 [data-theme="dark"] .container {
     background-color: var(--background-primary);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .pageHeader {
+    border-bottom-color: var(--border-primary);
+}
+
+[data-theme="dark"] .pageTitle {
+    color: #4CAF50 !important;
+}
+
+[data-theme="dark"] .themeButton {
+    background-color: #666 !important;
+    border-color: #666 !important;
 }
 
 [data-theme="dark"] .sectionHeader {
-    background-color: var(--background-primary);
+    background-color: var(--background-secondary);
+    border-color: var(--border-primary);
 }
 
 [data-theme="dark"] .sectionTitle {
@@ -245,6 +290,304 @@
     color: var(--text-placeholder) !important;
 }
 
-[data-theme="dark"] .statusSwitch .ant-switch-inner {
-    color: var(--text-primary) !important;
+/* Estilos para la barra de desplazamiento - Tema Claro */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--background-tertiary);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-primary);
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--border-dark);
+}
+
+::-webkit-scrollbar-corner {
+    background: var(--background-tertiary);
+}
+
+/* Estilos para la barra de desplazamiento - Tema Oscuro */
+[data-theme="dark"] ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-track {
+    background: var(--background-tertiary);
+    border-radius: 4px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+    background: var(--border-primary);
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+    background: var(--border-secondary);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-corner {
+    background: var(--background-tertiary);
+}
+
+/* Estilos para modales en tema oscuro */
+[data-theme="dark"] .ant-modal-mask {
+    background-color: rgba(0, 0, 0, 0.95) !important;
+}
+
+[data-theme="dark"] .ant-modal-content {
+    background-color: #333333 !important;
+    border: 1px solid #4CAF50 !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.95) !important;
+    backdrop-filter: none !important;
+    opacity: 1 !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+}
+
+[data-theme="dark"] .ant-modal-header {
+    background-color: #333333 !important;
+    border-bottom: 1px solid #4CAF50 !important;
+    padding: 16px 24px !important;
+    margin: 0 !important;
+}
+
+[data-theme="dark"] .ant-modal-title {
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .ant-modal-close {
+    color: #b0b0b0 !important;
+}
+
+[data-theme="dark"] .ant-modal-close:hover {
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .ant-modal-body {
+    background-color: #333333 !important;
+    color: #ffffff !important;
+    padding: 24px !important;
+    margin: 0 !important;
+}
+
+[data-theme="dark"] .ant-modal-footer {
+    background-color: #333333 !important;
+    border-top: 1px solid #4CAF50 !important;
+    padding: 16px 24px !important;
+    margin: 0 !important;
+}
+
+[data-theme="dark"] .ant-form-item-label > label {
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .ant-input {
+    background-color: #555555 !important;
+    border-color: #666666 !important;
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .ant-input:focus,
+[data-theme="dark"] .ant-input-focused {
+    border-color: #4CAF50 !important;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2) !important;
+}
+
+[data-theme="dark"] .ant-input::placeholder {
+    color: #aaaaaa !important;
+}
+
+[data-theme="dark"] .ant-switch {
+    background-color: #555555 !important;
+}
+
+[data-theme="dark"] .ant-switch-checked {
+    background-color: #4CAF50 !important;
+}
+
+[data-theme="dark"] .ant-switch-inner {
+    color: #ffffff !important;
+}
+
+/* Estilos para el formulario dentro del modal en tema oscuro */
+[data-theme="dark"] .ant-modal .ant-form {
+    background-color: #333333 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+[data-theme="dark"] .ant-modal .ant-form-item {
+    background-color: #333333 !important;
+    margin-bottom: 16px !important;
+}
+
+[data-theme="dark"] .ant-modal .ant-form-item-label {
+    background-color: #333333 !important;
+}
+
+[data-theme="dark"] .ant-modal .ant-form-item-control {
+    background-color: #333333 !important;
+}
+
+/* Estilos para botones del modal en tema oscuro */
+[data-theme="dark"] .ant-modal-footer .ant-btn {
+    border-radius: 6px !important;
+    font-weight: 500 !important;
+    height: 32px !important;
+    padding: 4px 16px !important;
+}
+
+[data-theme="dark"] .ant-modal-footer .ant-btn-default {
+    background-color: #d2a0a0 !important;
+    border-color: #4CAF50 !important;
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .ant-modal-footer .ant-btn-default:hover {
+    background-color: #444444 !important;
+    border-color: #4CAF50 !important;
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .ant-modal-footer .ant-btn-primary {
+    background-color: #4CAF50 !important;
+    border-color: #4CAF50 !important;
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .ant-modal-footer .ant-btn-primary:hover {
+    background-color: #45a049 !important;
+    border-color: #45a049 !important;
+    color: #ffffff !important;
+}
+
+/* Estilos para modales en tema claro */
+.ant-modal-mask {
+    background-color: rgba(0, 0, 0, 0.9) !important;
+}
+
+.ant-modal-content {
+    background-color: #ffffff !important;
+    border: 1px solid #d9d9d9 !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.9) !important;
+    backdrop-filter: none !important;
+    opacity: 1 !important;
+}
+
+.ant-modal-header {
+    background-color: #ffffff !important;
+    border-bottom: 1px solid #d9d9d9 !important;
+}
+
+.ant-modal-title {
+    color: #333333 !important;
+}
+
+.ant-modal-close {
+    color: #999999 !important;
+}
+
+.ant-modal-close:hover {
+    color: #333333 !important;
+}
+
+.ant-modal-body {
+    background-color: #ffffff !important;
+    color: #333333 !important;
+}
+
+.ant-modal-footer {
+    background-color: #ffffff !important;
+    border-top: 1px solid #d9d9d9 !important;
+    padding: 16px 24px !important;
+    margin: 0 !important;
+}
+
+/* Estilos para el formulario dentro del modal en tema claro */
+.ant-modal .ant-form {
+    background-color: #ffffff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.ant-modal .ant-form-item {
+    background-color: #ffffff !important;
+    margin-bottom: 16px !important;
+}
+
+.ant-modal .ant-form-item-label {
+    background-color: #ffffff !important;
+}
+
+.ant-modal .ant-form-item-control {
+    background-color: #ffffff !important;
+}
+
+/* Estilos para tablas - Tema Claro */
+.ant-table {
+    border: 1px solid #d9d9d9 !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+}
+
+.ant-table-thead > tr > th {
+    background-color: #fafafa !important;
+    border-bottom: 2px solid #d9d9d9 !important;
+    border-right: 1px solid #d9d9d9 !important;
+    color: #333333 !important;
+    font-weight: 600 !important;
+}
+
+.ant-table-tbody > tr > td {
+    border-bottom: 1px solid #f0f0f0 !important;
+    border-right: 1px solid #f0f0f0 !important;
+}
+
+.ant-table-tbody > tr:hover > td {
+    background-color: #f5f5f5 !important;
+}
+
+.ant-table-tbody > tr:nth-child(even) > td {
+    background-color: #fafafa !important;
+}
+
+/* Estilos para tablas - Tema Oscuro */
+[data-theme="dark"] .ant-table {
+    border: 1px solid #444444 !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+}
+
+[data-theme="dark"] .ant-table-thead > tr > th {
+    background-color: #2a2a2a !important;
+    border-bottom: 2px solid #444444 !important;
+    border-right: 1px solid #444444 !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+}
+
+[data-theme="dark"] .ant-table-tbody > tr > td {
+    border-bottom: 1px solid #333333 !important;
+    border-right: 1px solid #333333 !important;
+    background-color: #1a1a1a !important;
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .ant-table-tbody > tr:hover > td {
+    background-color: #2a2a2a !important;
+}
+
+[data-theme="dark"] .ant-table-tbody > tr:nth-child(even) > td {
+    background-color: #242424 !important;
 }

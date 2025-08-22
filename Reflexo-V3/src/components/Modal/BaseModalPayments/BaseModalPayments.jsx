@@ -10,46 +10,48 @@ import {
 } from 'antd';
 import { useTheme } from '../../../context/ThemeContext';
 
-// Constantes para colores del tema claro
-const LIGHT_THEME_COLORS = {
-  primary: '#4CAF50',
-  primaryHover: '#388E3C',
-  primaryLight: '#66BB6A',
-  background: '#FFFFFF',
-  backgroundDark: '#FAFAFA',
-  backgroundDarker: '#F5F5F5',
-  border: '#D9D9D9',
-  borderLight: '#E8E8E8',
-  borderDark: '#BFBFBF',
-  borderSecondary: '#F0F0F0',
-  text: '#333333',
-  textSecondary: '#666666',
-  textPlaceholder: '#BFBFBF',
-  textDisabled: '#999999',
-  error: '#ff4d4f',
-  white: '#ffffff',
-  transparent: 'transparent',
-};
-
-// Constantes para colores del tema oscuro
-const DARK_THEME_COLORS = {
-  primary: '#4CAF50',
-  primaryHover: '#388E3C',
-  primaryLight: '#66BB6A',
-  background: '#2a2a2a',
-  backgroundDark: '#1e1e1e',
-  backgroundDarker: '#1a1a1a',
-  border: '#555',
-  borderLight: '#666',
-  borderDark: '#444',
-  borderSecondary: '#333',
-  text: 'white',
-  textSecondary: '#b0b0b0',
-  textPlaceholder: '#666',
-  textDisabled: '#999999',
-  error: '#ff4d4f',
-  white: '#ffffff',
-  transparent: 'transparent',
+// Función helper para obtener colores del tema actual
+const getThemeColors = (isDark) => {
+  if (isDark) {
+    return {
+      primary: '#4CAF50',
+      primaryHover: '#388E3C',
+      primaryLight: '#66BB6A',
+      background: '#333333',
+      backgroundDark: '#1e1e1e',
+      backgroundDarker: '#1a1a1a',
+      border: '#555',
+      borderLight: '#666',
+      borderDark: '#444',
+      borderSecondary: '#333',
+      text: 'white',
+      textSecondary: '#b0b0b0',
+      textPlaceholder: '#666',
+      textDisabled: '#999999',
+      error: '#ff4d4f',
+      white: '#ffffff',
+    };
+  } else {
+    return {
+      primary: '#4CAF50',
+      primaryHover: '#388E3C',
+      primaryLight: '#66BB6A',
+      background: '#FFFFFF',
+      backgroundDark: '#FAFAFA',
+      backgroundDarker: '#F5F5F5',
+      border: '#D9D9D9',
+      borderLight: '#E8E8E8',
+      borderDark: '#BFBFBF',
+      borderSecondary: '#F0F0F0',
+      text: '#333333',
+      textSecondary: '#666666',
+      textPlaceholder: '#BFBFBF',
+      textDisabled: '#999999',
+      error: '#ff4d4f',
+      white: '#ffffff',
+      transparent: 'transparent',
+    };
+  }
 };
 
 // Constantes para espaciado y dimensiones
@@ -79,36 +81,8 @@ const EFFECTS = {
   maskOpacity: 'rgba(0, 0, 0, 0.7)',
 };
 
-// Función helper para crear estilos de botón
-const createButtonStyles = (type = 'default') => {
-  const baseStyles = {
-    padding: `${SPACING.xs}px ${SPACING.xl}px`,
-    height: DIMENSIONS.buttonHeight,
-    borderRadius: DIMENSIONS.borderRadius,
-    fontWeight: 500,
-  };
-
-  if (type === 'primary') {
-    return {
-      ...baseStyles,
-      backgroundColor: THEME_COLORS.primary,
-      borderColor: THEME_COLORS.primary,
-    };
-  }
-
-  return {
-    ...baseStyles,
-    border: `1px solid ${THEME_COLORS.primary}`,
-    color: THEME_COLORS.primary,
-    backgroundColor: THEME_COLORS.transparent,
-  };
-};
-
-// Función helper para obtener colores del tema actual
-const getThemeColors = (isDark) => isDark ? DARK_THEME_COLORS : LIGHT_THEME_COLORS;
-
 // Función helper para crear estilos de input
-const createInputStyles = () => ({
+const createInputStyles = (THEME_COLORS) => ({
   colorBgContainer: THEME_COLORS.background,
   colorText: THEME_COLORS.text,
   colorTextPlaceholder: THEME_COLORS.textPlaceholder,
@@ -127,22 +101,22 @@ const createInputStyles = () => ({
 });
 
 // Función helper para crear estilos de modal
-const createModalStyles = () => ({
+const createModalStyles = (THEME_COLORS, isDark) => ({
   header: {
     borderBottom: `1px solid ${THEME_COLORS.borderDark}`,
     padding: `${SPACING.sm}px ${SPACING.md}px`,
     marginBottom: SPACING.sm,
-    backgroundColor: THEME_COLORS.transparent,
+    backgroundColor: isDark ? '#333333' : THEME_COLORS.background,
   },
   body: {
     padding: `0 ${SPACING.md}px ${SPACING.sm}px`,
-    backgroundColor: THEME_COLORS.transparent,
+    backgroundColor: isDark ? '#333333' : THEME_COLORS.background,
   },
   footer: {
     borderTop: `1px solid ${THEME_COLORS.borderDark}`,
     padding: `${SPACING.sm}px ${SPACING.lg}px`,
     marginTop: SPACING.sm,
-    backgroundColor: THEME_COLORS.transparent,
+    backgroundColor: isDark ? '#333333' : THEME_COLORS.background,
   },
   mask: {
     backgroundColor: EFFECTS.maskOpacity,
@@ -150,7 +124,7 @@ const createModalStyles = () => ({
 });
 
 const BaseModal = ({
-  visible,
+  open,
   onCancel,
   onOk,
   title,
@@ -160,20 +134,20 @@ const BaseModal = ({
   cancelText = 'Cancelar',
   width = 520,
   initialValues,
-  form,
 }) => {
+  const [form] = Form.useForm();
   const { theme } = useTheme();
   const isDark = theme === 'dark';
   const THEME_COLORS = getThemeColors(isDark);
 
   // Efecto para manejar valores iniciales del formulario
   React.useEffect(() => {
-    if (visible && initialValues) {
+    if (open && initialValues) {
       form.setFieldsValue(initialValues);
-    } else if (visible) {
+    } else if (open) {
       form.resetFields();
     }
-  }, [visible, initialValues, form]);
+  }, [open, initialValues, form]);
 
   // Función callback para manejar la validación y envío
   const handleOk = React.useCallback(async () => {
@@ -188,7 +162,7 @@ const BaseModal = ({
   // Efecto para manejar eventos de teclado
   React.useEffect(() => {
     const handleKeyDown = (event) => {
-      if (!visible) return;
+      if (!open) return;
 
       if (event.key === 'Enter') {
         event.preventDefault();
@@ -199,14 +173,14 @@ const BaseModal = ({
       }
     };
 
-    if (visible) {
+    if (open) {
       document.addEventListener('keydown', handleKeyDown);
     }
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [visible, onCancel, handleOk]);
+  }, [open, onCancel, handleOk]);
 
   // Configuración del tema consolidada
   const themeConfig = {
@@ -226,9 +200,9 @@ const BaseModal = ({
     components: {
       Modal: {
         contentBg: isDark 
-          ? `linear-gradient(145deg, ${THEME_COLORS.background} 0%, ${THEME_COLORS.backgroundDark} 100%)`
+          ? '#333333'
           : THEME_COLORS.background,
-        headerBg: THEME_COLORS.transparent,
+        headerBg: isDark ? '#333333' : THEME_COLORS.background,
         titleColor: THEME_COLORS.text,
         colorText: THEME_COLORS.textSecondary,
         borderRadiusLG: DIMENSIONS.borderRadiusModal,
@@ -237,9 +211,9 @@ const BaseModal = ({
         colorBgElevated: THEME_COLORS.background,
         colorBorder: THEME_COLORS.borderDark,
       },
-      Input: createInputStyles(),
+      Input: createInputStyles(THEME_COLORS),
       'Input.Password': {
-        ...createInputStyles(),
+        ...createInputStyles(THEME_COLORS),
         colorIcon: THEME_COLORS.textPlaceholder,
         colorIconHover: THEME_COLORS.primary,
       },
@@ -281,14 +255,13 @@ const BaseModal = ({
     <ConfigProvider theme={themeConfig}>
       <Modal
         title={title}
-        visible={visible}
+        open={open}
         onCancel={onCancel}
         footer={
           <Space size={SPACING.sm}>
             <Button
               onClick={onCancel}
               disabled={confirmLoading}
-              style={createButtonStyles('default')}
               className="modal-cancel-btn"
             >
               {cancelText}
@@ -297,7 +270,6 @@ const BaseModal = ({
               type="primary"
               loading={confirmLoading}
               onClick={handleOk}
-              style={createButtonStyles('primary')}
               className="modal-ok-btn"
             >
               {okText}
@@ -306,8 +278,8 @@ const BaseModal = ({
         }
         width={width}
         centered
-        destroyOnClose
-        styles={createModalStyles()}
+        destroyOnHidden
+        styles={createModalStyles(THEME_COLORS, isDark)}
       >
         <Form
           form={form}

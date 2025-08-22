@@ -63,9 +63,8 @@ const getNameLabel = (type) => `Nombre del ${getTypeName(type)}`;
 const getNamePlaceholder = (type) => `Ingrese el nombre del ${getTypeName(type)}`;
 
 const Payments = () => {
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
-  const [form] = Form.useForm();
+  const { theme, toggleTheme } = useTheme();
+  const isDark = theme === 'dark';  
   const {
     paymentTypes,
     loading: loadingPayments,
@@ -84,7 +83,7 @@ const Payments = () => {
     refreshPrices,
   } = usePrices();
 
-  const [modalVisible, setModalVisible] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const [currentRecord, setCurrentRecord] = useState(null);
   const [modalType, setModalType] = useState('');
   const [action, setAction] = useState('');
@@ -113,34 +112,12 @@ const Payments = () => {
     };
   };
 
-  // Función helper para resetear el formulario
-  const resetForm = () => {
-    form.resetFields();
-  };
-
   // Función helper para abrir el modal
   const openModal = (newAction, newModalType, record = null) => {
     setAction(newAction);
     setModalType(newModalType);
     setCurrentRecord(record);
-    resetForm();
-    setModalVisible(true);
-
-    // Usar setTimeout para asegurar que el modal se haya renderizado
-    setTimeout(() => {
-      if (newAction === ACTIONS.EDIT && record) {
-        const formData = {
-          name: record.name,
-          status: record.status === STATUS.ENABLED,
-        };
-
-        if (record.price !== undefined) {
-          formData.price = parseFloat(record.price);
-        }
-
-        form.setFieldsValue(formData);
-      }
-    }, 0);
+    setModalOpen(true);
   };
 
   // Función helper para manejar acciones del modal
@@ -244,19 +221,13 @@ const Payments = () => {
 
   // Función helper para cancelar el modal
   const handleModalCancel = () => {
-    setModalVisible(false);
+    setModalOpen(false);
     setCurrentRecord(null);
     setAction('');
     setModalType('');
-    resetForm();
   };
 
-  // Efecto para resetear el formulario cuando cambia el modal
-  useEffect(() => {
-    if (!modalVisible) {
-      resetForm();
-    }
-  }, [modalVisible]);
+
 
   // Columnas para tipos de pago
   const paymentTypeColumns = [
@@ -312,6 +283,7 @@ const Payments = () => {
         <h2 className={styles.sectionTitle}>{title}</h2>
         <Button
           type="primary"
+          size="small"
           className={styles.addButton}
           onClick={onCreate}
         >
@@ -340,7 +312,7 @@ const Payments = () => {
         placeholder={getNamePlaceholder(modalType)}
         onChange={(e) => {
           const value = e.target.value.toUpperCase();
-          form.setFieldValue('name', value);
+          e.target.value = value;
         }}
       />
     </Form.Item>
@@ -374,10 +346,10 @@ const Payments = () => {
 
   // Función helper para renderizar botones de acción
   const renderActionButtons = (record, type) => (
-    <Space size="small">
+    <Space size={4}>
       <Button
-        type="primary"
         size="small"
+        className={`${styles.actionButton} ${styles.editActionButton}`}
         onClick={() => handleAction(ACTIONS.EDIT, record)}
       >
         Editar
@@ -389,63 +361,81 @@ const Payments = () => {
           okText="Sí"
           cancelText="No"
         >
-          <Button type="default" size="small" danger>
+          <Button 
+            size="small" 
+            className={`${styles.actionButton} ${styles.deactivateActionButton}`}
+          >
             Desactivar
           </Button>
         </Popconfirm>
       ) : (
-        <Button
-          type="default"
-          size="small"
-          onClick={() => handleActivate(record, type)}
-        >
-          Activar
-        </Button>
+                 <Button
+           size="small"
+           className={`${styles.actionButton} ${styles.restoreActionButton}`}
+           onClick={() => handleActivate(record, type)}
+         >
+           Restaurar
+         </Button>
       )}
     </Space>
   );
 
   // Configuración del tema dinámico
-  const getThemeConfig = () => ({
-    token: {
-      colorPrimary: '#4CAF50',
-      colorSuccess: '#52C41A',
-      colorWarning: '#FAAD14',
-      colorError: '#FF4D4F',
-      borderRadius: 6,
-      colorBgContainer: isDark ? '#2a2a2a' : '#FFFFFF',
-      colorText: isDark ? '#ffffff' : '#333333',
-      colorTextLightSolid: '#ffffff',
-    },
-    components: {
-      Button: {
-        primaryShadow: 'none',
-        controlHeight: 40,
-        borderRadius: 6,
-        colorPrimary: '#4CAF50',
-        colorBgContainer: isDark ? '#333333' : '#ffffff',
-        colorText: isDark ? '#ffffff' : '#333333',
-        colorBorder: isDark ? '#555555' : '#d9d9d9',
-      },
-      Table: {
-        headerBg: isDark ? '#1e1e1e' : '#FAFAFA',
-        headerColor: isDark ? '#ffffff' : '#333333',
-        colorBgContainer: isDark ? '#2a2a2a' : '#ffffff',
-        colorText: isDark ? '#ffffff' : '#333333',
-        colorBorder: isDark ? '#555555' : '#d9d9d9',
-      },
-      Popconfirm: {
+  const getThemeConfig = () => {
+    const isDark = theme === 'dark';
+    return {
+      token: {
+        colorPrimary: '#52c41a',
+        colorSuccess: '#52c41a',
+        colorWarning: '#faad14',
+        colorError: '#ff4d4f',
         borderRadius: 8,
-        padding: 12,
-        colorBgElevated: isDark ? '#1e1e1e' : '#ffffff',
+        colorBgContainer: isDark ? '#2a2a2a' : '#FFFFFF',
         colorText: isDark ? '#ffffff' : '#333333',
-      },
-      Popover: {
+        colorTextLightSolid: '#ffffff',
+        colorBgLayout: isDark ? '#1a1a1a' : '#f5f5f5',
         colorBgElevated: isDark ? '#1e1e1e' : '#ffffff',
-        colorText: isDark ? '#ffffff' : '#333333',
+        colorBorder: isDark ? '#555555' : '#d9d9d9',
       },
-    },
-  });
+      components: {
+        Button: {
+          primaryShadow: 'none',
+          controlHeight: 32,
+          controlHeightSM: 28,
+          borderRadius: 8,
+          borderRadiusSM: 6,
+          colorPrimary: '#52c41a',
+          colorBgContainer: isDark ? '#333333' : '#ffffff',
+          colorText: isDark ? '#ffffff' : '#333333',
+          colorBorder: isDark ? '#555555' : '#d9d9d9',
+        },
+        Table: {
+          headerBg: isDark ? '#1e1e1e' : '#FAFAFA',
+          headerColor: isDark ? '#ffffff' : '#333333',
+          colorBgContainer: isDark ? '#2a2a2a' : '#ffffff',
+          colorText: isDark ? '#ffffff' : '#333333',
+          colorBorder: isDark ? '#555555' : '#d9d9d9',
+          borderRadius: 8,
+          headerBorderRadius: 8,
+        },
+        Popconfirm: {
+          borderRadius: 8,
+          padding: 12,
+          colorBgElevated: isDark ? '#1e1e1e' : '#ffffff',
+          colorText: isDark ? '#ffffff' : '#333333',
+        },
+        Popover: {
+          colorBgElevated: isDark ? '#1e1e1e' : '#ffffff',
+          colorText: isDark ? '#ffffff' : '#333333',
+        },
+        Modal: {
+          colorBgElevated: isDark ? '#2a2a2a' : '#ffffff',
+          colorText: isDark ? '#ffffff' : '#333333',
+          borderRadius: 12,
+        },
+      },
+    };
+  };
 
   return (
     <ConfigProvider theme={getThemeConfig()}>
@@ -470,14 +460,13 @@ const Payments = () => {
 
         {/* Modal con BaseModal */}
         <BaseModal
-          visible={modalVisible}
+          open={modalOpen}
           onCancel={handleModalCancel}
           onOk={handleSubmit}
           title={getModalTitle(action, modalType)}
           okText={getOkText(action)}
           cancelText="Cancelar"
           width={500}
-          form={form}
           initialValues={getInitialValues()}
         >
           {renderNameField()}
