@@ -1,62 +1,51 @@
-// Importación de componentes de Ant Design y React
 import { Button, Col, ConfigProvider, Form, Row } from 'antd';
 import { useState, forwardRef } from 'react';
-
-// Importación de estilos CSS y componente personalizado de entrada
+import { useTheme, themeTokensDark, themeTokensLight } from '../../context/ThemeContext';
 import styles from '../Form/Form.module.css';
 import InputField from '../Input/Input';
 
-// Hook de formulario de Ant Design
 const { useForm } = Form;
 
-// Componente principal del formulario, usando forwardRef para permitir referencias externas
 const FormComponent = forwardRef(
   (
     {
-      // Props configurables para personalizar el formulario
-      fields = [], // Lista de campos a renderizar
-      mode = 'create', // Modo del formulario ('create' o 'edit')
-      showHourField = false, // Mostrar campo de hora
-      isPaymentRequired = true, // Requiere pago
-      patientType = '', // Tipo de paciente
-      paymentOption = '', // Opción de pago seleccionada
-      customAmount = '', // Monto personalizado
-      onSubmit = () => {}, // Callback al enviar el formulario
-      onPaymentOptionChange = () => {}, // Callback al cambiar opción de pago
-      onPatientTypeChange = () => {}, // Callback al cambiar tipo de paciente
-      onShowHourFieldChange = () => {}, // Callback al mostrar/ocultar campo de hora
-      onPaymentRequiredChange = () => {}, // Callback al cambiar si el pago es requerido
-      onOpenCreateModal = () => {}, // Callback para abrir modal de creación
-      onOpenSelectModal = () => {}, // Callback para abrir modal de selección
-      onCancel = () => {}, // Callback al cancelar el formulario
-      form: externalForm, // Formulario externo opcional
-      onPriceChange, // Callback para cambios de precio
+      fields = [],
+      mode = 'create',
+      showHourField = false,
+      isPaymentRequired = true,
+      patientType = '',
+      paymentOption = '',
+      customAmount = '',
+      onSubmit = () => {},
+      onPaymentOptionChange = () => {},
+      onPatientTypeChange = () => {},
+      onShowHourFieldChange = () => {},
+      onPaymentRequiredChange = () => {},
+      onOpenCreateModal = () => {},
+      onOpenSelectModal = () => {},
+      onCancel = () => {},
+      form: externalForm,
+      onPriceChange,
     },
-    ref, // Referencia externa al formulario
+    ref,
   ) => {
-    // Hook para manejar el formulario interno si no se pasa uno externo
     const [internalForm] = useForm();
     const form = externalForm || internalForm;
+    const [loading, setLoading] = useState(false);
+    const [isPhoneRequired, setIsPhoneRequired] = useState(true);
+    const [selectedPatient, setSelectedPatient] = useState('XD');
+    const { theme } = useTheme();
 
-    // Estados locales
-    const [loading, setLoading] = useState(false); // Estado de carga para el botón
-    const [isPhoneRequired, setIsPhoneRequired] = useState(true); // Si el teléfono es obligatorio
-    const [selectedPatient, setSelectedPatient] = useState('XD'); // Paciente seleccionado
-
-    // Alterna si el campo de teléfono es obligatorio
     const togglePhoneRequired = () => {
       setIsPhoneRequired((prev) => !prev);
-      form.validateFields(['primary_phone']); // Revalida el campo de teléfono
+      form.validateFields(['primary_phone']);
     };
 
-    // Actualiza el paciente seleccionado
     const handleSelectedPatientChange = (newText) => {
       setSelectedPatient(newText);
     };
 
-    // Renderiza cada campo del formulario según su tipo
     const renderField = (field, index) => {
-      // Renderiza un título
       if (field.type === 'title') {
         return (
           <Col span={24} key={index}>
@@ -65,7 +54,23 @@ const FormComponent = forwardRef(
         );
       }
 
-      // Renderiza una fila personalizada con subcampos
+      if (field.type === 'ubigeo') {
+        return (
+          <Col span={field.span || 24} key={index}>
+            <Form.Item
+              name={field.name}
+              label={<span className={styles.label}>{field.label}</span>}
+              className={`${styles.formItem} ${field.className || ''}`}
+            >
+              <InputField
+                type="ubigeo"
+                label={field.label}
+              />
+            </Form.Item>
+          </Col>
+        );
+      }
+
       if (field.type === 'customRow') {
         return (
           <Col span={24} key={index}>
@@ -78,9 +83,7 @@ const FormComponent = forwardRef(
         );
       }
 
-      // Renderiza un componente personalizado (InputField con props extendidas)
       if (field.type === 'customComponent') {
-        // Condicional para mostrar el campo de hora
         if (field.show === 'showHourField' && !showHourField) return null;
 
         return (
@@ -110,7 +113,6 @@ const FormComponent = forwardRef(
         );
       }
 
-      // Renderiza campos estándar (ej. texto, teléfono)
       const isPhoneField = field.name === 'primary_phone';
       return (
         <Col span={field.span || 8} key={index}>
@@ -158,35 +160,22 @@ const FormComponent = forwardRef(
       );
     };
 
-    // Render principal del formulario
     return (
-      <ConfigProvider
-        theme={{
-          token: {
-            colorPrimary: '#FFFFFFFF',
-            colorBgContainer: '#444444',
-            colorText: '#FFFFFFFF',
-            colorBorder: '#444',
-            controlOutline: 'none',
-            fontFamily: 'sans-serif',
-          },
-        }}
-      >
+      <ConfigProvider theme={theme === 'dark' ? themeTokensDark : themeTokensLight}>
         <div className={styles.container}>
           <Form
             form={form}
             layout="vertical"
             onFinish={onSubmit}
             className={styles.formContainer}
+            data-theme={theme}
             ref={ref}
           >
-            {/* Renderiza todos los campos definidos */}
             <Row gutter={[20, 0]}>
               {fields.map((field, index) => renderField(field, index))}
             </Row>
 
-            {/* Botones de acción */}
-            <Form.Item className={styles.buttonGroup}>
+            <Form.Item className={styles.buttonGroup} data-theme={theme}>
               <div className={styles.buttonWrapper}>
                 <Button
                   htmlType="button"
@@ -212,5 +201,4 @@ const FormComponent = forwardRef(
   },
 );
 
-// Exporta el componente para su uso en otros módulos
 export default FormComponent;
