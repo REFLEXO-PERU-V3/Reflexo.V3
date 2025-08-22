@@ -1,3 +1,21 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh; /* asegura cubrir el viewport completo */
+  background: #0b0b0c; /* mismo fondo oscuro base */
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  background-color: #0b0b0c; /* refuerzo del fondo oscuro */
+  overflow-x: hidden; /* evita scroll horizontal que puede mostrar líneas */
+  overflow-y: auto;  /* permite scroll vertical si es necesario */
+}
+
+
 body[data-theme='light'] .rbc-row-content {
   border-top: 1px solid #4e976a8a !important; /* borde suave en claro */
 }
@@ -40,6 +58,7 @@ body[data-theme='light'] {
   --shadow-strong: 0 16px 48px rgba(17, 18, 20, 0.10);
   --shadow-glow: 0 0 22px rgba(23, 154, 62, 0.25);
   --shadow-glow-strong: 0 0 36px rgba(23, 154, 62, 0.35);
+  
 }
 
 /* Ajustes específicos para tema claro donde hay fondos oscuros directos */
@@ -107,17 +126,22 @@ body[data-theme='light'] .rbc-allday-cell {
   border-color: #e6e7eb !important; /* gris claro suave */
 }
 /* Fondos claros coherentes */
-body[data-theme='light'] .rbc-month-view,
 body[data-theme='light'] .rbc-time-view { background: transparent !important; }
 body[data-theme='light'] .rbc-month-row { background: #ffffff !important; }
 body[data-theme='light'] .rbc-row-bg .rbc-day-bg { background: #ffffff !important; }
 
 body[data-theme='light'] .rbc-header {
-  background: #f3f4f6 !important; /* leve tono para cabecera en claro */
-  border-top: none !important;
+  background: #f3f4f6 !important; /* anular el borde superior entre header y primera fila del grid */
 }
-body[data-theme='light'] .rbc-month-view .rbc-header {
-  border-bottom: 1px solid #e6e7eb !important; /* borde sutil bajo cabeceras en claro */
+
+.rbc-month-view .rbc-month-header + .rbc-row {
+  border-top: none !important;
+  margin-top: -1px; /* solapar 1px para cubrir seams */
+}
+
+body[data-theme='light'] .rbc-month-view .rbc-month-header + .rbc-row {
+  border-top: 1px solid #e6e7eb !important; /* en claro mantener sutil */
+  margin-top: -1px;
 }
 
 /* Separadores específicos bajo toolbar y entre columnas/filas */
@@ -129,14 +153,20 @@ body[data-theme='light'] .rbc-month-view .rbc-header {
   margin-bottom: 0 !important; /* evita hueco bajo la toolbar */
   padding-bottom: 0 !important;
 }
+
+.rbc-month-view {
+  overflow: hidden; /* evita mostrar cualquier subpíxel sobrante */
+}
+
 .rbc-month-view .rbc-month-header {
-  border-bottom: none !important; /* sin línea separadora en oscuro */
   background: #121315 !important; /* igual al wrapper en oscuro */
   margin-top: 0 !important; /* elimina posible espacio superior */
-  margin-bottom: 0 !important;
+  margin-bottom: -1px !important; /* solapa 1px sobre la primera fila */
   padding-bottom: 0 !important;
   box-shadow: none !important; /* evitar sombras aparentes */
   position: relative; /* para pseudo-elemento tapa-seam */
+  will-change: transform;
+  transform: translateZ(0);
 }
 /* Overlay de 1px para cubrir cualquier borde subpixel en oscuro */
 .rbc-month-view .rbc-month-header::after {
@@ -145,8 +175,9 @@ body[data-theme='light'] .rbc-month-view .rbc-header {
   left: 0;
   right: 0;
   bottom: -1px; /* justo debajo del header */
-  height: 1px;
-  background: #121315; /* mismo tono del header/wrapper oscuro */
+  height: 2px; /* cubrir mejor seams subpíxel */
+  pointer-events: none;
+  z-index: 2;
 }
 .rbc-month-row { /* asegurar color del borde superior de cada semana */
   border-top: none !important; /* sin línea al inicio de cada fila en oscuro */
@@ -190,10 +221,12 @@ body[data-theme='light'] .rbc-month-view .rbc-month-header {
   border-bottom: 1px solid #e6e7eb !important;
   background: #f3f4f6 !important;
   margin-top: 0 !important;
-  margin-bottom: 0 !important;
+  margin-bottom: -1px !important;
   padding-bottom: 0 !important;
   box-shadow: none !important;
   position: relative;
+  will-change: transform;
+  transform: translateZ(0);
 }
 /* Overlay de 1px en claro, usa tono del wrapper claro */
 body[data-theme='light'] .rbc-month-view .rbc-month-header::after {
@@ -202,11 +235,14 @@ body[data-theme='light'] .rbc-month-view .rbc-month-header::after {
   left: 0;
   right: 0;
   bottom: -1px;
-  height: 1px;
+  height: 2px; /* cubrir mejor seam en claro */
   background: #f9fafb; /* coincide con calendarWrapper claro */
+  pointer-events: none;
+  z-index: 2;
 }
 body[data-theme='light'] .rbc-month-view {
   border-top: 1px solid #e6e7eb !important;
+  overflow: hidden;
 }
 body[data-theme='light'] .rbc-month-view .rbc-row + .rbc-row {
   border-top: 1px solid #e6e7eb !important;
@@ -560,6 +596,7 @@ body[data-theme='light'] .rbc-calendar {
 /* === Bordes de celdas === */
 .rbc-day-bg + .rbc-day-bg {
   border-left: 1px solid var(--border-primary);
+  
 }
 
 .rbc-month-row + .rbc-month-row {

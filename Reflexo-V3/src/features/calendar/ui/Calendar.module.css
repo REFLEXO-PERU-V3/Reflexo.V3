@@ -1,11 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
+
 .calendarContainer {
   display: flex;
   width: 100%; /* Asegura que ocupe todo el ancho disponible */
   height: calc(110vh - 125px); /* Ajusta este offset al alto de tu header */
   font-family: 'Poppins', sans-serif;
   background: #0b0b0c; /* fondo oscuro por defecto (tema oscuro) */
+
+}
+
+/* Blindado: neutraliza bordes/sombras de componentes AntD dentro del wrapper */
+.calendarWrapper :where([class^="ant-"], [class*=" ant-"]) {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  
 }
 
 /* Contenedor principal del calendario */
@@ -15,6 +25,7 @@
   flex-direction: column;
   width: 100%;
   min-height: 0; /* Importante para que los hijos flex puedan encajar */
+  
   
 }
 
@@ -28,12 +39,14 @@
   align-self: center; /* asegurar centrado dentro de layout flex-col */
   padding: 20px;
   border-radius: 10px;
-  background-color: #121315; /* tono distinto al container en oscuro */
+  background-color: #24252788; /* tono distinto al container en oscuro */
   position: relative;
   height: 100%;
   min-height: 0; /* Evita overflow en vistas semana/día */
-  border: 1px solid #1f1f1f; /* borde sutil en oscuro */
-
+  border: 3px solid #4b4b5288; /* borde sutil en oscuro */
+ box-shadow: #179a3e 0 4px 16px rgba(23, 154, 62, 0.2);
+  box-shadow: 0 4px 16px rgba(23, 154, 62, 0.2);
+  backdrop-filter: blur(10px); /* desenfoque sutil para efecto de profundidad */
 }
 
 /* Overlay superior para tapar cualquier raya (extiende visualmente el fondo) */
@@ -43,8 +56,8 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 10px; /* cubre hasta 10px de cualquier seam */
-  background: #121315; /* coincide con fondo oscuro del wrapper */
+  height: 20px; /* cubrir más alto para eliminar seams tercos */
+ box-shadow: #179a3e 0 4px 16px rgba(23, 154, 62, 0.2);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   pointer-events: none;
