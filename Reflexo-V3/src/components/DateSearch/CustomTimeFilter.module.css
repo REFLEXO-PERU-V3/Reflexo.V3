@@ -1,3 +1,11 @@
+/* Estilos del contenedor de búsqueda y filtros */
+.searchAndFilter {
+  display: flex;
+  justify-content: center; /* 👈 Centra horizontalmente los elementos hijos */
+  align-items: center;
+  gap: 16px;
+  /* Elimina cualquier propiedad de ancho aquí, como max-width o width */
+}
 /* Estilo base del DatePicker */
 .datePicker {
   width: 200px;
@@ -9,7 +17,7 @@
 
 /* Estado de foco (accesibilidad) */
 .datePicker:focus {
-  border: 1.5px solid green;
+  border: 1.5px solid rgb(4, 119, 36);
 }
 
 /* Estado hover */
@@ -17,4 +25,5 @@
    box-shadow: 0 0 0 3px rgba(0, 170, 85, 0.3);
 
 }
+
 

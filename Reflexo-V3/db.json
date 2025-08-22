@@ -1,0 +1,14 @@
+{
+  "appointments": [
+    {
+      "id": 1,
+      "ticket_number": "001",
+      "patient": { "id": 1, "name": "Juan", "paternal_lastname": "Perez", "maternal_lastname": "Lopez" },
+      "therapist": { "name": "Ana", "paternal_lastname": "Gomez", "maternal_lastname": "Diaz" },
+      "room": "A1",
+      "appointment_hour": "10:00",
+      "payment": 50,
+      "payment_type": { "name": "Tarjeta" }
+    }
+  ]
+}

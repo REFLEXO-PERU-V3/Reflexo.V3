@@ -1,55 +1,42 @@
-.zebraRow {
-  background-color: #272727;
+
+/* Estilos generales de la tabla para ambos modos */
+.tableCustom {
+  border: none !important;
 }
 
-.custom-table {
-  border: 1px solid #000;
+/* Estilos de las celdas del cuerpo de la tabla para ambos temas */
+.tableCustom .ant-table-tbody > tr > td {
+  border-bottom: 1px solid #444 !important;
+  border-right: 1px solid #444 !important;
+  background-color: inherit !important;
+  color: #e0e0e0 !important;
+  padding: 10px !important;
 }
 
-.custom-table .ant-table-thead > tr > th {
-  background-color: var(--bg-quaternary) !important;
-  color: var(--text-primary) !important;
+/* Estilos de las celdas del encabezado para ambos temas */
+.tableCustom .ant-table-thead > tr > th {
+  background-color: #222222 !important;
+  color: #e0e0e0 !important;
+  border-bottom: 1px solid #444 !important;
+  border-right: 1px solid #444 !important;
 }
 
-.row-light {
-  background-color: var(--bg-senary) !important;
+/* Eliminar el borde derecho de la última columna */
+.tableCustom .ant-table-tbody > tr > td:last-child,
+.tableCustom .ant-table-thead > tr > th:last-child {
+  border-right: none !important;
 }
 
-.row-dark {
-  background-color: var(--bg-quinary) !important;
+/* Estilos de las filas impares y pares en modo oscuro */
+.darkRowOdd {
+  background-color: #1a1a1a !important;
 }
 
-.custom-table .ant-table-tbody > tr > td {
-  border-color: #000 !important;
-  border-bottom: 1px solid #000 !important;
+.darkRowEven {
+  background-color: #222222 !important;
 }
 
-[data-theme="light"] .custom-table,
-[data-theme="light"] .custom-table .ant-table-thead > tr > th,
-[data-theme="light"] .custom-table .ant-table-tbody > tr > td {
-  color: #1A1A1A !important;
-  background-color: #fff !important;
-  border-color: #000 !important;
-}
-
-[data-theme="light"] .row-light {
-  background-color: #FAFAFA !important;
-}
-
-[data-theme="light"] .row-dark {
-  background-color: #F5F5F5 !important;
-}
-
-[data-theme="light"] .ant-table-body::-webkit-scrollbar {
-  width: 8px;
-  background: #fff;
-}
-
-[data-theme="light"] .ant-table-body::-webkit-scrollbar-thumb {
-  background: #232323;
-  border-radius: 4px;
-}
-
-[data-theme="light"] .ant-table-body::-webkit-scrollbar-track {
-  background: #fff;
+/* Estilos para el efecto al pasar el mouse */
+.tableCustom .ant-table-tbody > tr:hover > td {
+  background-color: #2e2e2e !important;
 }

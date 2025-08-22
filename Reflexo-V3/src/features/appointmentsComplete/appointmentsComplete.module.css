@@ -1,0 +1,52 @@
+/* Estilos generales del contenedor principal en ambos modos */
+.container {
+  height: 100%;
+  padding-top: 50px;
+  max-width: calc(100% - 200px);
+  background-color: #f0f2f5;
+  color: #333;
+  margin: 0 auto;
+}
+
+/* Estilos para el contenedor principal en modo oscuro */
+.darkContainer {
+  background-color: #000000;
+  color: #e0e0e0;
+}
+
+/* Estilos del contenedor de búsqueda y filtros */
+.searchAndFilter {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0 auto;
+}
+
+/* Estilos de la tabla, que ya funcionan bien */
+.darkContainer .ant-table-wrapper {
+  background-color: transparent !important;
+}
+
+.darkContainer .ant-table {
+  background-color: transparent !important;
+}
+
+.darkContainer .ant-table-thead > tr > th {
+  background-color: #1a1a1a !important;
+  color: #e0e0e0 !important;
+}
+
+
+.darkContainer .ant-table-tbody > tr > td {
+  background-color: inherit !important;
+  color: #e0e0e0 !important;
+}
+
+/* Estilos de las filas impares y pares */
+.darkRowOdd {
+  background-color: #1a1a1a !important;
+}
+
+.darkRowEven {
+  background-color: #222222 !important;
+}

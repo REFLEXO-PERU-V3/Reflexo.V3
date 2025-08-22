@@ -64,7 +64,7 @@ const SelectPrices = ({
         theme={{
           components: {
             Select: {
-              colorPrimary: '#1677ff',
+              colorPrimary: '#16ff6bff',
               optionSelectedBg: '#333333',
               colorText: '#fff',
               colorBgElevated: '#444444',
