@@ -1,9 +1,11 @@
 // Importación de componentes de Ant Design y React
 import { Button, Col, ConfigProvider, Form, Row } from 'antd';
 import { useState, forwardRef } from 'react';
+import { useTheme } from '../../context/ThemeContext';
 
 // Importación de estilos CSS y componente personalizado de entrada
 import styles from '../Form/Form.module.css';
+import '../Form/Form.enhanced.css';
 import InputField from '../Input/Input';
 
 // Hook de formulario de Ant Design
@@ -158,20 +160,48 @@ const FormComponent = forwardRef(
       );
     };
 
+    // Obtener el tema actual
+    const { theme } = useTheme();
+    
+    // Configuración del tema para el formulario
+    const formTheme = {
+      token: {
+        colorPrimary: '#4caf50',
+        colorBgContainer: theme === 'dark' ? '#161b22' : '#ffffff',
+        colorText: theme === 'dark' ? '#f0f6fc' : '#212529',
+        colorBorder: theme === 'dark' ? '#30363d' : '#dee2e6',
+        colorBorderSecondary: theme === 'dark' ? '#30363d' : '#e8f5e8',
+        controlOutline: 'none',
+        fontFamily: 'sans-serif',
+      },
+      components: {
+        Form: {
+          labelColor: theme === 'dark' ? '#f0f6fc' : '#2d5a2d',
+          colorTextHeading: theme === 'dark' ? '#f0f6fc' : '#2d5a2d',
+        },
+        Input: {
+          colorBgContainer: theme === 'dark' ? '#21262d' : '#ffffff',
+          colorText: theme === 'dark' ? '#f0f6fc' : '#212529',
+          colorBorder: theme === 'dark' ? '#30363d' : '#dee2e6',
+          colorTextPlaceholder: theme === 'dark' ? '#8b949e' : '#6c757d',
+        },
+        Select: {
+          colorBgContainer: theme === 'dark' ? '#21262d' : '#ffffff',
+          colorText: theme === 'dark' ? '#f0f6fc' : '#212529',
+          colorBorder: theme === 'dark' ? '#30363d' : '#dee2e6',
+          colorTextPlaceholder: theme === 'dark' ? '#8b949e' : '#6c757d',
+        },
+        Button: {
+          colorPrimary: '#4caf50',
+          colorPrimaryHover: '#3d8b40',
+          colorPrimaryActive: '#2d6a30',
+        },
+      },
+    };
+    
     // Render principal del formulario
     return (
-      <ConfigProvider
-        theme={{
-          token: {
-            colorPrimary: '#FFFFFFFF',
-            colorBgContainer: '#444444',
-            colorText: '#FFFFFFFF',
-            colorBorder: '#444',
-            controlOutline: 'none',
-            fontFamily: 'sans-serif',
-          },
-        }}
-      >
+      <ConfigProvider theme={formTheme}>
         <div className={styles.container}>
           <Form
             form={form}

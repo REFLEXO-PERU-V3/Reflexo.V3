@@ -1,6 +1,7 @@
-import React from "react";
-import { ConfigProvider, Input } from "antd";
+import React, { useState } from "react";
+import { Input } from "antd";
 import { useTheme } from "../../context/ThemeContext";
+import { SearchOutlined, LoadingOutlined } from "@ant-design/icons";
 
 const CustomSearch = ({
   placeholder = "Buscar...",  
@@ -8,60 +9,64 @@ const CustomSearch = ({
   size = "large",
   width = "400px",          
   style = {},
-  suffix,               
+  loading = false,
+  showLoadingIndicator = true,
 }) => {
   const { theme } = useTheme();
+  const [inputValue, setInputValue] = useState("");
 
   const handleChange = (e) => {
+    const value = e.target.value;
+    setInputValue(value);
+    
     if (onSearch) {
-      onSearch(e.target.value);
+      onSearch(value);
     }
   };
 
-  // 🎨 Tema dinámico para light/dark
-  const inputTheme =
-    theme === "dark"
-      ? {
-          colorTextPlaceholder: "#AAAAAA",
-          colorBgContainer: "#333333",
-          colorText: "#FFFFFF",
-          colorBorder: "#444444",
-          borderRadius: 4,
-          hoverBorderColor: "#555555",
-          activeBorderColor: "#00AA55",
-        }
-      : {
-          colorTextPlaceholder: "#444444",
-          colorBgContainer: "#FFFFFF",
-          colorText: "#1A1A1A",
-          colorBorder: "#CCCCCC",
-          borderRadius: 4,
-          hoverBorderColor: "#4CAF50",
-          activeBorderColor: "#4CAF50",
-        };
+  const handleClear = () => {
+    setInputValue("");
+    if (onSearch) {
+      onSearch("");
+    }
+  };
+
+  // Sufijo personalizado con indicador de carga
+  const customSuffix = () => {
+    if (loading && showLoadingIndicator) {
+      return <LoadingOutlined style={{ color: theme === 'dark' ? '#a0a0a0' : '#666666' }} spin />;
+    }
+    if (inputValue) {
+      return <SearchOutlined style={{ color: theme === 'dark' ? '#cccccc' : '#666666' }} />;
+    }
+    return <SearchOutlined style={{ color: theme === 'dark' ? '#a0a0a0' : '#666666' }} />;
+  };
 
   return (
-    <ConfigProvider
-      theme={{
-        components: {
-          Input: inputTheme,
-        },
+    <Input
+      placeholder={placeholder}
+      size={size}
+      value={inputValue}
+      onChange={handleChange}
+      onClear={handleClear}
+      allowClear
+      suffix={customSuffix()}
+      style={{
+        width,
+        height: '40px',
+        boxShadow: "none",
+        background: theme === 'dark' ? '#2d2d2d' : '#ffffff',
+        color: theme === 'dark' ? '#ffffff' : '#000000',
+        transition: "all 0.3s ease",
+        border: `1px solid ${theme === 'dark' ? '#444444' : '#d9d9d9'}`,
+        borderRadius: '8px',
+        fontSize: '14px',
+        fontWeight: '500',
+        padding: '0 12px',
+        ...style,
       }}
-    >
-      <Input
-        placeholder={placeholder}
-        size={size}
-        onChange={handleChange}
-        suffix={suffix}
-        style={{
-          width,
-          boxShadow: "none",
-          background: theme === "light" ? "#FFFFFF" : "#333333",
-          color: theme === "light" ? "#1A1A1A" : "#FFFFFF",
-          ...style,
-        }}
-      />
-    </ConfigProvider>
+      className="custom-search-input"
+    />
   );
 };
 

@@ -1,9 +1,9 @@
 .zebraRow {
-  background-color: #272727;
+  background-color: var(--bg-quinary);
 }
 
 .custom-table {
-  border: 1px solid #000;
+  border: 1px solid var(--border-primary);
 }
 
 .custom-table .ant-table-thead > tr > th {
@@ -20,36 +20,76 @@
 }
 
 .custom-table .ant-table-tbody > tr > td {
-  border-color: #000 !important;
-  border-bottom: 1px solid #000 !important;
+  border-color: var(--border-primary) !important;
+  border-bottom: 1px solid var(--border-primary) !important;
 }
 
+/* Tema Claro */
 [data-theme="light"] .custom-table,
 [data-theme="light"] .custom-table .ant-table-thead > tr > th,
 [data-theme="light"] .custom-table .ant-table-tbody > tr > td {
-  color: #1A1A1A !important;
-  background-color: #fff !important;
-  border-color: #000 !important;
+  color: var(--text-primary) !important;
+  background-color: var(--bg-primary) !important;
+  border-color: var(--border-primary) !important;
 }
 
 [data-theme="light"] .row-light {
-  background-color: #FAFAFA !important;
+  background-color: var(--bg-senary) !important;
 }
 
 [data-theme="light"] .row-dark {
-  background-color: #F5F5F5 !important;
+  background-color: var(--bg-quinary) !important;
 }
 
 [data-theme="light"] .ant-table-body::-webkit-scrollbar {
   width: 8px;
-  background: #fff;
+  background: var(--bg-primary);
 }
 
 [data-theme="light"] .ant-table-body::-webkit-scrollbar-thumb {
-  background: #232323;
+  background: var(--bg-quaternary);
   border-radius: 4px;
 }
 
 [data-theme="light"] .ant-table-body::-webkit-scrollbar-track {
-  background: #fff;
+  background: var(--bg-primary);
+}
+
+/* Tema Oscuro */
+[data-theme="dark"] .custom-table {
+  border: 1px solid var(--border-primary) !important;
+}
+
+[data-theme="dark"] .custom-table .ant-table-thead > tr > th {
+  background-color: var(--bg-quaternary) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-primary) !important;
+}
+
+[data-theme="dark"] .custom-table .ant-table-tbody > tr > td {
+  color: var(--text-primary) !important;
+  background-color: var(--bg-primary) !important;
+  border-color: var(--border-primary) !important;
+}
+
+[data-theme="dark"] .row-light {
+  background-color: var(--bg-primary) !important;
+}
+
+[data-theme="dark"] .row-dark {
+  background-color: var(--bg-secondary) !important;
+}
+
+[data-theme="dark"] .ant-table-body::-webkit-scrollbar {
+  width: 8px;
+  background: var(--bg-primary);
+}
+
+[data-theme="dark"] .ant-table-body::-webkit-scrollbar-thumb {
+  background: var(--bg-quaternary);
+  border-radius: 4px;
+}
+
+[data-theme="dark"] .ant-table-body::-webkit-scrollbar-track {
+  background: var(--bg-primary);
 }

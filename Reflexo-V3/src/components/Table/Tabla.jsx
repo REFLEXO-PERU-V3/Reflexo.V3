@@ -23,33 +23,56 @@ const ModeloTable = ({
 
   // Configuración de tema dinámico
   const themeConfig = theme === 'dark'
-    ? themeTokensDark
-    : {
-        ...themeTokensLight,
+    ? {
+        ...themeTokensDark,
         token: {
-          ...themeTokensLight.token,
-          colorBgContainer: '#fff',
-          colorText: '#1A1A1A',
-          colorBorder: '#000',
-          colorFillAlter: '#FAFAFA',
-          headerBg: '#232323',
-          headerColor: '#fff',
-          rowHoverBg: '#C8F7D8',
+          ...themeTokensDark,
+          colorBgContainer: 'var(--bg-primary)',
+          colorText: 'var(--text-primary)',
+          colorBorder: 'var(--border-primary)',
+          colorFillAlter: 'var(--bg-secondary)',
+          headerBg: 'var(--bg-quaternary)',
+          headerColor: 'var(--text-primary)',
+          rowHoverBg: 'var(--bg-tertiary)',
         },
         components: {
           Table: {
-            colorBgContainer: '#fff',
-            colorFillAlter: '#FAFAFA',
-            colorText: '#1A1A1A',
-            borderColor: '#000',
-            headerBg: '#232323',
-            headerColor: '#fff',
-            rowHoverBg: '#C8F7D8',
+            colorBgContainer: 'var(--bg-primary)',
+            colorFillAlter: 'var(--bg-secondary)',
+            colorText: 'var(--text-primary)',
+            borderColor: 'var(--border-primary)',
+            headerBg: 'var(--bg-quaternary)',
+            headerColor: 'var(--text-primary)',
+            rowHoverBg: 'var(--bg-tertiary)',
+          },
+        },
+      }
+    : {
+        ...themeTokensLight,
+        token: {
+          ...themeTokensLight,
+          colorBgContainer: 'var(--bg-primary)',
+          colorText: 'var(--text-primary)',
+          colorBorder: 'var(--border-primary)',
+          colorFillAlter: 'var(--bg-secondary)',
+          headerBg: 'var(--bg-quaternary)',
+          headerColor: 'var(--text-primary)',
+          rowHoverBg: 'var(--bg-tertiary)',
+        },
+        components: {
+          Table: {
+            colorBgContainer: 'var(--bg-primary)',
+            colorFillAlter: 'var(--bg-secondary)',
+            colorText: 'var(--text-primary)',
+            borderColor: 'var(--border-primary)',
+            headerBg: 'var(--bg-quaternary)',
+            headerColor: 'var(--text-primary)',
+            rowHoverBg: 'var(--bg-tertiary)',
           },
         },
       };
 
-  // Centrar columnas
+  // Centrar columnas con estilos que respetan el tema
   const centeredColumns = columns.map((column, index, arr) => {
     const isLast = index === arr.length - 1;
     return {
@@ -59,17 +82,17 @@ const ModeloTable = ({
         style: {
           textAlign: 'center',
           background: 'inherit',
-          borderRight: isLast ? 'none' : '1px solid #444',
+          borderRight: isLast ? 'none' : `1px solid var(--border-primary)`,
           borderBottom: 'none',
         },
       }),
       onHeaderCell: () => ({
         style: {
           textAlign: 'center',
-          background: '#272727',
-          borderRight: isLast ? 'none' : '1px solid #444',
+          background: 'var(--bg-quaternary)',
+          borderRight: isLast ? 'none' : `1px solid var(--border-primary)`,
           borderBottom: 'none',
-          color: '#fff',
+          color: 'var(--text-primary)',
         },
       }),
     };
@@ -98,6 +121,11 @@ const ModeloTable = ({
     return () => window.removeEventListener('resize', calculateHeight);
   }, [maxHeight]);
 
+  // Establecer el atributo data-theme en el documento
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
+
   return (
     <ConfigProvider theme={themeConfig}>
       <div
@@ -119,7 +147,7 @@ const ModeloTable = ({
             locale={{
               emptyText: (
                 <div style={{
-                  color: '#a0a0a0',
+                  color: 'var(--text-tertiary)',
                   padding: '16px',
                   textAlign: 'center',
                   display: 'flex',

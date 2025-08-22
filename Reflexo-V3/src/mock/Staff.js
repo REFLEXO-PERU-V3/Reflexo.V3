@@ -43,5 +43,50 @@ export const Staff = [
     phone: '932165498',
     email: 'pedro.lopez@reflexo.com',
     status: 'active'
+  },
+  {
+    id: 6,
+    document_number: '65432198',
+    full_name: 'González Silva, Carmen Rosa',
+    specialty: 'Fisioterapia Deportiva',
+    phone: '965432198',
+    email: 'carmen.gonzalez@reflexo.com',
+    status: 'active'
+  },
+  {
+    id: 7,
+    document_number: '98765432',
+    full_name: 'Herrera Mendoza, Roberto Luis',
+    specialty: 'Terapia Respiratoria',
+    phone: '998765432',
+    email: 'roberto.herrera@reflexo.com',
+    status: 'active'
+  },
+  {
+    id: 8,
+    document_number: '14725836',
+    full_name: 'Vargas Castro, Patricia Isabel',
+    specialty: 'Fisioterapia Geriátrica',
+    phone: '914725836',
+    email: 'patricia.vargas@reflexo.com',
+    status: 'active'
+  },
+  {
+    id: 9,
+    document_number: '25836914',
+    full_name: 'Ríos Flores, Miguel Ángel',
+    specialty: 'Fisioterapia Ortopédica',
+    phone: '925836914',
+    email: 'miguel.rios@reflexo.com',
+    status: 'active'
+  },
+  {
+    id: 10,
+    document_number: '36914725',
+    full_name: 'Torres Jiménez, Lucía Fernanda',
+    specialty: 'Terapia Manual',
+    phone: '936914725',
+    email: 'lucia.torres@reflexo.com',
+    status: 'active'
   }
 ];

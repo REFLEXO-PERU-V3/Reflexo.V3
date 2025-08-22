@@ -1,25 +1,17 @@
 /* ===================================
-   ESTILOS DEL COMPONENTE FORMULARIO - TEMA CLARO
+   ESTILOS DEL COMPONENTE FORMULARIO - COMPATIBLE CON TEMA CLARO Y OSCURO
    ===================================
    
    Este archivo contiene todos los estilos para el componente FormComponent.
    Utiliza CSS Modules para evitar conflictos de nombres de clases.
-   El diseño está optimizado para tema claro con colores blanco y verde.
+   El diseño está optimizado para adaptarse a temas claros y oscuros usando variables CSS.
 */
 
 /* ===================================
    CONTENEDOR PRINCIPAL DEL FORMULARIO
    =================================== */
 .formContainer {
-  max-width: 850px;        /* Ancho máximo para mantener legibilidad */
-  margin: 0 auto;          /* Centrado horizontal */
-  margin-top: 10px;        /* Espaciado superior mínimo */
-  padding: 24px;           /* Espaciado interno generoso */
-  border-radius: 12px;     /* Bordes redondeados modernos */
-  color: #333333;          /* Texto gris oscuro para buena legibilidad */
-  background-color: #ffffff; /* Fondo blanco limpio */
-  border: 2px solid #e8f5e8; /* Borde verde muy claro */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  composes: formContainer from './Form.enhanced.css';
 }
 
 /* ===================================
@@ -27,12 +19,7 @@
    =================================== */
 /* Títulos de secciones dentro del formulario */
 .title {
-  margin-top: 10px;        /* Espaciado superior reducido */
-  font-size: 26px;         /* Tamaño grande pero no excesivo */
-  font-weight: bold;       /* Peso de fuente destacado */
-  color: #2d5a2d;          /* Verde oscuro para títulos */
-  border-bottom: 2px solid #4CAF50; /* Línea verde debajo del título */
-  padding-bottom: 8px;     /* Espaciado para la línea */
+  composes: title from './Form.enhanced.css';
 }
 
 /* ===================================
@@ -40,9 +27,7 @@
    =================================== */
 /* Etiquetas de los campos del formulario */
 .label {
-  font-size: 0.95rem;      /* Tamaño ligeramente menor que el texto normal */
-  color: #2d5a2d;          /* Verde oscuro para buena legibilidad */
-  font-weight: 600;        /* Peso medio para destacar */
+  composes: label from './Form.enhanced.css';
 }
 
 /* ===================================
@@ -50,7 +35,7 @@
    =================================== */
 /* Espaciado compacto entre campos para mejor densidad visual */
 .formItem {
-  margin: 12px 0;          /* Margen vertical moderado */
+  composes: formItem from './Form.enhanced.css';
 }
 
 /* Estilos para los Form.Item de Ant Design */
@@ -59,7 +44,7 @@
 }
 
 .formItem :global(.ant-form-item-explain-error) {
-  color: #d32f2f;          /* Color rojo para errores */
+  color: #ff4d4f;          /* Color rojo para errores */
   font-size: 0.85rem;      /* Tamaño menor para mensajes de error */
 }
 
@@ -68,67 +53,22 @@
    =================================== */
 /* Contenedor del grupo de botones */
 .buttonGroup {
-  margin-top: 24px;        /* Mayor separación del resto del formulario */
-  margin-bottom: 10px;     /* Espaciado inferior */
-  border-top: 1px solid #e8f5e8; /* Línea separadora verde claro */
-  padding-top: 16px;       /* Espaciado superior */
+  composes: buttonGroup from './Form.enhanced.css';
 }
 
 /* Wrapper para alinear botones a la derecha */
 .buttonWrapper {
-  display: flex;           /* Flexbox para alineación */
-  justify-content: flex-end; /* Alineación a la derecha */
-  gap: 12px;               /* Espaciado entre botones */
+  composes: buttonWrapper from './Form.enhanced.css';
 }
 
 /* Estilo específico del botón Cancelar */
 .buttonCancel {
-  display: flex;           /* Flexbox para centrar contenido */
-  align-items: center;     /* Centrado vertical */
-  justify-content: center; /* Centrado horizontal */
-  height: 40px;            /* Altura mayor para mejor usabilidad */
-  padding: 0 20px;         /* Espaciado interno horizontal */
-  border: 2px solid #e0e0e0; /* Borde gris claro */
-  border-radius: 6px;      /* Bordes redondeados */
-  font-size: 0.95rem;      /* Tamaño de fuente */
-  font-weight: 500;        /* Peso medio */
-  color: #666666;          /* Texto gris */
-  background-color: #ffffff; /* Fondo blanco */
-  cursor: pointer;         /* Cursor pointer */
-  transition: all 0.3s ease; /* Transición suave */
-}
-
-.buttonCancel:hover {
-  border-color: #bdbdbd;   /* Borde más oscuro al hover */
-  color: #333333;          /* Texto más oscuro al hover */
-  transform: translateY(-1px); /* Efecto de elevación */
+  composes: buttonCancel from './Form.enhanced.css';
 }
 
 /* Estilo específico del botón Enviar/Registrar */
 .buttonSubmit {
-  display: flex;           /* Flexbox para centrar contenido */
-  align-items: center;     /* Centrado vertical */
-  justify-content: center; /* Centrado horizontal */
-  height: 40px;            /* Altura igual al botón cancelar */
-  padding: 0 20px;         /* Espaciado interno horizontal */
-  border: none;            /* Sin borde */
-  border-radius: 6px;      /* Bordes redondeados */
-  font-size: 0.95rem;      /* Tamaño de fuente consistente */
-  font-weight: 600;        /* Peso mayor para destacar */
-  color: #ffffff;          /* Texto blanco */
-  background-color: #4CAF50; /* Fondo verde principal */
-  cursor: pointer;         /* Cursor pointer */
-  transition: all 0.3s ease; /* Transición suave */
-}
-
-.buttonSubmit:hover {
-  background-color: #45a049; /* Verde más oscuro al hover */
-  transform: translateY(-1px); /* Efecto de elevación */
-  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3); /* Sombra verde */
-}
-
-.buttonSubmit:active {
-  transform: translateY(0); /* Resetear elevación al click */
+  composes: buttonSubmit from './Form.enhanced.css';
 }
 
 /* ===================================

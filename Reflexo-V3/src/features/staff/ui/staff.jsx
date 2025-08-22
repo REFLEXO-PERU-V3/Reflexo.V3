@@ -9,6 +9,8 @@ import EditTherapist from './EditTherapist/EditTherapist';
 import { getTherapistById } from '../service/staffService';
 import { LoadingOutlined } from '@ant-design/icons';
 import InfoTherapist from './infoTherapist/infoTherapist';
+import { useTheme } from '../../../context/ThemeContext';
+import styles from './staff.module.css';
 
 const whiteSpinIndicator = (
   <LoadingOutlined style={{ fontSize: 20, color: '#fff' }} spin />
@@ -16,12 +18,16 @@ const whiteSpinIndicator = (
 
 export default function Staff() {
   const navigate = useNavigate();
+  const { theme, toggleTheme } = useTheme();
   const {
     staff,
     loading,
+    searching,
     pagination,
+    searchTerm,
     handlePageChange,
     setSearchTerm,
+    handleSearch,
     handleDeleteTherapist,
   } = useStaff();
   const [editingTherapist, setEditingTherapist] = useState(null);
@@ -140,8 +146,8 @@ export default function Staff() {
     navigate('registrar');
   };
 
-  const handleSearch = (value) => {
-    setSearchTerm(value);
+  const handleSearchInput = (value) => {
+    handleSearch(value);
   };
 
   const columns = [
@@ -170,57 +176,86 @@ export default function Staff() {
   ];
 
   return (
-    <div
-      style={{
-        height: '100%',
-        paddingTop: '50px',
-        maxWidth: 'calc(100% - 200px)',
-      }}
-    >
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '16px',
-          margin: '0 auto',
-        }}
-      >
-        <CustomButton text="Crear Terapeuta" onClick={handleButton} />
+    <div className={styles.staffMainContainer}>
+      <div className={styles.staffContainer}>
+        <div className={styles.staffHeader}>
+          <div className={styles.staffHeaderLeft}>
+            <CustomButton text="Crear Terapeuta" onClick={handleButton} />
+          </div>
 
-        <CustomSearch
-          placeholder="Buscar por Apellido/Nombre o DNI..."
-          onSearch={handleSearch}
-          width="100%"
+          <div className={styles.staffHeaderCenter}>
+            <CustomSearch
+              placeholder="Buscar por Apellido/Nombre o DNI..."
+              onSearch={handleSearchInput}
+              width="600px"
+              loading={searching}
+              showLoadingIndicator={true}
+            />
+          </div>
+
+          <div className={styles.staffHeaderRight}>
+            <Button
+              type="button"
+              onClick={toggleTheme}
+              className={styles.themeToggleButton}
+            >
+              {theme === 'dark' ? '☀️' : '🌙'} 
+              {theme === 'dark' ? 'Tema Claro' : 'Tema Oscuro'}
+            </Button>
+          </div>
+        </div>
+
+        {/* Indicador de resultados de búsqueda */}
+        {searchTerm && (
+          <div className={styles.searchResults}>
+            <div className={styles.searchInfo}>
+              <span className={styles.searchTerm}>
+                Búsqueda: "{searchTerm}"
+              </span>
+              <span className={styles.resultCount}>
+                {searching ? 'Buscando...' : `${staff.length} resultado${staff.length !== 1 ? 's' : ''} encontrado${staff.length !== 1 ? 's' : ''}`}
+              </span>
+            </div>
+            {!searching && (
+              <Button
+                type="text"
+                onClick={() => handleSearchInput('')}
+                className={styles.clearSearchButton}
+              >
+                Limpiar búsqueda
+              </Button>
+            )}
+          </div>
+        )}
+
+        <ModeloTable
+          columns={columns}
+          data={staff}
+          loading={loading}
+          pagination={{
+            current: pagination.currentPage,
+            total: pagination.totalItems,
+            pageSize: 50,
+            onChange: handlePageChange,
+          }}
         />
+
+        {editingTherapist && (
+          <EditTherapist
+            therapist={editingTherapist}
+            onClose={() => setEditingTherapist(null)}
+            onSave={() => handlePageChange(pagination.currentPage)}
+          />
+        )}
+
+        {therapistInfo && (
+          <InfoTherapist
+            therapist={therapistInfo}
+            open={showInfoModal}
+            onClose={() => setShowInfoModal(false)}
+          />
+        )}
       </div>
-
-      <ModeloTable
-        columns={columns}
-        data={staff}
-        loading={loading}
-        pagination={{
-          current: pagination.currentPage,
-          total: pagination.totalItems,
-          pageSize: 50,
-          onChange: handlePageChange,
-        }}
-      />
-
-      {editingTherapist && (
-        <EditTherapist
-          therapist={editingTherapist}
-          onClose={() => setEditingTherapist(null)}
-          onSave={() => handlePageChange(pagination.currentPage)}
-        />
-      )}
-
-      {therapistInfo && (
-        <InfoTherapist
-          therapist={therapistInfo}
-          open={showInfoModal}
-          onClose={() => setShowInfoModal(false)}
-        />
-      )}
     </div>
   );
 }

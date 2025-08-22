@@ -1,8 +1,9 @@
-import { Form, Modal, notification } from 'antd';
+import { Form, Modal, notification, ConfigProvider } from 'antd';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import FormGenerator from '../../../../components/Form/Form';
 import { useStaff } from '../../hook/staffHook';
+import { useTheme } from '../../../../context/ThemeContext';
 
 // Reutiliza los mismos fields que para crear
 const fields = [
@@ -152,6 +153,59 @@ const EditTherapist = ({ therapist, onClose, onSave }) => {
   const [form] = Form.useForm();
   const { handleUpdateTherapist } = useStaff();
   const [loading, setLoading] = useState(false);
+  const { theme } = useTheme();
+
+  // Configuración del tema para el modal
+  const modalTheme = {
+    token: {
+      colorBgElevated: 'var(--bg-primary)',
+      colorBgContainer: 'var(--bg-primary)',
+      colorText: 'var(--text-primary)',
+      colorTextHeading: 'var(--text-primary)',
+      colorBorder: 'var(--border-primary)',
+      colorBorderSecondary: 'var(--border-secondary)',
+      borderRadius: 8,
+    },
+    components: {
+      Modal: {
+        colorBgElevated: 'var(--bg-primary)',
+        colorBgMask: 'rgba(0, 0, 0, 0.45)',
+        titleColor: 'var(--text-primary)',
+        headerBg: 'var(--bg-secondary)',
+        contentBg: 'var(--bg-primary)',
+        footerBg: 'var(--bg-secondary)',
+        borderColor: 'var(--border-primary)',
+      },
+      Form: {
+        labelColor: 'var(--text-primary)',
+        labelRequiredMarkColor: '#ff4d4f',
+      },
+      Input: {
+        colorBgContainer: 'var(--bg-secondary)',
+        colorText: 'var(--text-primary)',
+        colorBorder: 'var(--border-primary)',
+        colorTextPlaceholder: 'var(--text-muted)',
+        hoverBorderColor: 'var(--border-secondary)',
+        activeBorderColor: 'var(--border-secondary)',
+      },
+      Select: {
+        colorBgContainer: 'var(--bg-secondary)',
+        colorText: 'var(--text-primary)',
+        colorBorder: 'var(--border-primary)',
+        colorTextPlaceholder: 'var(--text-muted)',
+        optionSelectedBg: 'var(--bg-tertiary)',
+        optionActiveBg: 'var(--bg-quaternary)',
+      },
+      DatePicker: {
+        colorBgContainer: 'var(--bg-secondary)',
+        colorText: 'var(--text-primary)',
+        colorBorder: 'var(--border-primary)',
+        colorTextPlaceholder: 'var(--text-muted)',
+        hoverBorderColor: 'var(--border-secondary)',
+        activeBorderColor: 'var(--border-secondary)',
+      },
+    },
+  };
 
   // Actualiza el formulario con los datos recibidos
   const setFormWithTherapist = (data) => {
@@ -240,24 +294,27 @@ const EditTherapist = ({ therapist, onClose, onSave }) => {
     `${therapist.paternal_lastname || ''} ${therapist.maternal_lastname || ''} ${therapist.name || ''}`.trim();
 
   return (
-    <Modal
-      title={`Editar Terapeuta: ${modalTitle}`}
-      open={true}
-      onCancel={onClose}
-      footer={null}
-      width={800}
-      centered
-      destroyOnClose
-    >
-      <FormGenerator
-        form={form}
-        fields={fields}
-        mode="edit"
-        onSubmit={handleSubmit}
+    <ConfigProvider theme={modalTheme}>
+      <Modal
+        title={`Editar Terapeuta: ${modalTitle}`}
+        open={true}
         onCancel={onClose}
-        loading={loading}
-      />
-    </Modal>
+        footer={null}
+        width={800}
+        centered
+        destroyOnClose
+        className="edit-therapist-modal"
+      >
+        <FormGenerator
+          form={form}
+          fields={fields}
+          mode="edit"
+          onSubmit={handleSubmit}
+          onCancel={onClose}
+          loading={loading}
+        />
+      </Modal>
+    </ConfigProvider>
   );
 };
 

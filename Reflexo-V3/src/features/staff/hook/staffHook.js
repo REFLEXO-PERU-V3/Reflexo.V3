@@ -13,6 +13,7 @@ import { formatToastMessage } from '../../../utils/messageFormatter';
 export const useStaff = () => {
   const [staff, setStaff] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [searching, setSearching] = useState(false);
   const [error, setError] = useState(null);
   const [pagination, setPagination] = useState({
     currentPage: 1,
@@ -47,8 +48,8 @@ export const useStaff = () => {
   };
 
   const searchStaffByTerm = async (term) => {
-    if (loading) return;
-    setLoading(true);
+    if (searching) return;
+    setSearching(true);
     try {
       const { data, total } = await searchStaff(term);
       setStaff(data);
@@ -66,7 +67,17 @@ export const useStaff = () => {
         ),
       );
     } finally {
-      setLoading(false);
+      setSearching(false);
+    }
+  };
+
+  const handleSearch = (term) => {
+    setSearchTerm(term);
+    
+    // Si el término está vacío, cargar todos los terapeutas
+    if (!term || term.trim() === '') {
+      loadStaff(1);
+      return;
     }
   };
 
@@ -206,6 +217,7 @@ export const useStaff = () => {
     }
   }, [initialLoad]);
 
+  // Efecto para búsqueda con debounce mejorado
   useEffect(() => {
     if (!initialLoad) return;
 
@@ -215,7 +227,7 @@ export const useStaff = () => {
       } else {
         loadStaff(1);
       }
-    }, 1200);
+    }, 800); // Reducido de 1200ms a 800ms para mejor respuesta
 
     return () => clearTimeout(delayDebounce);
   }, [searchTerm, initialLoad]);
@@ -223,12 +235,15 @@ export const useStaff = () => {
   return {
     staff,
     loading,
+    searching,
     error,
     pagination,
+    searchTerm,
     submitNewTherapist,
     handleUpdateTherapist,
     handlePageChange: loadStaff,
     setSearchTerm,
+    handleSearch,
     handleDeleteTherapist,
   };
 };

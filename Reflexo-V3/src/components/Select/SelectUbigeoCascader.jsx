@@ -164,7 +164,7 @@ const SelectUbigeoCascader = ({ value, onChange, ...rest }) => {
       theme={{
         components: {
           Cascader: {
-            colorBgElevated: '#ffffff', // ✅ Fondo blanco
+            colorBgElevated: '#ffffffff', // ✅ Fondo blanco
             colorText: '#000000', // ✅ Texto negro
             colorTextPlaceholder: '#8c8c8c',
             colorTextDisabled: '#bfbfbf',

@@ -35,12 +35,57 @@ export const getStaff = async (page = 1, perPage = 50) => {
 
 export const searchStaff = async (term) => {
   try {
+    if (!term || term.trim() === '') {
+      return {
+        data: Staff,
+        total: Staff.length,
+      };
+    }
+
+    const searchTerm = term.toLowerCase().trim();
+    
     // Filtrar datos de prueba por término de búsqueda
-    const filteredData = Staff.filter(staff => 
-      staff.full_name.toLowerCase().includes(term.toLowerCase()) ||
-      staff.document_number.includes(term) ||
-      staff.email.toLowerCase().includes(term.toLowerCase())
-    );
+    const filteredData = Staff.filter(staff => {
+      // Búsqueda por DNI (número de documento)
+      if (staff.document_number.includes(searchTerm)) {
+        return true;
+      }
+      
+      // Búsqueda por nombre completo
+      if (staff.full_name.toLowerCase().includes(searchTerm)) {
+        return true;
+      }
+      
+      // Búsqueda por email
+      if (staff.email.toLowerCase().includes(searchTerm)) {
+        return true;
+      }
+      
+      // Búsqueda por teléfono
+      if (staff.phone.includes(searchTerm)) {
+        return true;
+      }
+      
+      // Búsqueda por especialidad
+      if (staff.specialty.toLowerCase().includes(searchTerm)) {
+        return true;
+      }
+      
+      // Búsqueda avanzada: separar apellidos y nombres
+      const fullNameParts = staff.full_name.toLowerCase().split(/[,\s]+/);
+      const searchParts = searchTerm.split(/\s+/);
+      
+      // Verificar si todos los términos de búsqueda están en el nombre
+      const allPartsFound = searchParts.every(part => 
+        fullNameParts.some(namePart => namePart.includes(part))
+      );
+      
+      if (allPartsFound) {
+        return true;
+      }
+      
+      return false;
+    });
     
     return {
       data: filteredData,
