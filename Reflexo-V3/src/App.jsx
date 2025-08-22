@@ -6,7 +6,6 @@ import Router from './routes/Router';
 import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider } from './routes/AuthContext';
 
-
 function App() {
   return (
     <ToastProvider>

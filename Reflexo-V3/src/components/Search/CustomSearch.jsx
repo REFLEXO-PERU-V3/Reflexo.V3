@@ -7,7 +7,8 @@ const CustomSearch = ({
   onSearch,                      
   size = "large",
   width = "400px",          
-  style = {},               
+  style = {},
+  suffix,               
 }) => {
   const { theme } = useTheme();
 
@@ -51,6 +52,7 @@ const CustomSearch = ({
         placeholder={placeholder}
         size={size}
         onChange={handleChange}
+        suffix={suffix}
         style={{
           width,
           boxShadow: "none",
@@ -63,4 +65,4 @@ const CustomSearch = ({
   );
 };
 
-export default CustomSearch; 
+export default CustomSearch;

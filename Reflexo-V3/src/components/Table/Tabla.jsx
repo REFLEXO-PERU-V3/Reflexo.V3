@@ -4,14 +4,12 @@ import { useEffect, useRef, useState } from 'react';
 import { themeTokensDark, themeTokensLight, useTheme } from '../../context/ThemeContext';
 import ModeloPagination from './Pagination/Pagination.jsx';
 import estilos from './Tabla.module.css';
-import ModeloTable from "../components/Table/Tabla";
-
 
 const ModeloTable = ({ 
   columns, 
   data, 
   loading = false, 
-  pagination = {} ,
+  pagination = {},
   maxHeight = '60vh',
 }) => {
   const currentPage = pagination?.current || 1;
