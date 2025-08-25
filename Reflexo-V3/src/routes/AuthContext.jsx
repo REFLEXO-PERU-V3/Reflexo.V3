@@ -1,9 +1,9 @@
 // src/context/AuthContext.jsx
 import { createContext, useContext, useEffect, useState } from 'react';
-//import { get } from '../services/API/MethodsGeneral';
+import { get } from '../services/API/MethodsGeneral';
 import {
-  getLocalStorage,
-  persistLocalStorage,
+    getLocalStorage,
+    persistLocalStorage,
 } from '../utils/localStorageUtility';
 
 import { useToast } from '../services/toastify/ToastContext';
