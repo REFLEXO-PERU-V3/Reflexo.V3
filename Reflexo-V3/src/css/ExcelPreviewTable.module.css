@@ -1,0 +1,96 @@
+/* ========================================
+   EXCEL PREVIEW TABLE - ESTILOS MODULARES
+   ======================================== */
+
+/* Variables CSS para mantener consistencia y facilitar cambios */
+:root {
+  --primary-green: #95e472;
+  --dark-green: #2d5a3d;
+  --light-gray: #f8f8f8;
+  --border-color: #d9d9d9;
+  --text-dark: #222;
+  --white: #fff;
+  --shadow: 0 2px 12px #e0e0e0;
+  --border-radius: 14px;
+  --padding: 24px;
+  --font-family: Helvetica;
+  --font-size: 15px;
+}
+
+/* ========================================
+   CONTENEDOR PRINCIPAL
+   ======================================== */
+.container {
+  /* Fondo y sombra */
+  background: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  
+  /* Espaciado */
+  padding: var(--padding);
+  margin-top: 16px;
+}
+
+/* ========================================
+   CONFIGURACIÓN DE TIPOGRAFÍA
+   ======================================== */
+/* Aplicar tipografía a la tabla Ant Design */
+.container :global(.ant-table) {
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+}
+
+/* ========================================
+   FILAS ALTERNADAS (ZEBRA STRIPING)
+   ======================================== */
+/* Filas pares - fondo gris claro */
+.rowEven td {
+  background: var(--light-gray) !important;
+}
+
+/* Filas impares - fondo blanco */
+.rowOdd td {
+  background: var(--white) !important;
+}
+
+/* ========================================
+   OVERRIDES DE ANT DESIGN - ENCABEZADOS
+   ======================================== */
+/* Estilo de los encabezados de la tabla */
+.container :global(.ant-table-thead > tr > th) {
+  background: var(--primary-green) !important;
+  color: var(--text-dark) !important;
+  font-weight: bold !important;
+  border: none !important;
+}
+
+/* ========================================
+   OVERRIDES DE ANT DESIGN - CUERPO DE TABLA
+   ======================================== */
+/* Bordes de las celdas del cuerpo */
+.container :global(.ant-table-tbody > tr > td) {
+  border: 1px solid var(--border-color) !important;
+}
+
+/* ========================================
+   OVERRIDES DE ANT DESIGN - PAGINACIÓN
+   ======================================== */
+/* Elemento activo de paginación */
+.container :global(.ant-pagination-item-active) {
+  border-color: var(--primary-green) !important;
+}
+
+.container :global(.ant-pagination-item-active a) {
+  color: var(--dark-green) !important;
+}
+
+/* Efectos hover en paginación */
+.container :global(.ant-pagination-item:hover) {
+  border-color: var(--primary-green) !important;
+}
+
+.container :global(.ant-pagination-item:hover a) {
+  color: var(--dark-green) !important;
+}
+
+
