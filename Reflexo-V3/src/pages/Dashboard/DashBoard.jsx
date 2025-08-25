@@ -29,21 +29,23 @@ export default function Dashboard() {
             <Spin />
           </ConfigProvider>
         ) : (
-          <img
-            alt="Logo de reflexo"
-            src={logoUrl || img}
-            style={{
-              width: 'clamp(50px, 8vw, 90px)',
-              aspectRatio: '1 / 1',
-              borderRadius: '50%',
-              objectFit: 'cover',
-              border: '2px solid #4CAF50',
-              maxWidth: '100%',
-              height: 'auto',
-            }}
-          />
+          <>
+            <img
+              alt="Logo de reflexo"
+              src={logoUrl || img}
+              style={{
+                width: 'clamp(50px, 8vw, 90px)',
+                aspectRatio: '1 / 1',
+                borderRadius: '50%',
+                objectFit: 'cover',
+                border: '2px solid #4CAF50',
+                maxWidth: '100%',
+                height: 'auto',
+              }}
+            />
+            <p>{companyName}</p>
+          </>
         )}
-        <p>{companyName}</p>
       </div>
       <Divider
         style={{
@@ -99,4 +101,3 @@ export default function Dashboard() {
     </div>
   );
 }
->>>>>>> Ronal---Dashboard

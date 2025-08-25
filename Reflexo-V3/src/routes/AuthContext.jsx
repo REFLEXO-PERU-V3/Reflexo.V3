@@ -1,6 +1,6 @@
 // src/context/AuthContext.jsx
 import { createContext, useContext, useEffect, useState } from 'react';
-import { get } from '../services/API/MethodsGeneral';
+//import { get } from '../services/API/MethodsGeneral';
 import {
   getLocalStorage,
   persistLocalStorage,
@@ -28,6 +28,20 @@ export const AuthProvider = ({ children }) => {
     const checkAuth = async () => {
       const token = getLocalStorage('token');
       if (!token) {
+        setAuthChecked(true);
+        return;
+      }
+
+      // Soporte modo MOCK: si hay token simulado, usa datos de localStorage
+      if (typeof token === 'string' && token.startsWith('mock-')) {
+        const role = getLocalStorage('user_role') ?? 1;
+        const name = getLocalStorage('name') ?? 'Administrador';
+        const userId = getLocalStorage('user_id') ?? 1;
+
+        setIsAuthenticated(true);
+        setUserRole(role);
+        persistLocalStorage('name', name);
+        persistLocalStorage('user_id', userId);
         setAuthChecked(true);
         return;
       }
