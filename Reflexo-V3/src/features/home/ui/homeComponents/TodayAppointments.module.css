@@ -1,0 +1,88 @@
+.container {
+  flex: 1;
+  padding: 30px; /* más grande */
+  border-radius: 20px;
+  box-sizing: border-box;
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+  box-shadow:
+    0 10px 6px #1b7b46,   /* menos alto y menos difuso */
+    0 7px 4px #1b7b46;     /* menos alto y menos difuso */
+  transition: all 0.3s ease;
+  min-height: 400px; /* igual que QuickAccess */
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  margin-bottom: 25px;
+  font-weight: bold;
+  font-size: clamp(1.4rem, 3vw, 2rem); /* más grande */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.scrollArea {
+  flex: 1; /* ocupa el espacio restante */
+  max-height: 100%;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.appointment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px; /* más grande */
+  border-radius: 12px;
+  margin-bottom: 10px;
+  background-color: var(--bg-quaternary);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.appointment:hover {
+  transform: translateY(-2px);
+  background-color: var(--bg-hover);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* también más suave */
+}
+
+.appointmentContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.name {
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.details {
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.check {
+  margin-left: 10px;
+}
+
+.emptyState {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  color: var(--text-secondary);
+}
+
+@media screen and (max-width: 600px) {
+  .appointment {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .check {
+    margin-left: 0;
+    margin-top: 8px;
+  }
+}
