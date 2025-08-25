@@ -31,14 +31,15 @@ canvas {
   align-items: center;
   justify-content: center;
 
-  height: 100vh;
+  height: 89vh;
   padding: 2rem;
 }
 
 .loginForm {
   z-index: 1;
 
-  width: 100%;
+  width: 70%;
+  height: 75%;
   min-width: 350px;
   max-width: 560px;
   padding: 3rem;
@@ -51,6 +52,8 @@ canvas {
   box-shadow:
     0 80px 24px #1b7b46,
     0 60px 20px #1b7b46; 
+  margin-top: -10%;
+  margin-left: 97.5%;
 }
 
 

@@ -1,0 +1,27 @@
+.banner {
+  padding: clamp(16px, 5vw, 30px);
+  border-radius: 20px;
+  text-align: left;
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+  box-shadow:
+    0 10px 6px #1b7b46,   /* sombra más pequeña */
+    0 7px 4px #1b7b46;     /* sombra más pequeña */
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: bold;
+  color: var(--text-primary);
+}
+
+.subtitle {
+  flex-wrap: wrap;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: var(--text-primary);
+}

@@ -1,0 +1,105 @@
+/* ===========================
+   🎨 Variables globales
+   =========================== */
+:global(:root) {
+  --color-primary: #1cb54a;
+  --color-bg: #ffffff;
+  --color-text: #222222;
+  --color-border: #dddddd;
+  --color-placeholder: #888888;
+}
+
+:global(html.dark-theme) {
+  --color-primary: #4ade80;
+  --color-bg: #1f1f1f;
+  --color-text: #f1f1f1;
+  --color-border: #444444;
+  --color-placeholder: #bbbbbb;
+}
+
+/* ===========================
+   🧱 Layout base
+   =========================== */
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ===========================
+   📦 Contenedor principal
+   =========================== */
+.container {
+  background: var(--color-bg);
+  color: var(--color-text);
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: background 0.3s ease, color 0.3s ease, border 0.3s ease;
+  overflow: hidden;
+
+  /* NUEVO: evita que los elementos internos se salgan o empujen el layout */
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  /* NUEVO: asegura que el contenido no se expanda más allá del contenedor */
+  align-items: stretch;
+}
+
+
+/* ===========================
+   🧩 Campos de formulario
+   =========================== */
+input,
+textarea,
+.ant-input,
+.ant-select,
+.ant-select-selector,
+.ant-picker {
+  background-color: var(--color-bg) !important;
+  color: var(--color-text) !important;
+  border-color: var(--color-border) !important;
+  
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* ===========================
+   🖋️ Placeholders
+   =========================== */
+input::placeholder,
+textarea::placeholder,
+.ant-select-selection-placeholder {
+  color: var(--color-placeholder) !important;
+}
+
+.patientButtons button {
+  margin-top: 10px;
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+  background: transparent;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  border-radius: 40px;
+
+}
+
+.patientButtons button:hover {
+  color: #fff;
+  background: var(--color-primary);
+  /* transform: scale(1.01);  <-- solo si lo necesitas, pero con cuidado */
+}
+
+.patientSection {
+  flex-direction: row-reverse;
+  gap: 15px;
+  margin: 1rem 0;
+  display: flex;
+}
