@@ -1,23 +1,40 @@
-import React, { createContext, useContext, useMemo } from 'react';
+import React, { createContext, useContext, useState, useMemo } from 'react';
 
 const UserContext = createContext({
-  refetchPhoto: async () => {},
+  profile: null,
+  photoUrl: null,
+  loading: false,
   refetchProfile: async () => {},
+  refetchPhoto: async () => {},
 });
 
-export function UserProvider({ children }) {
+export const UserProvider = ({ children }) => {
+  const [profile, setProfile] = useState(null);
+  const [photoUrl, setPhotoUrl] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const refetchProfile = async () => {
+    // TODO: lógica para recargar perfil
+  };
+
+  const refetchPhoto = async () => {
+    // TODO: lógica para recargar foto
+  };
+
   const value = useMemo(
     () => ({
-      refetchPhoto: async () => {},
-      refetchProfile: async () => {},
+      profile,
+      photoUrl,
+      loading,
+      refetchProfile,
+      refetchPhoto,
     }),
-    []
+    [profile, photoUrl, loading]
   );
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
-}
+};
 
-export function useUser() {
-  return useContext(UserContext);
-}
+export const useUser = () => useContext(UserContext);
 
+export default UserContext;

@@ -1,25 +1,42 @@
-import React, { createContext, useContext, useMemo } from 'react';
+import React, { createContext, useContext, useState, useMemo } from 'react';
 
 const CompanyContext = createContext({
-  refetchCompanyLogo: async () => {},
+  companyInfo: null,
+  logoUrl: null,
+  loading: false,
   refetchCompanyInfo: async () => {},
+  refetchCompanyLogo: async () => {},
 });
 
-export function CompanyProvider({ children }) {
+export const CompanyProvider = ({ children }) => {
+  const [companyInfo, setCompanyInfo] = useState(null);
+  const [logoUrl, setLogoUrl] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const refetchCompanyInfo = async () => {
+    // TODO: lógica para recargar la info de la empresa
+  };
+
+  const refetchCompanyLogo = async () => {
+    // TODO: lógica para recargar el logo de la empresa
+  };
+
   const value = useMemo(
     () => ({
-      refetchCompanyLogo: async () => {},
-      refetchCompanyInfo: async () => {},
+      companyInfo,
+      logoUrl,
+      loading,
+      refetchCompanyInfo,
+      refetchCompanyLogo,
     }),
-    []
+    [companyInfo, logoUrl, loading]
   );
 
   return (
     <CompanyContext.Provider value={value}>{children}</CompanyContext.Provider>
   );
-}
+};
 
-export function useCompany() {
-  return useContext(CompanyContext);
-}
+export const useCompany = () => useContext(CompanyContext);
 
+export default CompanyContext;
