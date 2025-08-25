@@ -1,21 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useTheme } from "../../../../context/ThemeContext";
 
 const ThemeToggle = () => {
-  const [isDark, setIsDark] = useState(true);
-
-  useEffect(() => {
-    if (isDark) {
-      document.body.classList.add("dark");
-      document.body.classList.remove("light");
-    } else {
-      document.body.classList.add("light");
-      document.body.classList.remove("dark");
-    }
-  }, [isDark]);
-
-  const toggleBackground = () => {
-    setIsDark(!isDark);
-  };
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <button
@@ -31,9 +18,9 @@ const ThemeToggle = () => {
         color: "white",
         fontWeight: "bold",
       }}
-      onClick={toggleBackground}
+      onClick={toggleTheme}
     >
-      {isDark ? "Mod Claro" : "Mod Oscuro"}
+      {theme === 'dark' ? "Mod Claro" : "Mod Oscuro"}
     </button>
   );
 };
