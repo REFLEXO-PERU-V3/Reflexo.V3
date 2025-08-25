@@ -1,9 +1,9 @@
 import {
-    del,
-    get,
-    post,
-    postID,
-    put,
+  get,
+  del,
+  post,
+  postID,
+  put,
 } from '../../../services/API/MethodsGeneral';
 
 export const login = async (data) => {
@@ -12,15 +12,16 @@ export const login = async (data) => {
 };
 
 export const validateCode = async (code, id) => {
-  const response = await postID(`verification`, id, code);
+  const response = await postID('verification', id, code);
   return response;
 };
 
 export const changePassword = async (data) => {
-  const response = await put(`change-password`, data);
+  const response = await put('change-password', data);
   console.log(response);
   return response;
 };
+
 export const logOut = async () => {
   const response = await del('logout');
   return response;

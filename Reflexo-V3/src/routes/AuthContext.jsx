@@ -2,13 +2,19 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { get } from '../services/API/MethodsGeneral';
 import {
-    getLocalStorage,
-    persistLocalStorage,
+  getLocalStorage,
+  persistLocalStorage,
 } from '../utils/localStorageUtility';
 
 import { useToast } from '../services/toastify/ToastContext';
 
-const AuthContext = createContext();
+const AuthContext = createContext({
+  isAuthenticated: false,
+  setIsAuthenticated: () => {},
+  userRole: null,
+  setUserRole: () => {},
+  authChecked: false,
+});
 
 export const useAuth = () => useContext(AuthContext);
 
@@ -16,7 +22,7 @@ export const AuthProvider = ({ children }) => {
   const { showToast } = useToast();
   const [authChecked, setAuthChecked] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [userRole, setUserRole] = useState(null); // 👈 nuevo
+  const [userRole, setUserRole] = useState(null);
 
   useEffect(() => {
     const checkAuth = async () => {

@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useMemo } from 'react';
 
 const UserContext = createContext({
   profile: null,
@@ -13,19 +13,28 @@ export const UserProvider = ({ children }) => {
   const [photoUrl, setPhotoUrl] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const refetchProfile = async () => {};
-  const refetchPhoto = async () => {};
+  const refetchProfile = async () => {
+    // TODO: lógica para recargar perfil
+  };
 
-  return (
-    <UserContext.Provider
-      value={{ profile, photoUrl, loading, refetchProfile, refetchPhoto }}
-    >
-      {children}
-    </UserContext.Provider>
+  const refetchPhoto = async () => {
+    // TODO: lógica para recargar foto
+  };
+
+  const value = useMemo(
+    () => ({
+      profile,
+      photoUrl,
+      loading,
+      refetchProfile,
+      refetchPhoto,
+    }),
+    [profile, photoUrl, loading]
   );
+
+  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
 
 export const useUser = () => useContext(UserContext);
 
 export default UserContext;
-

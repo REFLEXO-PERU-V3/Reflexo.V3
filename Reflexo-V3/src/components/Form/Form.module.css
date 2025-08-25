@@ -1,303 +1,479 @@
-/* ===================================
-   ESTILOS DEL COMPONENTE FORMULARIO - TEMA CLARO
-   ===================================
-   
-   Este archivo contiene todos los estilos para el componente FormComponent.
-   Utiliza CSS Modules para evitar conflictos de nombres de clases.
-   El diseño está optimizado para tema claro con colores blanco y verde.
-*/
+/* Variables CSS para sistema de temas con diseño verde */
+:root {
+  /* Tema claro */
+  --form-bg-light: #ffffff;
+  --form-text-light: #000000;
+  --form-border-light: #4caf50;
+  --form-border-accent-light: #2e7d32;
+  --form-input-bg-light: #ffffff;
+  --form-shadow-light: rgba(76, 175, 80, 0.2);
+  --form-hover-light: #e8f5e8;
+  --form-focus-light: rgba(76, 175, 80, 0.4);
+  --form-placeholder-light: #757575;
+  
+  /* Tema oscuro */
+  --form-bg-dark: #1a1a1a;
+  --form-text-dark: #ffffff;
+  --form-border-dark: #404040;
+  --form-input-bg-dark: #2a2a2a;
+  --form-shadow-dark: rgba(0, 0, 0, 0.3);
+  --form-hover-dark: #333333;
+  --form-focus-dark: rgba(76, 175, 80, 0.4);
+  --form-placeholder-dark: #666666;
+}
 
-/* ===================================
-   CONTENEDOR PRINCIPAL DEL FORMULARIO
-   =================================== */
+/* Contenedor principal */
+.container {
+  width: 100%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .formContainer {
-  max-width: 850px;        /* Ancho máximo para mantener legibilidad */
-  margin: 0 auto;          /* Centrado horizontal */
-  margin-top: 10px;        /* Espaciado superior mínimo */
-  padding: 24px;           /* Espaciado interno generoso */
-  border-radius: 12px;     /* Bordes redondeados modernos */
-  color: #333333;          /* Texto gris oscuro para buena legibilidad */
-  background-color: #ffffff; /* Fondo blanco limpio */
-  border: 2px solid #e8f5e8; /* Borde verde muy claro */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  display: flex;
+  flex-direction: column;
+  max-width: 850px;
+  margin: 10px auto 0;
+  padding: 24px;
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Tema oscuro por defecto */
+  background-color: var(--form-bg-dark);
+  color: var(--form-text-dark);
+  border: 2px solid var(--form-border-dark);
+  box-shadow: 0 4px 12px var(--form-shadow-dark);
 }
 
-/* ===================================
-   ESTILOS DE TÍTULOS
-   =================================== */
-/* Títulos de secciones dentro del formulario */
+.formContainer[data-theme="light"] {
+  background-color: var(--form-bg-light);
+  color: #000000 !important;
+  border: 3px solid var(--form-border-light);
+  box-shadow: 0 6px 20px var(--form-shadow-light);
+}
+
+/* Título y etiquetas */
 .title {
-  margin-top: 10px;        /* Espaciado superior reducido */
-  font-size: 26px;         /* Tamaño grande pero no excesivo */
-  font-weight: bold;       /* Peso de fuente destacado */
-  color: #2d5a2d;          /* Verde oscuro para títulos */
-  border-bottom: 2px solid #4CAF50; /* Línea verde debajo del título */
-  padding-bottom: 8px;     /* Espaciado para la línea */
+  margin: 10px 0 20px;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--form-text-dark);
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: -0.5px;
 }
 
-/* ===================================
-   ESTILOS DE ETIQUETAS (LABELS)
-   =================================== */
-/* Etiquetas de los campos del formulario */
+.title[data-theme="light"] {
+  color: #000000 !important;
+}
+
 .label {
-  font-size: 0.95rem;      /* Tamaño ligeramente menor que el texto normal */
-  color: #2d5a2d;          /* Verde oscuro para buena legibilidad */
-  font-weight: 600;        /* Peso medio para destacar */
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--form-text-dark);
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-bottom: 8px;
+  display: block;
+  line-height: 1.4;
 }
 
-/* ===================================
-   ESPACIADO DE ELEMENTOS DEL FORMULARIO
-   =================================== */
-/* Espaciado compacto entre campos para mejor densidad visual */
+.label[data-theme="light"] {
+  color: #000000 !important;
+}
+
+/* Layout */
 .formItem {
-  margin: 12px 0;          /* Margen vertical moderado */
+  display: flex;
+  flex-direction: column;
+  margin: 12px 0;
 }
 
-/* Estilos para los Form.Item de Ant Design */
-.formItem :global(.ant-form-item-label) {
-  padding-bottom: 4px;     /* Reducir espaciado entre label e input */
+.formRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 16px;
 }
 
-.formItem :global(.ant-form-item-explain-error) {
-  color: #d32f2f;          /* Color rojo para errores */
-  font-size: 0.85rem;      /* Tamaño menor para mensajes de error */
+.formCol {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 200px;
 }
 
-/* ===================================
-   ESTILOS DE BOTONES
-   =================================== */
-/* Contenedor del grupo de botones */
+
+
+/* ===== CONTENEDOR DE BOTONES ===== */
 .buttonGroup {
-  margin-top: 24px;        /* Mayor separación del resto del formulario */
-  margin-bottom: 10px;     /* Espaciado inferior */
-  border-top: 1px solid #e8f5e8; /* Línea separadora verde claro */
-  padding-top: 16px;       /* Espaciado superior */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 2px solid var(--form-border-dark);
 }
 
-/* Wrapper para alinear botones a la derecha */
 .buttonWrapper {
-  display: flex;           /* Flexbox para alineación */
-  justify-content: flex-end; /* Alineación a la derecha */
-  gap: 12px;               /* Espaciado entre botones */
+  display: flex;
+  gap: 12px;
+  align-items: center;
 }
 
-/* Estilo específico del botón Cancelar */
-.buttonCancel {
-  display: flex;           /* Flexbox para centrar contenido */
-  align-items: center;     /* Centrado vertical */
-  justify-content: center; /* Centrado horizontal */
-  height: 40px;            /* Altura mayor para mejor usabilidad */
-  padding: 0 20px;         /* Espaciado interno horizontal */
-  border: 2px solid #e0e0e0; /* Borde gris claro */
-  border-radius: 6px;      /* Bordes redondeados */
-  font-size: 0.95rem;      /* Tamaño de fuente */
-  font-weight: 500;        /* Peso medio */
-  color: #666666;          /* Texto gris */
-  background-color: #ffffff; /* Fondo blanco */
-  cursor: pointer;         /* Cursor pointer */
-  transition: all 0.3s ease; /* Transición suave */
+.buttonGroup[data-theme="light"] {
+  border-top: 2px solid var(--form-border-light);
 }
 
-.buttonCancel:hover {
-  border-color: #bdbdbd;   /* Borde más oscuro al hover */
-  color: #333333;          /* Texto más oscuro al hover */
-  transform: translateY(-1px); /* Efecto de elevación */
+/* ===== FORZAR TEXTO NEGRO EN TEMA CLARO ===== */
+
+/* Forzar texto negro en todos los elementos del formulario en tema claro */
+[data-theme="light"] .formContainer,
+[data-theme="light"] .formContainer *,
+[data-theme="light"] .title,
+[data-theme="light"] .label {
+  color: #000000 !important;
 }
 
-/* Estilo específico del botón Enviar/Registrar */
-.buttonSubmit {
-  display: flex;           /* Flexbox para centrar contenido */
-  align-items: center;     /* Centrado vertical */
-  justify-content: center; /* Centrado horizontal */
-  height: 40px;            /* Altura igual al botón cancelar */
-  padding: 0 20px;         /* Espaciado interno horizontal */
-  border: none;            /* Sin borde */
-  border-radius: 6px;      /* Bordes redondeados */
-  font-size: 0.95rem;      /* Tamaño de fuente consistente */
-  font-weight: 600;        /* Peso mayor para destacar */
-  color: #ffffff;          /* Texto blanco */
-  background-color: #4CAF50; /* Fondo verde principal */
-  cursor: pointer;         /* Cursor pointer */
-  transition: all 0.3s ease; /* Transición suave */
-}
+/* ===== ESTILOS GLOBALES PARA COMPONENTES ANT DESIGN ===== */
 
-.buttonSubmit:hover {
-  background-color: #45a049; /* Verde más oscuro al hover */
-  transform: translateY(-1px); /* Efecto de elevación */
-  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3); /* Sombra verde */
-}
-
-.buttonSubmit:active {
-  transform: translateY(0); /* Resetear elevación al click */
-}
-
-/* ===================================
-   ESTILOS DE CAMPOS DE ENTRADA
-   =================================== */
-/* Estilos globales para todos los inputs y controles de Ant Design */
-input,
-select,
-textarea,
+/* Inputs, selects y pickers - Base (tema oscuro) */
 :global(.ant-input),
+:global(.ant-picker),
 :global(.ant-select-selector),
-:global(.ant-picker) {
-  height: 40px !important; /* Altura estándar para todos los controles */
-  padding: 8px 12px !important; /* Espaciado interno cómodo */
-  font-size: 0.95rem !important; /* Tamaño de fuente consistente */
-  line-height: 1.4 !important; /* Altura de línea para buena legibilidad */
-  border: 2px solid #e8f5e8 !important; /* Borde verde muy claro */
-  border-radius: 6px !important; /* Bordes redondeados */
-  background-color: #ffffff !important; /* Fondo blanco */
-  color: #333333 !important; /* Texto gris oscuro */
-  transition: all 0.3s ease !important; /* Transición suave */
+:global(.ant-cascader-picker) {
+  background-color: var(--form-input-bg-dark) !important;
+  color: var(--form-text-dark) !important;
+  border-color: var(--form-border-dark) !important;
+  border-radius: 8px !important;
+  width: 100% !important;
+  height: 40px !important;
+  font-size: 0.95rem !important;
+  font-weight: 500 !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
 }
 
-/* Estados de focus para inputs */
-input:focus,
-select:focus,
-textarea:focus,
-:global(.ant-input:focus),
-:global(.ant-select-focused .ant-select-selector),
-:global(.ant-picker:focus) {
-  border-color: #4CAF50 !important; /* Borde verde al focus */
-  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1) !important; /* Sombra verde suave */
-  outline: none !important; /* Sin outline por defecto */
+/* Tema claro - FORZAR TEXTO NEGRO */
+[data-theme="light"] :global(.ant-input),
+[data-theme="light"] :global(.ant-picker),
+[data-theme="light"] :global(.ant-select-selector),
+[data-theme="light"] :global(.ant-cascader-picker) {
+  background-color: var(--form-input-bg-light) !important;
+  color: #000000 !important;
+  border-color: var(--form-border-light) !important;
+  border-width: 2px !important;
+  box-shadow: 0 2px 6px var(--form-shadow-light) !important;
 }
 
-/* Placeholder styling */
-input::placeholder,
-textarea::placeholder,
-:global(.ant-input::placeholder),
+/* Elementos internos de select - FORZAR TEXTO NEGRO */
+:global(.ant-select-selection-item) {
+  color: var(--form-text-dark) !important;
+  font-weight: 600 !important;
+}
+
 :global(.ant-select-selection-placeholder) {
-  color: #999999 !important; /* Color gris para placeholders */
-  opacity: 1 !important; /* Opacidad completa */
+  color: var(--form-placeholder-dark) !important;
 }
 
-/* Estilos para textareas */
-textarea,
-:global(.ant-input) {
-  min-height: 80px !important; /* Altura mínima para textareas */
-  resize: vertical !important; /* Solo redimensionar verticalmente */
+[data-theme="light"] :global(.ant-select-selection-item) {
+  color: #000000 !important;
+  font-weight: 600 !important;
 }
 
-/* ===================================
-   ESTILOS PARA SELECTS
-   =================================== */
+[data-theme="light"] :global(.ant-select-selection-placeholder) {
+  color: #666666 !important;
+}
+
+/* Dropdown del select - FORZAR TEXTO NEGRO */
 :global(.ant-select-dropdown) {
-  border: 2px solid #e8f5e8 !important; /* Borde verde claro */
-  border-radius: 6px !important; /* Bordes redondeados */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important; /* Sombra suave */
+  background-color: var(--form-input-bg-dark) !important;
+  border: 1px solid var(--form-border-dark) !important;
+}
+
+:global(.ant-select-item) {
+  color: var(--form-text-dark) !important;
+}
+
+:global(.ant-select-item:hover) {
+  background-color: var(--form-hover-dark) !important;
 }
 
 :global(.ant-select-item-option-selected) {
-  background-color: #e8f5e8 !important; /* Fondo verde claro para opción seleccionada */
-  color: #2d5a2d !important; /* Texto verde oscuro */
+  background-color: var(--form-focus-dark) !important;
 }
 
-:global(.ant-select-item-option:hover) {
-  background-color: #f1f8e9 !important; /* Fondo verde muy claro al hover */
+[data-theme="light"] :global(.ant-select-dropdown) {
+  background-color: var(--form-input-bg-light) !important;
+  border: 2px solid var(--form-border-light) !important;
+  box-shadow: 0 8px 24px var(--form-shadow-light) !important;
 }
 
-/* ===================================
-   DISEÑO RESPONSIVE PARA MÓVILES
-   =================================== */
-/* Adaptaciones para pantallas pequeñas (móviles) */
-@media (max-width: 480px) {
-  /* Contenedor principal más compacto en móviles */
+[data-theme="light"] :global(.ant-select-item) {
+  color: #000000 !important;
+}
+
+[data-theme="light"] :global(.ant-select-item:hover) {
+  background-color: var(--form-hover-light) !important;
+  color: #000000 !important;
+}
+
+[data-theme="light"] :global(.ant-select-item-option-selected) {
+  background-color: var(--form-focus-light) !important;
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+
+/* DatePicker input - FORZAR TEXTO NEGRO */
+[data-theme="light"] :global(.ant-picker-input > input) {
+  color: #000000 !important;
+}
+
+/* Labels de formulario - FORZAR TEXTO NEGRO */
+:global(.ant-form-item-label > label) {
+  color: var(--form-text-dark) !important;
+}
+
+[data-theme="light"] :global(.ant-form-item-label > label) {
+  color: #000000 !important;
+}
+
+/* Estados hover y focus */
+[data-theme="light"] :global(.ant-input:hover),
+[data-theme="light"] :global(.ant-select:hover),
+[data-theme="light"] :global(.ant-picker:hover) {
+  background-color: var(--form-hover-light) !important;
+  border-color: var(--form-border-accent-light) !important;
+  box-shadow: 0 4px 12px var(--form-shadow-light) !important;
+  color: #000000 !important;
+}
+
+[data-theme="light"] :global(.ant-input:focus),
+[data-theme="light"] :global(.ant-select:focus),
+[data-theme="light"] :global(.ant-picker:focus) {
+  border-color: var(--form-border-accent-light) !important;
+  box-shadow: 0 0 0 3px var(--form-focus-light) !important;
+  outline: none !important;
+  color: #000000 !important;
+}
+
+:global(.ant-input:hover),
+:global(.ant-select:hover),
+:global(.ant-picker:hover) {
+  background-color: var(--form-hover-dark) !important;
+  border-color: var(--form-text-dark) !important;
+}
+
+:global(.ant-input:focus),
+:global(.ant-select:focus),
+:global(.ant-picker:focus) {
+  border-color: var(--form-text-dark) !important;
+  box-shadow: 0 0 0 3px var(--form-focus-dark) !important;
+  outline: none !important;
+}
+
+/* ===== DATEPICKER PANEL - FORZAR TEXTO NEGRO ===== */
+
+/* Base (tema oscuro) */
+:global(.ant-picker-dropdown) {
+  background-color: var(--form-input-bg-dark) !important;
+  border: 2px solid var(--form-border-dark) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+:global(.ant-picker-panel-container),
+:global(.ant-picker-header),
+:global(.ant-picker-content) {
+  background-color: var(--form-input-bg-dark) !important;
+}
+
+:global(.ant-picker-header-view),
+:global(.ant-picker-prev-icon),
+:global(.ant-picker-next-icon),
+:global(.ant-picker-super-prev-icon),
+:global(.ant-picker-super-next-icon),
+:global(.ant-picker-cell) {
+  color: var(--form-text-dark) !important;
+}
+
+:global(.ant-picker-cell:hover .ant-picker-cell-inner) {
+  background-color: var(--form-hover-dark) !important;
+}
+
+:global(.ant-picker-cell-selected .ant-picker-cell-inner) {
+  background-color: var(--form-border-dark) !important;
+  border: 2px solid #4caf50 !important;
+}
+
+:global(.ant-picker-cell-today .ant-picker-cell-inner) {
+  border: 1px solid #4caf50 !important;
+}
+
+:global(.ant-picker-today-btn) {
+  color: #4caf50 !important;
+  font-weight: 600 !important;
+}
+
+/* Tema claro - FORZAR TEXTO NEGRO EN DATEPICKER */
+[data-theme="light"] :global(.ant-picker-dropdown) {
+  background-color: var(--form-input-bg-light) !important;
+  border: 2px solid var(--form-border-light) !important;
+  box-shadow: 0 8px 24px var(--form-shadow-light) !important;
+}
+
+[data-theme="light"] :global(.ant-picker-panel-container),
+[data-theme="light"] :global(.ant-picker-header),
+[data-theme="light"] :global(.ant-picker-content) {
+  background-color: var(--form-input-bg-light) !important;
+}
+
+[data-theme="light"] :global(.ant-picker-header-view),
+[data-theme="light"] :global(.ant-picker-prev-icon),
+[data-theme="light"] :global(.ant-picker-next-icon),
+[data-theme="light"] :global(.ant-picker-super-prev-icon),
+[data-theme="light"] :global(.ant-picker-super-next-icon),
+[data-theme="light"] :global(.ant-picker-cell) {
+  color: #000000 !important;
+}
+
+[data-theme="light"] :global(.ant-picker-cell:hover .ant-picker-cell-inner) {
+  background-color: var(--form-hover-light) !important;
+  color: #000000 !important;
+}
+
+[data-theme="light"] :global(.ant-picker-cell-selected .ant-picker-cell-inner) {
+  background-color: var(--form-focus-light) !important;
+  border: 2px solid var(--form-border-accent-light) !important;
+  font-weight: 700 !important;
+  color: #000000 !important;
+}
+
+[data-theme="light"] :global(.ant-picker-cell-today .ant-picker-cell-inner) {
+  border: 1px solid var(--form-border-accent-light) !important;
+  font-weight: 600 !important;
+  color: #000000 !important;
+}
+
+[data-theme="light"] :global(.ant-picker-today-btn) {
+  color: var(--form-border-accent-light) !important;
+}
+
+[data-theme="light"] :global(.ant-picker-today-btn:hover) {
+  background-color: var(--form-hover-light) !important;
+  color: #000000 !important;
+}
+
+/* Estilos para DatePicker en tema claro */
+[data-theme="light"] :global(.ant-picker-input > input) {
+  color: var(--form-text-light) !important;
+  font-weight: 500 !important;
+}
+
+/* Estilos para labels de formulario */
+[data-theme="light"] :global(.ant-form-item-label > label) {
+  color: var(--form-text-light) !important;
+  font-weight: 600 !important;
+}
+
+/* ===== BOTONES CON ESTILOS ESPECÍFICOS ===== */
+.buttonCancel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 20px;
+  border: none !important;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: white !important;
+  background-color: #007bff !important;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+}
+
+.buttonCancel:hover {
+  background-color: #0056b3 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+}
+
+.buttonSubmit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 20px;
+  border: none !important;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: white !important;
+  background-color: #28a745 !important;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 4px rgba(40, 167, 69, 0.3);
+}
+
+.buttonSubmit:hover {
+  background-color: #1e7e34 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(40, 167, 69, 0.4);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
   .formContainer {
-    padding: 16px;         /* Reducir espaciado interno */
-    margin: 10px;          /* Margen lateral en móviles */
+    padding: 16px;
+    margin: 10px;
+  }
+  
+  .formRow {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .formCol {
+    min-width: unset;
+  }
+  
+  .buttonGroup {
+    gap: 8px;
+  }
+  
+  .buttonCancel,
+  .buttonSubmit {
+    height: 36px;
+    padding: 0 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .formContainer {
+    padding: 12px;
   }
 
-  /* Títulos más pequeños en móviles */
   .title {
-    margin-bottom: 0.5rem; /* Menor espaciado inferior */
-    font-size: 1.4rem;     /* Tamaño de fuente reducido */
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
   }
 
-  /* Campos más compactos en móviles */
   .formItem {
-    margin: 8px 0;         /* Reducir margen vertical */
+    margin: 8px 0;
   }
 
-  /* Controles más pequeños en móviles */
-  input,
-  select,
-  textarea,
   :global(.ant-input),
-  :global(.ant-select-selector),
+  :global(.ant-select),
   :global(.ant-picker) {
-    height: 36px !important; /* Altura reducida para móviles */
-    font-size: 0.9rem !important; /* Fuente más pequeña */
-    padding: 6px 10px !important; /* Menos espaciado interno */
-  }
-
-  /* Botones más compactos en móviles */
-  .buttonCancel,
-  .buttonSubmit {
-    height: 36px;          /* Altura reducida */
-    padding: 0 16px;       /* Menos espaciado interno */
-    font-size: 0.9rem;     /* Fuente más pequeña */
-  }
-
-  /* Botones en columna en móviles muy pequeños */
-  .buttonWrapper {
-    flex-direction: column; /* Botones en columna */
-    gap: 8px;              /* Espaciado menor */
+    height: 32px !important;
+    font-size: 0.85rem !important;
   }
 
   .buttonCancel,
   .buttonSubmit {
-    width: 100%;           /* Ancho completo en móviles */
+    height: 32px;
+    padding: 0 12px;
+    font-size: 0.8rem;
   }
+
 }
-
-/* ===================================
-   ESTILOS ADICIONALES PARA TEMA CLARO
-   =================================== */
-
-/* Contenedor general con fondo claro */
-.container {
-  background-color: #f8fdf8; /* Fondo verde muy claro para toda la página */
-  min-height: 100vh;       /* Altura mínima completa */
-  padding: 20px 0;         /* Espaciado vertical */
-}
-
-/* Estilos para checkboxes */
-:global(.ant-checkbox-wrapper) {
-  color: #333333 !important; /* Texto gris oscuro */
-}
-
-:global(.ant-checkbox-checked .ant-checkbox-inner) {
-  background-color: #4CAF50 !important; /* Fondo verde para checkbox marcado */
-  border-color: #4CAF50 !important; /* Borde verde */
-}
-
-/* Estilos para radio buttons */
-:global(.ant-radio-checked .ant-radio-inner) {
-  border-color: #4CAF50 !important; /* Borde verde */
-}
-
-:global(.ant-radio-checked .ant-radio-inner::after) {
-  background-color: #4CAF50 !important; /* Punto verde */
-}
-
-/* ===================================
-   NOTAS DE IMPLEMENTACIÓN - TEMA CLARO
-   ===================================
-   
-   1. Este formulario usa CSS Modules para encapsulación de estilos
-   2. El tema claro es consistente en todo el componente
-   3. Los estilos son responsive y se adaptan a móviles
-   4. Se mantiene consistencia visual con Ant Design
-   5. Los colores siguen una paleta coherente:
-      - Fondo principal: #ffffff (blanco)
-      - Fondo secundario: #f8fdf8 (verde muy claro)
-      - Controles: #e8f5e8 (verde claro)
-      - Texto: #333333 (gris oscuro)
-      - Títulos: #2d5a2d (verde oscuro)
-      - Botón principal: #4CAF50 (verde)
-      - Botón secundario: #ffffff con borde gris
-   6. Se agregaron efectos hover y transiciones para mejor UX
-   7. Sombras sutiles para dar profundidad al diseño
-*/

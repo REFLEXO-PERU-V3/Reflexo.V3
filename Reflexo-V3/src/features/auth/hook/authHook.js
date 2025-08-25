@@ -6,16 +6,16 @@ import { useAuth as useAuthentication } from '../../../routes/AuthContext';
 import { get } from '../../../services/API/MethodsGeneral';
 import { useToast } from '../../../services/toastify/ToastContext';
 import {
-    getLocalStorage,
-    persistLocalStorage,
-    removeLocalStorage,
+  getLocalStorage,
+  persistLocalStorage,
+  removeLocalStorage,
 } from '../../../utils/localStorageUtility';
 import {
-    changePassword as changePasswordService,
-    login as LoginService,
-    logOut as LogOutService,
-    sendVerifyCode as sendVerifyCodeService,
-    validateCode as validateCodeService,
+  changePassword as changePasswordService,
+  login as LoginService,
+  logOut as LogOutService,
+  sendVerifyCode as sendVerifyCodeService,
+  validateCode as validateCodeService,
 } from '../service/authService';
 
 export const useAuth = () => {
@@ -38,10 +38,7 @@ export const useAuth = () => {
       }
       return false;
     } catch (err) {
-      showToast(
-        'intentoFallido',
-        'No se pudo obtener la información del usuario.',
-      );
+      showToast('intentoFallido', 'No se pudo obtener la información del usuario.');
       return false;
     }
   };
@@ -71,14 +68,13 @@ export const useAuth = () => {
       const loginData = await LoginService(credentials);
 
       if (loginData.status === 200 && loginData.data) {
-        // Verificar si es el primer inicio de sesión
         if (loginData.data.first_login) {
-          // Es primer inicio - guardar user_id y redirigir a primer inicio
+          // primer inicio
           persistLocalStorage('user_id', loginData.data.user_id);
           showToast('inicioSesionExitoso');
           navigate('/primerInicio');
         } else {
-          // No es primer inicio - flujo normal
+          // flujo normal
           persistLocalStorage('token', loginData.data.token);
           setIsAuthenticated(true);
 
@@ -131,14 +127,12 @@ export const useAuth = () => {
   const validateCode = async (code) => {
     try {
       const data = await validateCodeService(code, getLocalStorage('user_id'));
-      // El backend responde con { valid: true/false, message: ... }
       if (data.data?.valid) {
         showToast('codigoVerificado');
         persistLocalStorage('token', data.data.token);
         navigate('/cambiarContraseña');
       } else {
         showToast('intentoFallido', data.data?.message || 'Código incorrecto');
-        // No navega ni permite avanzar
       }
     } catch (error) {
       const backendMsg = error?.response?.data?.message || null;
@@ -151,7 +145,6 @@ export const useAuth = () => {
       const response = await changePasswordService(data);
       if (response.status == '200') {
         showToast('contraseñaCambiada');
-        // Después de cambiar contraseña, obtener datos del usuario y redirigir
         setIsAuthenticated(true);
         const roleFetched = await fetchUserRole();
         if (roleFetched) {

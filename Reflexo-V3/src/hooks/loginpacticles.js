@@ -1,8 +1,8 @@
-// Simple fallback particle effect to avoid runtime errors when used in login/changes password screens.
-// Returns a cleanup function to remove listeners and DOM nodes.
+// Particle effect for login and change-password screens.
+// Returns a cleanup function to stop animation and remove canvas safely.
 
 export function initializeParticles() {
-  const container = document.getElementById('particles-js');
+  const container = typeof document !== 'undefined' ? document.getElementById('particles-js') : null;
   if (!container) {
     return () => {};
   }
@@ -68,4 +68,3 @@ export function initializeParticles() {
 }
 
 export default { initializeParticles };
-
