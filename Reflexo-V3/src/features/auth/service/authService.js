@@ -1,10 +1,10 @@
 import {
-  get,
-  del,
-  post,
-  postID,
-  put,
-} from '../../../services/api/Axios/MethodsGeneral';
+    del,
+    get,
+    post,
+    postID,
+    put,
+} from '../../../services/API/MethodsGeneral';
 
 export const login = async (data) => {
   const response = await post('login', data);
