@@ -1,0 +1,1186 @@
+/* Variables CSS para temas */
+:root {
+  /* Colores primarios */
+  --primary: #4CAF50;
+  --primary-hover: #43a047;
+  --primary-dark: #388E3C;
+  --primary-light: #e8f5e9;
+  
+  /* Tema claro - Valores por defecto */
+  --bg-color: #f8f9fa;
+  --surface: #ffffff;
+  --text: #1a1a1a;
+  --text-secondary: #666666;
+  --border: #e0e0e0;
+  --hover: #f5f5f5;
+  --card-bg: #ffffff;
+  --header-bg: #ffffff;
+  
+  /* Estados */
+  --success: #52c41a;
+  --error: #ff4d4f;
+  --warning: #faad14;
+  --info: #1890ff;
+  
+  /* Sombras */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  
+  /* Transiciones */
+  --transition: all 0.3s ease;
+}
+
+/* Tema oscuro */
+[data-theme="dark"] {
+  --bg-color: #141414;
+  --surface: #1f1f1f;
+  --text: #f0f0f0;
+  --text-secondary: #a0a0a0;
+  --border: #333333;
+  --hover: #2a2a2a;
+  --card-bg: #1f1f1f;
+  --header-bg: #1a1a1a;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  background-color: var(--bg-color);
+  color: var(--text);
+}
+
+/* Asegurar que el body ocupe toda la altura */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Aplicar el tema al body */
+body {
+  background-color: var(--bg-color);
+  color: var(--text);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Aplicar tema claro por defecto */
+:root {
+  --bg-color: var(--light-bg);
+  --surface-color: var(--light-surface);
+  --text-color: var(--light-text);
+  --text-secondary: var(--light-text-secondary);
+  --border-color: var(--light-border);
+  --hover-color: var(--light-hover);
+}
+
+/* Estilos base */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text);
+  transition: var(--transition);
+  line-height: 1.5;
+}
+
+/* Contenedor principal */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px;
+  min-height: 100vh;
+}
+
+/* Encabezado */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Botón primario */
+.primaryButton {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: white;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.primaryButton:hover {
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+  color: white;
+}
+
+/* Botón de alternar tema */
+.themeToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: var(--transition);
+  color: var(--text);
+}
+
+.themeToggle:hover {
+  background: var(--hover);
+}
+
+/* Tarjeta */
+.card {
+  background: var(--surface);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  padding: 24px;
+  margin-bottom: 24px;
+  border: 1px solid var(--border);
+}
+
+/* Tabla */
+.tableContainer {
+  background: var(--surface);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+/* Estado */
+.statusTag {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.statusActive {
+  background-color: rgba(76, 175, 80, 0.1);
+  color: var(--primary);
+}
+
+.statusInactive {
+  background-color: rgba(244, 67, 54, 0.1);
+  color: #f44336;
+}
+
+/* Botones de acción */
+.actionButton {
+  margin-right: 8px;
+}
+
+.editButton {
+  color: var(--info);
+  border-color: var(--info);
+}
+
+.deleteButton {
+  color: var(--error);
+  border-color: var(--error);
+}
+
+/* Modal */
+.modalHeader {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+  margin-bottom: 24px;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+/* Encabezado */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.title {
+  margin: 0;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Botón de tema */
+.themeToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--surface-color);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all 0.3s;
+  border: 1px solid var(--border-color);
+}
+
+.themeToggle:hover {
+  transform: rotate(30deg);
+  background-color: var(--hover-color);
+}
+
+/* Botón de agregar */
+.addButton {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: white;
+  font-weight: 500;
+  height: 40px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s;
+}
+
+.addButton:hover, .addButton:focus {
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+}
+
+/* Contenedor de tabla */
+.tableContainer {
+  background: var(--surface-color);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+/* Celdas de tabla */
+.tableCell {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-color);
+}
+
+/* Badges de estado */
+.statusTag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.statusActive {
+  background-color: rgba(82, 196, 26, 0.1);
+  border: 1px solid rgba(82, 196, 26, 0.3);
+  color: var(--success);
+}
+
+.statusInactive {
+  background-color: rgba(255, 77, 79, 0.1);
+  border: 1px solid rgba(255, 77, 79, 0.3);
+  color: var(--error);
+}
+
+/* Badges de rol */
+.roleBadge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.roleAdmin {
+  background-color: rgba(24, 144, 255, 0.1);
+  color: var(--info);
+}
+
+.roleUser {
+  background-color: rgba(82, 196, 26, 0.1);
+  color: var(--success);
+}
+
+/* Botones de acción */
+.editButton {
+  color: var(--info);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.3s;
+}
+
+.editButton:hover {
+  color: #40a9ff;
+}
+
+.deleteButton {
+  color: var(--error);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.3s;
+}
+
+.deleteButton:hover {
+  color: #ff7875;
+}
+
+/* Modal */
+.modal :global(.ant-modal-content) {
+  background-color: var(--surface-color);
+  color: var(--text-color);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.modal :global(.ant-modal-header) {
+  background-color: var(--surface-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.modal :global(.ant-modal-title) {
+  color: var(--text-color);
+}
+
+.modal :global(.ant-modal-close) {
+  color: var(--text-secondary);
+}
+
+.modal :global(.ant-modal-close:hover) {
+  color: var(--text-color);
+}
+
+/* Formularios */
+:global(.ant-form-item-label > label) {
+  color: var(--text-color) !important;
+}
+
+:global(.ant-input) {
+  background-color: var(--surface-color);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+:global(.ant-select-selector) {
+  background-color: var(--surface-color) !important;
+  color: var(--text-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* Tabla */
+:global(.ant-table) {
+  background: var(--surface-color);
+  color: var(--text-color);
+}
+
+:global(.ant-table-thead > tr > th) {
+  background: var(--hover-color) !important;
+  color: var(--text-color) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+:global(.ant-table-tbody > tr > td) {
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+:global(.ant-table-tbody > tr:hover > td) {
+  background: var(--hover-color) !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  
+  .actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+/* Variables adicionales */
+:root {
+  --warning: #faad14;
+  --info: #1890ff;
+  --status-enabled: #52c41a;
+  --status-disabled: #ff4d4f;
+  --status-pending: #faad14;
+  --status-enabled-bg: #f6ffed;
+  --status-disabled-bg: #fff2f0;
+  --status-pending-bg: #fffbe6;
+  --status-enabled-text: #237804;
+  --status-disabled-text: #a8071a;
+  --form-label-color: rgba(0, 0, 0, 0.85);
+  --section-title-color: rgba(0, 0, 0, 0.85);
+  --card-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Aplicar estilos generales */
+body {
+  background-color: var(--background);
+  color: var(--text-primary);
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.5;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: var(--background);
+  color: var(--text-primary);
+  min-height: 100vh;
+  padding: 16px;
+  margin-left: 80px; /* Espacio para la barra lateral */
+  transition: all 0.3s ease;
+}
+
+/* Estilos para la tabla */
+.tableContainer {
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+}
+
+/* Asegurar que la tabla ocupe el ancho completo */
+.tableContainer .ant-table {
+  width: 100% !important;
+}
+
+/* Centrar el contenido de las celdas */
+.tableContainer .ant-table-thead > tr > th,
+.tableContainer .ant-table-tbody > tr > td {
+  text-align: center !important;
+  vertical-align: middle;
+}
+
+/* Ajustar el paginador */
+.tableContainer .ant-pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+/* Estilos para los botones de acción */
+.actionButton {
+  margin-right: 8px;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+/* Estilos para los modales */
+.modalHeader {
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+}
+
+.modalFooter {
+  border-top: 1px solid var(--border-color);
+  padding-top: 16px;
+  margin-top: 16px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* Estilos para las tarjetas */
+.card {
+  background: var(--card-bg);
+  border-radius: 8px;
+  box-shadow: var(--card-shadow);
+  padding: 16px;
+  margin-bottom: 16px;
+  transition: all 0.3s ease;
+}
+
+/* Estilos para los estados */
+.statusEnabled {
+  font-weight: 500;
+  color: var(--status-enabled-text);
+  background-color: var(--status-enabled-bg);
+  transition: all 0.3s ease;
+}
+
+.statusDisabled {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--status-disabled-text);
+  background-color: var(--status-disabled-bg);
+  transition: all 0.3s ease;
+}
+
+/* Estilos para los botones */
+.editButton,
+.deactivateButton,
+.deleteButton,
+.addButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 16px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.editButton {
+  color: var(--edit-button-text);
+  background-color: var(--edit-button-bg);
+}
+
+.editButton:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.deactivateButton {
+  color: var(--deactivate-button-text);
+  background-color: var(--deactivate-button-bg);
+}
+
+.deactivateButton:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.deleteButton {
+  color: var(--delete-button-text);
+  background-color: var(--delete-button-bg);
+}
+
+.deleteButton:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.addButton {
+  border: 1px solid var(--add-button-border);
+  color: var(--add-button-text);
+  background-color: var(--add-button-bg);
+}
+
+.addButton:hover {
+  border-color: var(--add-button-hover-border);
+  background-color: var(--add-button-hover-bg);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Estilos para el encabezado */
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Estilos para la tabla */
+.tableContainer .ant-table-thead > tr > th {
+  background-color: var(--header-bg) !important;
+  color: var(--text-color) !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+
+.tableContainer .ant-table-tbody > tr > td {
+  border-bottom: 1px solid var(--border) !important;
+  transition: background-color 0.3s;
+}
+
+/* Eliminar borde de la columna de acciones */
+.tableContainer .ant-table-thead > tr > th:last-child,
+.tableContainer .ant-table-tbody > tr > td:last-child {
+  border-right: none !important;
+}
+
+.tableContainer .ant-table {
+  border: 1px solid var(--border) !important;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Estilos para formularios */
+.userForm {
+  margin-top: 16px;
+}
+
+.userForm .ant-form-item-label > label {
+  color: var(--text);
+  font-weight: 500;
+  height: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.userForm .ant-form-item {
+  margin-bottom: 16px;
+}
+
+.userForm .ant-form-item:last-child {
+  margin-bottom: 0;
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* Inputs */
+.userForm .ant-input,
+.userForm .ant-select-selector,
+.userForm .ant-input-password {
+  background-color: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  height: 40px;
+  padding: 8px 12px;
+  transition: all 0.3s;
+}
+
+.userForm .ant-input-affix-wrapper {
+  padding: 0;
+  border-radius: 4px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.userForm .ant-input-affix-wrapper > input.ant-input {
+  height: 38px;
+  padding: 0 12px;
+  border: none;
+  box-shadow: none;
+}
+
+.userForm .ant-input-affix-wrapper-focused {
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+  border-color: var(--primary);
+}
+
+.userForm .ant-input:focus,
+.userForm .ant-select-selector:focus,
+.userForm .ant-input-password:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+/* Select */
+.userForm .ant-select-selector {
+  height: 40px !important;
+  display: flex;
+  align-items: center;
+}
+
+.userForm .ant-select-selection-item {
+  line-height: 38px !important;
+}
+
+/* Botones del formulario */
+.userForm .ant-btn {
+  height: 36px;
+  padding: 0 16px;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.userForm .ant-btn-default {
+  background-color: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.userForm .ant-btn-default:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.userForm .ant-btn-primary {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.userForm .ant-btn-primary:hover {
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+}
+
+/* Switch */
+.userForm .ant-switch {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.userForm .ant-switch-checked {
+  background: var(--primary);
+}
+
+/* Mensajes de ayuda */
+.userForm .ant-form-item-extra {
+  color: var(--text-secondary);
+  font-size: 12px;
+  margin-top: 4px;
+  min-height: 20px;
+}
+
+/* Estilos para selects */
+.ant-select-selector {
+  background-color: var(--input-bg) !important;
+  border-color: var(--border) !important;
+  color: var(--text-primary) !important;
+  height: 40px !important;
+  border-radius: 6px !important;
+}
+
+.ant-select-arrow {
+  color: var(--text-secondary) !important;
+}
+
+.ant-select-dropdown {
+  background-color: var(--surface) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+.ant-select-item {
+  color: var(--text-primary) !important;
+}
+
+.ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+  background-color: var(--hover-bg) !important;
+}
+
+.ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  background-color: var(--selected-bg) !important;
+  color: var(--text-on-primary) !important;
+  font-weight: 500;
+}
+
+/* Estilos para la tabla */
+.tableContainer {
+  background-color: var(--surface);
+  border: 3px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.ant-table {
+  background: transparent !important;
+}
+
+.ant-table-thead > tr > th {
+  background-color: var(--primary) !important;
+  color: var(--text-on-primary) !important;
+  font-weight: 600 !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+
+.ant-table-tbody > tr > td {
+  border-bottom: 1px solid var(--border) !important;
+  transition: all 0.3s ease;
+}
+
+.ant-table-tbody > tr:hover > td {
+  background-color: var(--hover-bg) !important;
+}
+
+.ant-table-pagination.ant-pagination {
+  margin: 16px;
+  color: var(--text-primary);
+}
+
+.ant-pagination-item,
+.ant-pagination-prev,
+.ant-pagination-next,
+.ant-pagination-jump-prev,
+.ant-pagination-jump-next {
+  background: transparent !important;
+  border-color: var(--border) !important;
+}
+
+.ant-pagination-item a,
+.ant-pagination-prev button,
+.ant-pagination-next button {
+  color: var(--text-primary) !important;
+}
+
+.ant-pagination-item-active a {
+  color: var(--primary) !important;
+  font-weight: 600;
+}
+
+.ant-pagination-item-active {
+  border-color: var(--primary) !important;
+}
+
+.ant-pagination-item:focus-visible,
+.ant-pagination-item:hover,
+.ant-pagination-prev:focus-visible .ant-pagination-item-link,
+.ant-pagination-next:focus-visible .ant-pagination-item-link,
+.ant-pagination-prev:hover .ant-pagination-item-link,
+.ant-pagination-next:hover .ant-pagination-item-link {
+  border-color: var(--primary) !important;
+  color: var(--primary) !important;
+}
+
+/* Estilos para el switch de estado */
+.statusSwitch {
+  width: 110px;
+}
+
+.switchContainer .ant-form-item-control-input-content {
+  display: flex;
+  align-items: center;
+  height: 40px;
+}
+
+/* Estilos para modales */
+@keyframes modalScaleIn {
+  from {
+    transform: translateY(-50%) scale(0.8);
+    opacity: 0.7;
+  }
+  to {
+    transform: translateY(-50%) scale(1);
+    opacity: 1;
+  }
+}
+
+.userModal {
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: var(--surface);
+  color: var(--text);
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0 auto;
+  animation: modalScaleIn 0.2s ease-out forwards;
+}
+
+.userModal .ant-modal-content {
+  background-color: var(--surface);
+  border-radius: 8px;
+  padding: 0;
+  overflow: hidden;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  transform-origin: center center;
+}
+
+/* Fondo con blur cuando el modal está abierto */
+.modalBlur {
+  filter: blur(3px);
+  transition: filter 0.3s ease;
+  position: relative;
+}
+
+/* Contenedor principal */
+.container {
+  padding: 20px;
+  transition: filter 0.3s ease;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Clase para aplicar el desenfoque cuando el modal está abierto */
+.container.blurEffect {
+  filter: blur(3px);
+  pointer-events: none;
+  user-select: none;
+}
+
+.userModal .ant-modal-header {
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 24px;
+  margin: 0;
+}
+
+.userModal .ant-modal-title {
+  color: var(--text);
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.userModal .ant-modal-close {
+  color: var(--text-secondary);
+}
+
+.userModal .ant-modal-close:hover {
+  color: var(--text);
+}
+
+.userModal .ant-modal-body {
+  padding: 24px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+/* Contenedor del formulario */
+.formContainer {
+  padding: 0 20px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Estilos para los botones del formulario */
+.formFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.cancelButton {
+  background-color: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.cancelButton:hover {
+  background-color: var(--hover);
+  border-color: var(--text-secondary);
+  color: var(--text);
+}
+
+.submitButton {
+  background-color: var(--primary);
+  border: none;
+  color: white;
+}
+
+.submitButton:hover {
+  background-color: var(--primary-hover);
+  color: white;
+}
+
+/* Estilos para tarjetas */
+.ant-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.ant-card-head {
+  border-bottom: 1px solid var(--border);
+}
+
+.ant-card-head-title {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.ant-card-bordered {
+  border: 1px solid var(--border);
+}
+
+/* Estilos para pestañas */
+.ant-tabs-nav {
+  margin: 0 0 16px 0;
+}
+
+.ant-tabs-tab {
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+}
+
+.ant-tabs-tab-active {
+  color: var(--primary) !important;
+}
+
+.ant-tabs-ink-bar {
+  background: var(--primary);
+}
+
+.ant-tabs-tab:hover {
+  color: var(--primary);
+}
+
+/* Estilos para mensajes y notificaciones */
+.ant-message-notice-content {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-md);
+}
+
+.ant-notification-notice {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+}
+
+.ant-notification-notice-message,
+.ant-notification-notice-description {
+  color: var(--text-primary);
+}
+
+/* Estilos para tooltips */
+.ant-tooltip-inner {
+  background-color: var(--surface);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+}
+
+.ant-tooltip-arrow-content {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+}
+
+/* Estilos para popovers */
+.ant-popover-inner {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+}
+
+.ant-popover-title {
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border);
+}
+
+.ant-popover-inner-content {
+  color: var(--text-primary);
+}
+
+/* Ajustes para formularios en modo oscuro */
+.ant-form-item-label > label {
+  color: var(--text-secondary);
+}
+
+.ant-input,
+.ant-input-password,
+.ant-input-number,
+.ant-picker,
+.ant-select-selector,
+.ant-input-affix-wrapper,
+.ant-cascader-picker,
+.ant-mentions,
+.ant-input-textarea-show-count > .ant-input {
+  background-color: var(--input-bg);
+  border-color: var(--border);
+  color: var(--text-primary);
+}
+
+.ant-input:hover,
+.ant-input-password:hover,
+.ant-input-number:hover,
+.ant-picker:hover,
+.ant-select:not(.ant-select-disabled):hover .ant-select-selector,
+.ant-input-affix-wrapper:hover,
+.ant-cascader-picker:hover .ant-cascader-input,
+.ant-mentions:hover,
+.ant-input-textarea-show-count:hover > .ant-input {
+  border-color: var(--primary) !important;
+}
+
+.ant-input:focus,
+.ant-input-focused,
+.ant-input-password:focus,
+.ant-input-password-focused,
+.ant-input-number:focus,
+.ant-input-number-focused,
+.ant-picker-focused,
+.ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input) .ant-select-selector,
+.ant-input-affix-wrapper:focus,
+.ant-input-affix-wrapper-focused,
+.ant-cascader-picker:focus .ant-cascader-input,
+.ant-mentions:focus,
+.ant-mentions-focused,
+.ant-input-textarea-show-count > .ant-input:focus {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.2) !important;
+}
+
+.ant-input::placeholder,
+.ant-input-password::placeholder,
+.ant-input-number-input::placeholder,
+.ant-picker-input input::placeholder,
+.ant-select-selection-placeholder,
+.ant-cascader-picker-input::placeholder,
+.ant-mentions-input::placeholder {
+  color: var(--text-secondary) !important;
+  opacity: 0.7;
+}

@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from 'react';
 import { themeTokensDark, themeTokensLight, useTheme } from '../../context/ThemeContext';
 import ModeloPagination from './Pagination/Pagination.jsx';
 import estilos from './Tabla.module.css';
-import ModeloTable from "../components/Table/Tabla";
 
 
 const ModeloTable = ({ 
@@ -22,8 +21,6 @@ const ModeloTable = ({
   const containerRef = useRef(null);
   const [tableHeight, setTableHeight] = useState('auto');
   const { theme } = useTheme();
-
-  // Configuración de tema dinámico
   const themeConfig = theme === 'dark'
     ? themeTokensDark
     : {
@@ -51,33 +48,34 @@ const ModeloTable = ({
         },
       };
 
-  // Centrar columnas
+  // Transformar columnas para centrar contenido
   const centeredColumns = columns.map((column, index, arr) => {
-    const isLast = index === arr.length - 1;
-    return {
-      ...column,
-      align: 'center',
-      onCell: () => ({
-        style: {
-          textAlign: 'center',
-          background: 'inherit',
-          borderRight: isLast ? 'none' : '1px solid #444',
-          borderBottom: 'none',
-        },
-      }),
-      onHeaderCell: () => ({
-        style: {
-          textAlign: 'center',
-          background: '#272727',
-          borderRight: isLast ? 'none' : '1px solid #444',
-          borderBottom: 'none',
-          color: '#fff',
-        },
-      }),
-    };
-  });
+  const isLast = index === arr.length - 1;
+  
+  return {
+    ...column,
+    align: 'center',
+    onCell: () => ({
+      style: {
+        textAlign: 'center',
+        background: 'inherit',
+        borderRight: isLast ? 'none' : '1px solid #444', // Línea vertical derecha
+        borderBottom: 'none',
+      },
+    }),
+    onHeaderCell: () => ({
+      style: {
+        textAlign: 'center',
+        background: '#272727',
+        borderRight: isLast ? 'none' : '1px solid #444', // Línea vertical derecha en header
+        borderBottom: 'none',
+        color: '#fff',
+      },
+    }),
+  };
+});
 
-  // Cálculo de altura automática
+  //Calculo simplificado de altura
   useEffect(() => {
     const calculateHeight = () => {
       if (!containerRef.current) return;
@@ -85,9 +83,12 @@ const ModeloTable = ({
       const containerRect = containerRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
       const spaceFromTop = containerRect.top;
-      const marginBottom = 32;
+      const marginBottom = 32; // Margen para paginación y espacio respiro
+      
+      // Altura calculada con límite máximo
       const calculatedHeight = windowHeight - spaceFromTop - marginBottom;
       
+      // Aplicamos el mínimo entre la altura calculada y el máximo especificado
       const finalHeight = typeof maxHeight === 'string' && maxHeight.endsWith('vh') 
         ? Math.min(calculatedHeight, (windowHeight * parseInt(maxHeight)) / 100)
         : Math.min(calculatedHeight, maxHeight);
@@ -100,8 +101,24 @@ const ModeloTable = ({
     return () => window.removeEventListener('resize', calculateHeight);
   }, [maxHeight]);
 
+
   return (
-    <ConfigProvider theme={themeConfig}>
+    <ConfigProvider theme={themeConfig}
+      renderEmpty={() => {
+        <div style={{ 
+          color: '#a0a0a0', 
+          padding: '16px', 
+          textAlign: 'center',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '8px',
+        }}>
+          <Package size={40} />
+          <span>No hay datos disponibles</span>
+        </div>
+      }}
+    >
       <div
         ref={containerRef}
         style={{
@@ -109,50 +126,41 @@ const ModeloTable = ({
           marginTop: '15px',
         }}
       >
-        <div style={{ overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-          <Table
-            className={`${estilos.tableCustom} custom-table`}
-            columns={centeredColumns}
-            dataSource={data}
-            rowKey="id"
-            pagination={false}
-            scroll={{ y: tableHeight, x: 'max-content' }}
-            rowClassName={(record, index) => index % 2 === 0 ? 'row-light' : 'row-dark'}
-            locale={{
-              emptyText: (
-                <div style={{
-                  color: '#a0a0a0',
-                  padding: '16px',
-                  textAlign: 'center',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  gap: '8px',
-                }}>
-                  <Package size={40} />
-                  <span>No hay datos disponibles</span>
-                </div>
-              )
-            }}
-            loading={{
-              spinning: loading,
-              indicator: (
-                <Spin 
-                  size="large" 
-                  style={{ color: '#ffffff' }}
-                  tip="Cargando..."
-                />
-              )
-            }}
+        <div style={{ 
+            overflow: 'hidden',
+            display: 'flex',
+            flexDirection: 'column',
+            
+          }}>
+            <Table
+              className={estilos.tableCustom}
+              columns={centeredColumns}
+              dataSource={data}
+              rowKey="id"
+              pagination={false}
+              scroll={{ y: tableHeight, x: 'max-content' }}
+              rowClassName={(record, index) => index % 2 === 0 ? 'row-light' : 'row-dark'}
+              loading={{
+                spinning: loading,
+                indicator: (
+                  <Spin 
+                    size="large" 
+                    style={{ color: '#ffffff' }} // Texto blanco
+                    tip="Cargando..."
+                  />
+                )
+              }}
+              className="custom-table"
+            />
+        </div>
+        <div>
+          <ModeloPagination
+            total={total}
+            current={currentPage}
+            pageSize={pageSize}
+            onChange={onPageChange}
           />
         </div>
-
-        <ModeloPagination
-          total={total}
-          current={currentPage}
-          pageSize={pageSize}
-          onChange={onPageChange}
-        />
       </div>
     </ConfigProvider>
   );
