@@ -8,8 +8,8 @@ import ModeloTable from '../../../components/Table/Tabla';
 // import { usePatients } from '../hook/patientsHook';
 // import { getPatientById } from '../service/patientsService';
 
-import EditPatient from '../ui/EditPatient/EditPatient';
-import InfoPatient from './InfoPatient/infopatient';
+// import EditPatient from '../ui/EditPatient/EditPatient';
+// import InfoPatient from './InfoPatient/infopatient';
 
 export default function Patients() {
   const navigate = useNavigate();
@@ -214,7 +214,7 @@ export default function Patients() {
       />
 
       {/* Modal de edición */}
-      {editingPatient && (
+      {/* {editingPatient && (
         <EditPatient
           patient={editingPatient}
           onClose={() => setEditingPatient(null)}
@@ -228,7 +228,7 @@ export default function Patients() {
           open={showInfoModal}
           onClose={() => setShowInfoModal(false)}
         />
-      )}
+      )} */}
     </div>
   );
 }
