@@ -1,13 +1,101 @@
-import React from 'react';
+import { Avatar, ConfigProvider, Divider, Spin } from 'antd';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useCompany } from '../../context/CompanyContext';
+import { useUser } from '../../context/UserContext';
+import { useAuth } from '../../routes/AuthContext';
+import { img } from '../../utils/vars';
+import BtnLogOut from './ButtonLogOut/btnLogOut';
+import Style from './Dashboard.module.css';
+import MenuDashboard from './Menu/Menu';
 
-function DashBoard() {
+export default function Dashboard() {
+  const { userRole } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const { profile, photoUrl, loading: userLoading } = useUser();
+  const { companyInfo, logoUrl, loading: companyLoading } = useCompany();
+
+  const companyName = companyInfo?.company_name || 'Empresa';
+  const fullName = profile?.full_name || 'Usuario';
+  const role =
+    userRole === 1 ? 'Administrador' : userRole === 2 ? 'Usuario' : 'Invitado';
+
   return (
-    <div style={{ padding: 24 }}>
-      <h1>Dashboard</h1>
-      <p>Bienvenido al panel de inicio.</p>
+    <div className={Style.dashboardContainer}>
+      <div className={Style.dashboardHeader}>
+        {companyLoading ? (
+          <ConfigProvider theme={{ token: { colorPrimary: '#4CAF50' } }}>
+            <Spin />
+          </ConfigProvider>
+        ) : (
+          <img
+            alt="Logo de reflexo"
+            src={logoUrl || img}
+            style={{
+              width: 'clamp(50px, 8vw, 90px)',
+              aspectRatio: '1 / 1',
+              borderRadius: '50%',
+              objectFit: 'cover',
+              border: '2px solid #4CAF50',
+              maxWidth: '100%',
+              height: 'auto',
+            }}
+          />
+        )}
+        <p>{companyName}</p>
+      </div>
+      <Divider
+        style={{
+          marginBottom: '15px',
+          marginTop: '15px',
+          backgroundColor: '#333333',
+        }}
+      />
+      <div className={Style.dashboardUser}>
+        {userLoading ? (
+          <ConfigProvider theme={{ token: { colorPrimary: '#4CAF50' } }}>
+            <Spin />
+          </ConfigProvider>
+        ) : (
+          <>
+            <Avatar
+              alt="Logo de avatar"
+              src={photoUrl || img}
+              style={{
+                width: 'clamp(35px, 4vw, 45px)',
+                height: 'auto',
+                aspectRatio: '1 / 1',
+                borderRadius: '50%',
+                objectFit: 'cover',
+              }}
+            />
+            <div className={Style.dashboardUserName}>
+              <div>
+                <h1>{fullName}</h1>
+              </div>
+              <div>
+                <p>{role}</p>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+      <Divider
+        style={{
+          marginBottom: '5px',
+          marginTop: '15px',
+          backgroundColor: '#333333',
+        }}
+      />
+      <div className={Style.dashboardMenu}>
+        <MenuDashboard />
+      </div>
+      <div className={Style.dashboardFooter}>
+        <Divider style={{ backgroundColor: '#333333' }} />
+        <BtnLogOut />
+        <p>© 2025 Centro de Reflexoterapia </p>
+      </div>
     </div>
   );
 }
-
-export default DashBoard;
-

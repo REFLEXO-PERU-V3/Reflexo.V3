@@ -1,5 +1,11 @@
 import axios from 'axios';
-import { getLocalStorage } from '../../utils/localStorageUtility';
+import {
+    getLocalStorage,
+    removeLocalStorage,
+} from '../../utils/localStorageUtility';
+
+const BaseURL =
+  '/backend/public/api/'; // Adjust the base URL as needed for your environment https://reflexoperu-v2.marketingmedico.vip
 
 const instance = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api',
