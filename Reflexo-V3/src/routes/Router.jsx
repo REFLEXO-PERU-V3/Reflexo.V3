@@ -2,6 +2,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ChangesPassword from '../features/auth/ui/ChangesPassword/ChangesPassword';
 import FirstSession from '../features/auth/ui/FirstSession/FirstSession';
 import Login from '../features/auth/ui/login';
+import Home from '../features/home/ui/home';
+import Patients from '../features/patiens/ui/patients';
 import Error500 from '../pages/Error/Error';
 import Error404 from '../pages/Error/Error404';
 import View from '../pages/View';
@@ -48,11 +50,11 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <Placeholder title="Inicio" />,
+            element: <Home />,
           },
           {
             path: 'pacientes',
-            element: <Placeholder title="Pacientes" />,
+            element: <Patients />,
           },
           {
             path: 'pacientes/historia/:id', // Ruta independiente

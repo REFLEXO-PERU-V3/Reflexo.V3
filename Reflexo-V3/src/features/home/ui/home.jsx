@@ -1,17 +1,15 @@
 import React from "react";
-import WelcomeBanner from "./homeComponents/WelcomeBanner";
+import styles from "./Home.module.css";
 import QuickAccess from "./homeComponents/QuickAccess";
 import TodayAppointments from "./homeComponents/TodayAppointments";
-import ThemeToggle from "./homeComponents/ThemeToggle";
-import styles from "./Home.module.css";
+import WelcomeBanner from "./homeComponents/WelcomeBanner";
 
 const Home = () => {
   return (
     <div className={styles.container}>
-      {/* Mensaje de bienvenida y botón arriba */}
+      {/* Mensaje de bienvenida */}
       <div className={styles.welcome}>
         <WelcomeBanner />
-        <ThemeToggle />
       </div>
 
       {/* Sección de dos columnas */}

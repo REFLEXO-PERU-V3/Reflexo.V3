@@ -1,10 +1,9 @@
 import { Package } from '@phosphor-icons/react';
 import { ConfigProvider, Spin, Table } from 'antd';
 import { useEffect, useRef, useState } from 'react';
-import { themeTokensDark, themeTokensLight, useTheme } from '../../context/ThemeContext';
+import { useTheme } from '../../context/ThemeContext';
 import ModeloPagination from './Pagination/Pagination.jsx';
 import estilos from './Tabla.module.css';
-import ModeloTable from "../components/Table/Tabla";
 
 
 const ModeloTable = ({ 
@@ -23,33 +22,27 @@ const ModeloTable = ({
   const [tableHeight, setTableHeight] = useState('auto');
   const { theme } = useTheme();
 
-  // Configuración de tema dinámico
-  const themeConfig = theme === 'dark'
-    ? themeTokensDark
-    : {
-        ...themeTokensLight,
-        token: {
-          ...themeTokensLight.token,
-          colorBgContainer: '#fff',
-          colorText: '#1A1A1A',
-          colorBorder: '#000',
-          colorFillAlter: '#FAFAFA',
-          headerBg: '#232323',
-          headerColor: '#fff',
-          rowHoverBg: '#C8F7D8',
-        },
-        components: {
-          Table: {
-            colorBgContainer: '#fff',
-            colorFillAlter: '#FAFAFA',
-            colorText: '#1A1A1A',
-            borderColor: '#000',
-            headerBg: '#232323',
-            headerColor: '#fff',
-            rowHoverBg: '#C8F7D8',
-          },
-        },
-      };
+  // Configuración de tema dinámica local
+  const isDark = theme === 'dark';
+  const themeConfig = {
+    token: {
+      colorBgContainer: isDark ? '#1E1E1E' : '#fff',
+      colorText: isDark ? '#ffffff' : '#1A1A1A',
+      colorBorder: isDark ? '#444' : '#000',
+      colorFillAlter: isDark ? '#2A2A2A' : '#FAFAFA',
+    },
+    components: {
+      Table: {
+        colorBgContainer: isDark ? '#1E1E1E' : '#fff',
+        colorFillAlter: isDark ? '#2A2A2A' : '#FAFAFA',
+        colorText: isDark ? '#ffffff' : '#1A1A1A',
+        borderColor: isDark ? '#444' : '#000',
+        headerBg: '#232323',
+        headerColor: '#fff',
+        rowHoverBg: isDark ? '#2E7D32' : '#C8F7D8',
+      },
+    },
+  };
 
   // Centrar columnas
   const centeredColumns = columns.map((column, index, arr) => {
